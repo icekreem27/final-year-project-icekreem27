@@ -1,21 +1,20 @@
+import os, requests, json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import os
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
-# Access credentials stored in environment variables
-email = os.environ.get('MY_EMAIL')
-password = os.environ.get('MY_PASSWORD')
-
-# Set up Chrome WebDriver
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+def transfer_cookies_to_requests(session, driver):
+    cookies = driver.get_cookies()
+    for cookie in cookies:
+        session.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
 
 def login():
     # Navigate to the login page
+    # (Data Mining module page)
     driver.get('https://minerva.leeds.ac.uk/ultra/courses/_541874_1/outline')
     # Initialize WebDriverWait instance
     wait = WebDriverWait(driver, 10)
@@ -57,16 +56,74 @@ def getUnits():
     # Find all <a> tags within the container
     unit_links = container.find_elements(By.TAG_NAME, 'a')
 
-    # Extract hrefs from units
-    unit_hrefs = [link.get_attribute('href') for link in unit_links]
+    # Extract hrefs and titles from units
+    units_info = [{'url': link.get_attribute('href'), 'title': link.text} for link in unit_links]
 
-    return unit_hrefs
+    return units_info
+
+def find_files(url, download_directory):
+    session = requests.Session()
+    transfer_cookies_to_requests(session, driver)
+
+    driver.get(url)
+    wait = WebDriverWait(driver, 10)
+    
+    # Check if containers exist
+    try:
+        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-bbtype='attachment']")))
+        file_containers = driver.find_elements(By.CSS_SELECTOR, "div[data-bbtype='attachment']")
+        
+        # For all containers
+        for container in file_containers:
+            data_bbfile = container.get_attribute("data-bbfile")
+            data_href = container.get_attribute("href")
+            if data_bbfile:
+                data_bbfile_json = json.loads(data_bbfile)
+                # Check if files are "lectures" or "transcripts"
+                if 'lecture' in data_bbfile_json['linkName'].lower() or 'transcript' in data_bbfile_json['linkName'].lower():
+                    download_url = data_href
+                    filename = data_bbfile_json['linkName']
+                    print(f"Found file: {filename}")
+                    download_file(download_url, download_directory, filename, session)
+    except TimeoutException:
+        print(f"No files found on {url}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+def download_file(download_url, download_directory, filename, session):
+    path = os.path.join(download_directory, filename)
+    response = session.get(download_url, stream=True)
+    if response.status_code == 200:
+        with open(path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        print(f"Downloaded {filename} to {download_directory}")
+    else:
+        print(f"Failed to download {filename}. Status code: {response.status_code}")
 
 # Main run
-login()
-urls = getUnits()
-print(len(urls))
+# Access credentials stored in environment variables
+email = os.environ.get('MY_EMAIL')
+password = os.environ.get('MY_PASSWORD')
 
+# Set up Chrome WebDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+
+# Set up a directory to save files
+download_directory = 'test_folder'
+os.makedirs(download_directory, exist_ok=True)
+
+# Call login method
+login()
+
+# Fetch Unit Urls
+units_info = getUnits()
+
+# Download files for each unit
+for unit in units_info:
+    print(f"Processing Unit: {unit['title']}")
+    find_files(unit['url'], download_directory)
 
 # Always remember to close the WebDriver session when you're done
 driver.quit()
