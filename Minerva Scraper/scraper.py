@@ -111,7 +111,7 @@ service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service)
 
 # Set up a directory to save files
-download_directory = 'test_folder'
+download_directory = 'Data Mining files'
 os.makedirs(download_directory, exist_ok=True)
 
 # Call login method
