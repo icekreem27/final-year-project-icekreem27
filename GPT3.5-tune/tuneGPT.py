@@ -13,13 +13,16 @@ def create_file(file_path):
 def create_fine_tune(file_name):
     client.fine_tuning.jobs.create(
         training_file = file_name, 
-        model = "gpt-3.5-turbo"
+        model = "gpt-3.5-turbo",
+        hyperparameters = {
+            "n_epochs" : 5
+        }
     )
 
 
 # main
 client = OpenAI()
-file_path = "augmented_dataset.jsonl"
+file_path = "augmented_dataset_2.0.jsonl"
 
 # create file on OpenAI
 fileID = create_file(file_path)
