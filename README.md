@@ -5,6 +5,8 @@
 
 <h1 align="center">Final Year Individual Project</h1>
 
+[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=12919739)
+
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
   <!-- <a href="#sparkles-features">Features</a> &#xa0; | &#xa0; -->
