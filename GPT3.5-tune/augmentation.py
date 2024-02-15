@@ -88,7 +88,7 @@ def augment_data(jsonl_file_path, output_file_path):
             f_out.write(json.dumps(item) + '\n')
 
 # File paths
-jsonl_file_path = 'dataset.jsonl'
+jsonl_file_path = 'scraped_dataset.jsonl'
 output_file_path = 'augmented_dataset.jsonl'
 
 # Run the augmentation
