@@ -22,7 +22,7 @@ def create_fine_tune(file_name):
 
 # main
 client = OpenAI()
-file_path = "augmented_dataset_2.0.jsonl"
+file_path = "/Datasets/augmented_dataset_2.0.jsonl"
 
 # create file on OpenAI
 fileID = create_file(file_path)

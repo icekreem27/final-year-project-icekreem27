@@ -29,5 +29,5 @@ def convert_pdf_folder_to_txt(source_folder_path, destination_folder_path):
 
 # Specify folder paths here
 source_folder_path = 'Data Mining files/'
-destination_folder_path = 'txt_files/'
+destination_folder_path = 'Data Mining files/txt_files/'
 convert_pdf_folder_to_txt(source_folder_path, destination_folder_path)
