@@ -1,0 +1,127 @@
+In these papers and Google code archive, you will learn more about methods and software to learn word embeddings (numerical vector representations of word meanings) from corpora, and the impacts of scaling from small data to large real-world data-sets. 
+E Atwell. 1986. A parsing expert system which learns from corpus analysis atwell86wordEmbeddings.pdf 
+M Banko and E Brill. 2001. Scaling to very very large corpora for natural language disambiguation banko01largeCorpora.pdf  
+T Mikolov et al. 2013. Efficient Estimation of Word Representations in Vector Space mikolov13word2vec.pdf
+Google code archive – word2vec code.google.com/archive/p/word2vec/
+
+ 
+
+Word embeddings 
+and scaling to big data
+AI Research papers
+AI research is reported in a paper presented at a conference and then published in a conference proceedings (or journal)
+
+e.g. ACL: Association for Computational Linguistics https://aclweb.org 
+Lists of computational linguistics journals, conferences
+ journals https://aclweb.org/aclwiki/Journals 
+conferences https://www.aclweb.org/portal/events 
+Research papers: ACL Anthology https://aclanthology.org/ 
+   note: Latin plural - 1 corpus, 2+ corpora  (corpuses) 
+   note: is “Proceedings” singular or plural ?? (check in SkE)
+Why read AI research papers?
+To learn about AI research …
+Also, ideas for a research proposal? 
+AI research paper is similar to a research proposal:
+Research aims & objectives
+Background – related research
+Methods – Programme of research work (usually no durations)
+Conclusions - contribution to knowledge, importance
+PLUS: Results - not usually in a research proposal
+(but proposal can add a “pilot study” for “proof of concept”)
+
+
+
+E Atwell. 1986. A parsing expert system which learns from corpus analysis
+Aim: a discovery procedure for grammar, given a corpus
+Background: English grammar, PoS taggers, Markov bi-grams
+Methods: frequent words: list of left-contexts and right-contexts
+“all possible pairings of one word with another word (w1, w2) were compared; if the context-lists of w1 were significantly similar to the context-lists of w2, the two were deemed to belong to the same word-class” 
+Conclusions: 1st corpus linguist to learn word embeddings from a corpus: numerical vector representations of word meanings 
+BUT: “200,000-word corpus … only 175 words occur 100 times … several weeks on ICL-2960 university mainframe computer”
+A parsing expert system which learns from corpus analysis
+ Results: “… will, should, could, must, may, and might were merged into a single word-class on the basis of their immediate lexical contexts” 
+BUT few words with 100+ contexts are content words
+ world < country 
+ year  < week
+M Banko and E Brill. 2001. Scaling to very very large corpora for natural language disambiguation
+Aim: “evaluate the performance of different learning methods … when trained on orders of magnitude more labeled data” 
+Background: ML classifiers “Confusion set disambiguation ... {weather,whether} … labeled training data is essentially free”
+Method: evaluate range of classifiers on range of data sizes
+Conclusions: More data -> higher accuracy, for all classifiers
+“… reconsider the trade-off between spending time and money on algorithm development versus spending it on corpus development” 
+
+
+
+
+
+Scaling to very very large corpora for natural language disambiguation
+More data higher score
+Data: 200K … 1000M
+Accuracy: 75% … 97%
+… for all classifiers
+Winnow: worst to best 
+Case-based: best to worst
+… so, “best” classifier depends on training set size NOT “best” ML algorithm
+Scaling to very very large corpora for natural language disambiguation
+Labelled training data is “free” … but other costs:
+ML model size grows proportional to data size
+Processor, memory grows
+(Maybe no problem for Microsoft etc but others?) 
+
+Scaling to very very large corpora for natural language disambiguation
+Ensemble: several ML classifiers vote
+Small data: voting > best
+Big data: best > voting
+(Ensemble is generally better unless you have very large training set)
+Scaling to very very large corpora for natural language disambiguation
+When annotated data is not free: 
+Active Learning: “… choose the most uncertain instances for manual annotation” 
+Semi-Supervised Learning: “… choose the instances that have the highest probability of being correct for automatic labelling” 
+“… direct efforts towards increasing the size of annotated training collections, while deemphasizing the focus on comparing different learning techniques trained only on small training corpora.”
+
+
+
+
+T Mikolov et al. 2013. Efficient Estimation of Word Representations in Vector Space
+Aims: “novel model architectures for computing continuous vector representations of words from very large data sets ... and … a new comprehensive test set for measuring both syntactic and semantic regularities” 
+Background: vector representations in neural network i/o, Feedforward Neural Network Language Model (NNLM) 
+Training complexity is high (processor, memory, duration)
+Methods: Continuous Bag-of-Words, Continuous Skip-gram fast training; new Word Relationships test set for evaluation
+Conclusions:  CBOW and Skip-gram have much lower computational complexity than feedforward and recurrent NNs
+Comprehensive test set will help the research community 
+
+
+Efficient Estimation of Word Representations in Vector Space
+Efficient Estimation of Word Representations in Vector Space
+“To compare the quality of different versions of word vectors, previous papers typically use a table showing example words and their most similar words, and understand them intuitively. … we define a comprehensive test set that contains five types of semantic questions, and nine types of syntactic questions. Two examples from each category are shown in Table 1. Overall, there are 8869 semantic and 10675 syntactic questions. … Question is assumed to be correctly answered only if the closest word to the vector computed using the above method is exactly the same as the correct word in the question; synonyms are thus counted as mistakes.” 
+
+ 
+
+Efficient Estimation of Word Representations in Vector Space
+Efficient Estimation of Word Representations in Vector Space
+Efficient Estimation of Word Representations in Vector Space
+Predictions, for example, Paris - France + Italy = ?  Rome 
+
+
+Efficient Estimation of Word Representations in Vector Space
+Conclusions: “… it is possible to train high quality word vectors using very simple model architectures, compared to the popular neural network models (both feedforward and recurrent). Because of the much lower computational complexity, it is possible to compute very accurate high dimensional word vectors from a much larger data set.
+… our comprehensive test set will help the research community to improve …
+… high quality word vectors will become an important building block for future NLP applications. “
+
+
+
+Google code archive – word2vec code.google.com/archive/p/word2vec/
+“… The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words. The resulting word vector file can be used as features in many natural language processing and machine learning applications.
+A simple way to investigate the learned representations is to find the closest words for a user-specified word z The distance tool serves that purpose. For example, if you enter 'france', distance will display the most similar words and their distances to 'france’ …”
+Also: large training-set corpora, and pre-trained vectors
+
+In these papers and Google code archive, you will learn more about methods and software to learn word embeddings (numerical vector representations of word meanings) from corpora, and the impacts of scaling from small data to large real-world data-sets. 
+E Atwell. 1986. A parsing expert system which learns from corpus analysis atwell86wordEmbeddings.pdf  - 1st attempt, very limited
+M Banko and E Brill. 2001. Scaling to very very large corpora for natural language disambiguation banko01largeCorpora.pdf   
+	- More data gives higher accuracy, for all classifiers
+T Mikolov et al. 2013. Efficient Estimation of Word Representations in Vector Space mikolov13word2vec.pdf  - CBOW, Skip-gram
+Google code archive – word2vec code.google.com/archive/p/word2vec/
+
+ 
+
+Summary

@@ -1,0 +1,530 @@
+Language Modeling
+
+1. Introduction to N-grams
+2. Estimating N-gram Probs
+3. Evaluation and Perplexity
+4. Generalization and zeros
+5. Add-one Laplace smoothing
+6. Interpolation, Backoff, and Web-Scale LMs
+
+
+
+
+
+Probabilistic Language Models
+Today’s goal: assign a probability to a sentence
+Machine Translation:
+P(high winds tonight) > P(large winds tonight)
+Spell Correction
+The office is about fifteen minuets from my house
+P(about fifteen minutes from) > P(about fifteen minuets from)
+Speech Recognition
+P(I saw a van) >> P(eyes awe of an)
++ Summarization, question-answering, etc., etc.!!
+Why?
+Probabilistic Language Modeling
+Goal: compute the probability of a sentence or sequence of words:
+     P(W) = P(w1,w2,w3,w4,w5…wn)
+Related task: probability of an upcoming word:
+      P(w5|w1,w2,w3,w4)
+A model that computes either of these:
+          P(W)     or     P(wn|w1,w2…wn-1)          is called a language model.
+or: a grammar       But language model or LM is standard
+How to compute P(W)
+How to compute this joint probability:
+
+P(its, water, is, so, transparent, that)
+
+Intuition: let’s rely on the Chain Rule of Probability
+Reminder: The Chain Rule
+Recall the definition of conditional probabilities
+p(B|A) = P(A,B)/P(A)	Rewriting:   P(A,B) = P(A)P(B|A)
+
+More variables:
+ P(A,B,C,D) = P(A)P(B|A)P(C|A,B)P(D|A,B,C)
+The Chain Rule in General
+  P(x1,x2,x3,…,xn) = P(x1)P(x2|x1)P(x3|x1,x2)…P(xn|x1,…,xn-1)
+
+The Chain Rule applied to compute joint probability of words in sentence
+
+
+
+
+P(“its water is so transparent”) =
+	P(its) × P(water|its) ×  P(is|its water) 
+         ×  P(so|its water is) ×  P(transparent|its water is so)
+How to estimate these probabilities
+Could we just count and divide?
+
+
+
+
+
+No!  Too many possible sentences!
+We’ll never see enough data for estimating these
+
+
+Markov Assumption
+Simplifying assumption:
+
+
+Or maybe
+
+ 
+(Markov modelled letter-sequences, simpler)
+Andrei Markov
+Markov Assumption
+
+
+In other words, we approximate each component in the product
+
+
+
+
+
+
+
+
+Simplest case: Unigram model
+fifth, an, of, futures, the, an, incorporated, a, a, the, inflation, most, dollars, quarter, in, is, mass
+
+thrift, did, eighty, said, hard, 'm, july, bullish
+
+that, or, limited, the
+Some automatically generated sentences from a unigram model
+Condition on the previous word:
+
+
+
+
+
+Bigram model
+texaco, rose, one, in, this, issue, is, pursuing, growth, in, a, boiler, house, said, mr., gurria, mexico, 's, motion, control, proposal, without, permission, from, five, hundred, fifty, five, yen
+
+outside, new, car, parking, lot, of, the, agreement, reached
+
+this, would, be, a, record, november
+N-gram models
+We can extend to trigrams, 4-grams, 5-grams
+In general this is an insufficient model of language
+because language has long-distance dependencies:
+
+“The computer which I had just put into the machine room on the fifth floor crashed.”
+
+But we can often get away with N-gram models
+Language Modeling
+
+Introduction to N-grams
+
+
+Language Modeling
+
+Estimating N-gram Probabilities
+
+
+Estimating bigram probabilities
+The Maximum Likelihood Estimate
+An example
+<s> I am Sam </s>
+<s> Sam I am </s>
+<s> I do not like green eggs and ham </s>
+
+
+
+
+
+
+
+More examples: Berkeley Restaurant Project sentences
+can you tell me about any good cantonese restaurants close by
+mid priced thai food is what i’m looking for
+tell me about chez panisse
+can you give me a listing of the kinds of food that are available
+i’m looking for a good place to eat breakfast
+when is caffe venezia open during the day
+Raw bigram counts
+Out of 9222 sentences
+Raw bigram probabilities
+Normalize by unigrams:
+
+Result:
+Bigram estimates of sentence probabilities
+P(<s> I want english food </s>) =
+	P(I|<s>)   
+ 	×  P(want|I)  
+		×  P(english|want)   
+		×  P(food|english)   
+		×  P(</s>|food)
+       =  .000031
+What kinds of knowledge?
+P(english|want)  = .0011
+P(chinese|want) =  .0065
+P(to|want) = .66
+P(eat | to) = .28
+P(food | to) = 0
+P(want | spend) = 0
+P (i | <s>) = .25
+Practical Issues
+We do everything in log space
+Avoid underflow
+(also adding is faster than multiplying)
+Language Modeling Toolkits
+SRILM
+http://www.speech.sri.com/projects/srilm/
+KenLM
+https://kheafield.com/code/kenlm/
+Google N-Gram Release, August 2006
+…
+Google N-Gram Release
+serve as the incoming 92
+serve as the incubator 99
+serve as the independent 794
+serve as the index 223
+serve as the indication 72
+serve as the indicator 120
+serve as the indicators 45
+serve as the indispensable 111
+serve as the indispensible 40
+serve as the individual 234
+http://googleresearch.blogspot.com/2006/08/all-our-n-gram-are-belong-to-you.html
+Google Book N-grams
+http://ngrams.googlelabs.com/
+Language Modeling
+
+Estimating N-gram Probabilities
+
+
+Language Modeling
+
+Evaluation and Perplexity
+
+
+Evaluation: How good is our model?
+Does our language model prefer good sentences to bad ones?
+Assign higher probability to “real” or “frequently observed” sentences 
+Than “ungrammatical” or “rarely observed” sentences?
+We train parameters of our model on a training set.
+We test the model’s performance on data we haven’t seen.
+A test set is an unseen dataset that is different from our training set, totally unused.
+An evaluation metric tells us how well our model does on the test set.
+Extrinsic evaluation of N-gram models
+Best evaluation for comparing models A and B
+Put each model in a task
+ spelling corrector, speech recognizer, MT system
+Run the task, get an accuracy for A and for B
+How many misspelled words corrected properly
+How many words translated correctly
+Compare accuracy for A and B
+Difficulty of extrinsic (in-vivo) evaluation of  N-gram models
+Extrinsic evaluation
+Time-consuming; can take days or weeks
+So
+Sometimes use intrinsic evaluation: perplexity
+Bad approximation 
+unless the test data looks just like the training data
+So generally only useful in pilot experiments
+But is helpful to think about.
+Intuition of Perplexity
+The Shannon Game:
+How well can we predict the next word?
+
+
+
+
+Unigrams are terrible at this game.  (Why?)
+A better model of a text
+ is one which assigns a higher probability to the word that actually occurs
+
+I always order pizza with cheese and ____
+The 33rd President of the US was ____
+I saw a ____
+mushrooms 0.1
+pepperoni 0.1
+anchovies 0.01
+….
+fried rice 0.0001
+….
+and 1e-100
+
+Perplexity
+Perplexity is the inverse probability of the test set, normalized by the number of words:
+
+                                               Chain rule:
+
+                                              For bigrams:
+Minimizing perplexity is the same as maximizing probability
+The best language model is one that best predicts an unseen test set
+Gives the highest P(sentence)
+Lower perplexity = better model
+
+Training 38 million words, test 1.5 million words, WSJ
+Language Modeling
+
+Evaluation and Perplexity
+
+
+Language Modeling
+
+Generalization and zeros
+
+
+The Shannon Visualization Method
+Choose a random bigram 
+ (<s>, w) according to its probability
+Now choose a random bigram        (w, x) according to its probability
+And so on until we choose </s>
+Then string the words together
+<s> I
+    I want
+      want to
+           to eat
+              eat Chinese
+                  Chinese food
+                          food  </s>
+I want to eat Chinese food
+
+Approximating Shakespeare
+ 
+Shakespeare as corpus
+N=884,647 tokens, V=29,066
+Shakespeare produced 300,000 bigram types out of V2= 844 million possible bigrams.
+So 99.96% of the possible bigrams were never seen (have zero entries in the table)
+Quadrigrams worse:   What's coming out looks like Shakespeare because it is Shakespeare
+
+The Wall Street Journal is not Shakespeare (no offense)
+Can you guess the training set author of the LM that generated these random 3-gram sentences?
+They also point to ninety nine point six billion dollars from two hundred four oh six three percent of the rates of interest stores as Mexico and gram Brazil on market conditions 
+This shall forbid it should be branded, if renown made it empty. 
+“You are uniformly charming!” cried he, with a smile of associating and now and then I bowed and they perceived a chaise and four to wish for. 
+
+
+
+41
+The perils of overfitting
+N-grams only work well for word prediction if the test corpus looks like the training corpus
+In real life, it often doesn’t
+We need to train robust models that generalize!
+One kind of generalization: Zeros!
+Things that don’t ever occur in the training set
+But occur in the test set
+Zeros
+Training set:
+… denied the allegations
+… denied the reports
+… denied the claims
+… denied the request
+
+P(“offer” | denied the) = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Test set
+… denied the offer
+… denied the loan
+Zero probability bigrams
+Bigrams with zero probability
+mean that we will assign 0 probability to the test set!
+And hence we cannot compute perplexity (can’t divide by 0)!
+Language Modeling
+
+Generalization and zeros
+
+
+Language Modeling
+
+Smoothing: Add-one (Laplace) smoothing
+
+
+The intuition of smoothing (from Dan Klein)
+When we have sparse statistics:
+
+
+
+
+
+
+Steal probability mass to generalize better
+
+
+
+
+
+
+
+
+
+P(w | denied the)
+  3 allegations
+  2 reports
+  1 claims
+  1 request
+
+  7 total
+P(w | denied the)
+  2.5 allegations
+  1.5 reports
+  0.5 claims
+  0.5 request
+  2 other
+
+  7 total
+
+allegations
+reports
+claims
+attack
+request
+man
+outcome
+…
+
+allegations
+
+
+attack
+
+man
+outcome
+…
+allegations
+reports
+claims
+request
+
+
+
+Add-one estimation
+Also called Laplace smoothing
+Pretend we saw each word one more time than we did
+Just add one to all the counts!
+
+MLE estimate:
+
+Add-1 estimate:
+
+Maximum Likelihood Estimates
+The maximum likelihood estimate
+of some parameter of a model M from a training set T
+maximizes the likelihood of the training set T given the model M
+Suppose the word “bagel” occurs 400 times in a corpus of a million words
+What is the probability that a random word from some other text will be “bagel”?
+MLE estimate is 400/1,000,000 = .0004
+This may be a bad estimate for some other corpus
+But it is the estimate that makes it most likely that “bagel” will occur 400 times in a million word corpus.
+Berkeley Restaurant Corpus: Laplace smoothed bigram counts
+
+Laplace-smoothed bigrams
+
+Reconstituted counts
+
+Compare with raw bigram counts
+Add-1 estimation is a blunt instrument
+So add-1 isn’t used for state-of-the-art N-gram LMs: 
+There are better (but more complicated) methods
+add-1 is used to smooth some NLP models
+For text classification, rank order can be sufficient 
+In limited domains, with limited corpus.
+Language Modeling
+
+Smoothing: Add-one (Laplace) smoothing
+
+
+Language Modeling
+
+Interpolation, Backoff, and Web-Scale LMs
+
+
+Backoff and Interpolation
+Sometimes it helps to use less context
+Condition on less context for contexts you haven’t learned much about 
+Backoff: 
+use trigram if you have good evidence,
+otherwise bigram, otherwise unigram
+Interpolation: 
+mix unigram, bigram, trigram
+
+Interpolation works better, but is more complicated
+Linear Interpolation
+Simple interpolation
+
+
+Lambdas conditional on context:
+How to set the lambdas?
+Use a held-out corpus
+
+
+Choose λs to maximize the probability of held-out data:
+Fix the N-gram probabilities (on the training data)
+Then search for λs that give largest probability to held-out set
+
+Training Data
+Held-Out Data
+Test 
+Data
+Unknown words: Open versus closed vocabulary tasks
+If we know all the words in advanced
+Vocabulary V is fixed
+Closed vocabulary task
+Often we don’t know this
+Out Of Vocabulary = OOV words
+Open vocabulary task
+Instead: create an unknown word token <UNK>
+Training of <UNK> probabilities
+Create a fixed lexicon L of size V
+At text normalization phase, any training word not in L changed to  <UNK>
+Now we train its probabilities like a normal word
+At decoding time
+If text input: Use UNK probabilities for any word not in training
+Huge web-scale n-grams
+How to deal with, e.g., Google N-gram corpus
+Pruning
+Only store N-grams with count > threshold.
+Remove singletons of higher-order n-grams
+Efficiency
+Efficient data structure like trie or bloom filter
+Backoff, not interpolation
+Store words as indexes, not strings
+Use Huffman coding to fit large numbers of words into two bytes
+Quantize probabilities (4-8 bits instead of 8-byte float)
+
+Advanced Language Modeling
+Adaptive models:
+ choose n-gram weights to improve a task, not to fit the  training set
+Parsing-based models
+Caching Models
+Recently used words are more likely to appear
+
+
+
+Language Modeling
+
+Interpolation, Backoff, and Web-Scale LMs
+
+
+Language Modeling
+
+1. Introduction to N-grams
+2. Estimating N-gram Probs
+3. Evaluation and Perplexity
+4. Generalization and zeros
+5. Add-one Laplace smoothing
+6. Interpolation, Backoff, and Web-Scale LMs
+
+
+
+
+

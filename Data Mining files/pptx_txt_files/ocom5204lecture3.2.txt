@@ -1,0 +1,223 @@
+Sequence Labeling for Part of Speech and Named Entities
+Labelling sequences of words
+
+PoS: Part of Speech Tagging
+NER: Named Entity Recognition
+
+Parts of Speech
+From the earliest linguistic traditions (Yaska and Panini 5th C. BCE, Aristotle 4th C. BCE), the idea that words can be classified into grammatical categories
+part of speech, word classes, POS, POS tags
+8 parts of speech attributed to Dionysius Thrax of Alexandria (c. 1st C. BCE): 
+noun, verb, pronoun, preposition, adverb, conjunction, participle, article 
+These categories are relevant for NLP today.
+
+Two major classes of words: Closed v Open
+Closed class: function words
+Relatively fixed membership
+Usually function words: short, frequent words with grammatical function
+determiners: a, an, the
+pronouns: she, he, I, (they)
+prepositions: on, under, over, near, by, …
+Open class: content words
+Usually content words: Nouns, Verbs, Adjectives, Adverbs
+Plus interjections: oh, ouch, uh-huh, yes, hello
+New nouns and verbs like iPhone or to google
+
+
+
+Open class ("content") words
+Closed class ("function")
+
+Nouns
+
+Verbs
+
+Proper
+
+Common
+
+Auxiliary
+
+Main
+
+Adjectives
+
+Adverbs
+
+Prepositions
+
+Particles
+
+Determiners
+
+Conjunctions
+
+Pronouns
+… more
+… more
+Janet
+Italy
+cat,  cats
+mango
+eat
+went
+can
+had
+old   green   tasty
+slowly yesterday
+to with
+off   up
+the some
+and or
+they its
+
+Numbers
+122,312
+one
+Interjections
+Ow  hello
+Part-of-Speech Tagging
+Assigning a part-of-speech to each word in a text. 
+Words often have more than one POS. 
+book:
+VERB: (Book that flight) 
+NOUN: (Hand me that book).
+Part-of-Speech Tagging
+Map from sequence x1,…,xn of words to y1,…,yn of POS tags 
+"Universal Dependencies" Tagset
+Nivre et al. 2016
+Sample "Tagged" English sentences
+There/PRO were/VERB 70/NUM children/NOUN there/ADV ./PUNC
+Preliminary/ADJ findings/NOUN were/AUX reported/VERB in/ADP today/NOUN ’s/PART New/PROPN England/PROPN Journal/PROPN of/ADP Medicine/PROPN
+There are also other tagsets, for English, Arabic, … 
+English PoS-tags: Brown, LOB, ICE, Penn, AMALGAM …
+Why Part of Speech Tagging?
+Can be useful for other NLP tasks
+Parsing: POS tagging can improve syntactic parsing
+MT: reordering of adjectives and nouns (say from Spanish to English)
+Sentiment or affective tasks: may want to distinguish adjectives or other POS
+Text-to-speech (how do we pronounce “lead” or "object"?)
+Or linguistic or language-analytic computational tasks
+Need to control for POS when studying linguistic change like creation of new words, or meaning shift
+Or control for POS in measuring meaning similarity or difference
+
+How difficult is POS tagging in English?
+Roughly 15% of word types are ambiguous
+Hence 85% of word types are unambiguous
+Janet is always PROPN, hesitantly is always ADV 
+But those 15% tend to be very common. 
+So ~60% of word tokens are ambiguous
+E.g., back
+earnings growth took a back/ADJ seat
+a small building in the back/NOUN
+a clear majority of senators back/VERB the bill 
+enable the country to buy back/PART debt
+I was twenty-one back/ADV then 
+POS tagging performance in English
+How many tags are correct?  (Tag accuracy)
+About 97%
+Hasn't changed in the last 10+ years
+HMMs, CRFs, BERT perform similarly .
+Human accuracy about the same
+But baseline is 92%!
+Baseline is performance of stupidest possible method
+"Most frequent class baseline" is an important baseline for many tasks
+Tag every word with its most frequent tag
+(and tag unknown words as nouns)
+Partly easy because
+Many words are unambiguous
+Sources of information for POS tagging
+Janet will back the bill
+     AUX/NOUN/VERB?           NOUN/VERB?
+
+Prior probabilities of word/tag
+"will" is usually an AUX
+Identity of neighboring words
+"the" means the next word is probably not a verb
+Morphology (word structure or “wordshape”):
+Prefixes			unable: 		un-  ADJ
+Suffixes			importantly: 	-ly  ADJ
+Capitalization		Janet: 		CAP  PROPN
+
+
+Standard algorithms for POS tagging
+Hand-crafted rules-based systems: Constraint Grammar, Helsinki Univ
+Supervised Machine Learning Algorithms:
+Hidden Markov Models
+Conditional Random Fields (CRF), Maximum Entropy Markov Models (MEMM) etc
+Neural sequence models (RNNs or Transformers)
+Large Language Models (like BERT), finetuned
+Need a hand-labeled training set, equal performance c97% for English
+All make use of information sources we discussed
+Via human created features: HMMs and CRFs
+Via representation learning:  Neural LMs
+Sequence Labeling for Part of Speech and Named Entities
+PoS: Part of Speech Tagging
+
+Sequence Labeling for Part of Speech and Named Entities
+NER: Named Entity Recognition
+
+Named Entities
+Named entity, in its core usage, means anything that can be referred to with a proper name. Most common 4 tags:
+PER (Person): “Marie Curie”
+LOC (Location): “New York City” 
+ORG (Organization): “Stanford University”
+GPE (Geo-Political Entity): "Boulder, Colorado"
+Often multi-word phrases
+But the term is also extended to things that aren't entities:
+dates, times, prices
+
+
+
+Named Entity tagging
+The task of named entity recognition (NER):
+find spans of text that constitute proper names
+tag the type of the entity. 
+NER output
+Why NER?
+Sentiment analysis: consumer’s sentiment toward a particular company or person?
+Question Answering: answer questions about an entity?
+Information Extraction: Extracting facts about entities from text.
+ 
+Why NER is hard
+Segmentation
+In POS tagging, no segmentation problem since each word gets one tag.
+In NER we have to find and segment the entities!
+Type ambiguity
+
+
+BIO Tagging
+How can we turn this structured problem into a sequence problem like POS tagging, with one label per word?
+
+[PER Jane Villanueva] of [ORG United] , a unit of [ORG United Airlines Holding] , said the fare applies to the [LOC Chicago ] route. 
+
+BIO Tagging
+[PER Jane Villanueva] of [ORG United] , a unit of [ORG United Airlines Holding] , said the fare applies to the [LOC Chicago ] route. 
+
+Now we have one tag per token!!!
+BIO Tagging
+B: token that begins a span
+I: tokens inside a span
+O: tokens outside of any span
+
+# of tags (where n is #entity types):
+	1 O tag, 
+n B tags, 
+n I tags
+ total of 2n+1
+BIO Tagging variants: IO and BIOES
+[PER Jane Villanueva] of [ORG United] , a unit of [ORG United Airlines Holding] , said the fare applies to the [LOC Chicago ] route. 
+
+Standard algorithms for NER
+Supervised Machine Learning given a human-labeled training set of text annotated with tags
+Hidden Markov Models
+Conditional Random Fields (CRF)/ Maximum Entropy Markov Models (MEMM)
+Neural sequence models (RNNs or Transformers)
+Large Language Models (like BERT), finetuned
+
+Sequence Labeling for Part of Speech and Named Entities
+Labelling sequences of words
+
+PoS: Part of Speech Tagging
+NER: Named Entity Recognition
+

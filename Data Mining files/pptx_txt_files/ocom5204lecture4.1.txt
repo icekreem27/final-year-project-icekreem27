@@ -1,0 +1,437 @@
+Machine Translation:Challenges and Approaches
+Based on a talk by Nizar Habashhttp://www.nizarhabash.com/
+Professor of Computer Science, 
+New York University Abu Dhabi
+Google offers translations between many languages: Afrikaans Albanian Amharic history Arabic Armenian Azerbaijani Basque Belarusian Bengali Bosnian Bulgarian Catalan Cebuano Chichewa Chinese Corsican Croatian Czech Danish history Dutch check English Esperanto Estonian Filipino Finnish history French Frisian Galician Georgian history German Greek Gujarati Haitian Creole Hausa Hawaiian Hebrew Hindi Hmong Hungarian Icelandic Igbo Indonesian Irish Italian Japanese Javanese Kannada Kazakh Khmer Kinyarwanda Korean Kurdish (Kurmanji) Kyrgyz Lao Latin Latvian Lithuanian Luxembourgish Macedonian Malagasy Malay Malayalam Maltese Maori Marathi Mongolian Myanmar (Burmese) Nepali Norwegian Odia (Oriya) Pashto Persian Polish Portuguese Punjabi Romanian Russian Samoan Scots Gaelic Serbian Sesotho Shona Sindhi Sinhala Slovak Slovenian Somali Spanish Sundanese Swahili Swedish Tajik Tamil Tatar Telugu Thai Turkish Turkmen Ukrainian Urdu Uyghur Uzbek Vietnamese Welsh Xhosa Yiddish Yoruba Zulu
+WorldMapperThe world as you’ve never seen it before
+List of languages with maps showing world-wide distribution:
+http://www.worldmapper.org/extraindex/text_language.html 
+Eg Arabic:
+
+
+
+
+Road Map
+Multilingual Challenges for MT
+MT Approaches
+MT Evaluation
+
+Multilingual Challenges
+Complex Orthography (writing system)
+Ambiguous spelling, eg Arabic vowels omitted
+ كتب الاولاد اشعارا   كَتَبَ الأوْلادُ اشعَاراً
+ Ambiguous word boundaries, eg Chinese
+ 
+Lexical Ambiguity
+Bank   بنك (financial) vs.  ضفة(river)
+Eat  essen (human) vs. fressen (animal)
+
+Multilingual Challenges Morphological complexity and variation
+Affixation vs. Root+Pattern
+
+
+
+ Tokenization: a “word” can be a whole phrase
+لست هنا
+I-am-not here
+am
+I
+here
+I am not here
+not
+لست
+هنا
+
+Translation Divergences
+conflation 
+Je ne suis pas ici
+I not am not here
+suis
+Je
+ici
+ne
+
+pas
+Translation Divergences  head swap and categorial
+Corpus resources for training
+Need a Corpus (eg web-as-corpus: WebBootCat)and DICTIONARY, other NLP resources.
+BUT: really need PARALLEL corpus, with 
+    SOURCE and TARGET sentences ALIGNED.
+Some languages have few resources, esp non-European languages: Bengali, Amharic, …
+Road Map
+Multilingual Challenges for MT
+MT Approaches
+MT Evaluation
+MT ApproachesMT Pyramid
+
+Source word
+Source syntax
+Source meaning
+Target meaning
+Target syntax
+Target word
+Analysis
+Generation
+MT ApproachesGisting Example
+Sobre la base de dichas experiencias se estableció en 1988 una metodología. 
+Envelope her basis out speak experiences them settle at 1988 one methodology.  
+On the basis of these experiences, a methodology was arrived at in 1988.
+MT ApproachesMT Pyramid
+
+Source word
+Source syntax
+Source meaning
+Target meaning
+Target syntax
+Target word
+Analysis
+Generation
+MT ApproachesTransfer Example
+Transfer Lexicon 
+Map SL structure to TL structure
+
+
+
+poner
+
+X
+
+mantequilla
+
+en
+
+Y
+:obj
+:mod
+:subj
+:obj
+:subj
+:obj
+X puso mantequilla en Y
+X buttered Y
+MT ApproachesMT Pyramid
+
+Source word
+Source syntax
+Source meaning
+Target meaning
+Target syntax
+Target word
+Analysis
+Generation
+
+
+MT ApproachesInterlingua Example: Lexical Conceptual Structure
+(Dorr, 1993)
+MT ApproachesMT Pyramid
+
+Source word
+Source syntax
+Source meaning
+Target meaning
+Target syntax
+Target word
+Analysis
+Generation
+
+
+
+
+MT ApproachesMT Pyramid
+
+Source word
+Source syntax
+Source meaning
+Target meaning
+Target syntax
+Target word
+Analysis
+Generation
+
+
+
+
+
+Statistical MT Automatic Word Alignment
+ GIZA++
+A statistical machine translation toolkit used to train word alignments.
+Uses Expectation-Maximization with various constraints to bootstrap alignments
+Slide based on Kevin Knight’s http://www.sims.berkeley.edu/courses/is290-2/f04/lectures/mt-lecture.ppt
+Mary
+
+did
+
+not
+
+slap
+
+the
+
+green
+
+witch
+Maria    no   dio    una  bofetada  a      la     bruja   verde
+Statistical MT IBM Model (Word-based Model)
+
+http://www.clsp.jhu.edu/ws03/preworkshop/lecture_yamada.pdf
+Phrase-Based Statistical MT
+Foreign input segmented in to phrases
+“phrase” is any sequence of words
+Each phrase is probabilistically translated into English
+P(to the conference | zur Konferenz)
+P(into the meeting | zur Konferenz)
+Phrases are probabilistically re-ordered
+Morgen
+fliege
+ich
+nach Kanada
+zur Konferenz
+Tomorrow
+I
+will fly
+to the conference
+In Canada
+
+
+
+
+
+Slide courtesy of  Kevin Knight http://www.sims.berkeley.edu/courses/is290-2/f04/lectures/mt-lecture.ppt
+Mary
+
+did
+
+not
+
+slap
+
+the
+
+green
+
+witch
+Maria    no      dió     una  bofetada  a         la    bruja   verde
+
+
+
+
+
+
+Word Alignment Induced Phrases
+(Maria, Mary) (no, did not) (slap, dió una bofetada) (la, the) (bruja, witch) (verde, green)
+Slide courtesy of  Kevin Knight http://www.sims.berkeley.edu/courses/is290-2/f04/lectures/mt-lecture.ppt
+Mary
+
+did
+
+not
+
+slap
+
+the
+
+green
+
+witch
+Maria    no      dió     una  bofetada  a         la    bruja   verde
+
+
+
+
+
+
+Word Alignment Induced Phrases
+(Maria, Mary) (no, did not) (slap, dió una bofetada) (la, the) (bruja, witch) (verde, green)
+(a la, the) (dió una bofetada a, slap the)
+
+
+Slide courtesy of  Kevin Knight http://www.sims.berkeley.edu/courses/is290-2/f04/lectures/mt-lecture.ppt
+
+
+Mary
+
+did
+
+not
+
+slap
+
+the
+
+green
+
+witch
+Maria    no      dió     una  bofetada  a         la    bruja   verde
+
+
+
+
+
+
+
+
+
+
+Word Alignment Induced Phrases
+(Maria, Mary) (no, did not) (slap, dió una bofetada) (la, the) (bruja, witch) (verde, green) 
+(a la, the) (dió una bofetada a, slap the)
+(Maria no, Mary did not) (no dió una bofetada, did not slap), (dió una bofetada a la, slap the) 
+(bruja verde, green witch)
+Slide courtesy of  Kevin Knight http://www.sims.berkeley.edu/courses/is290-2/f04/lectures/mt-lecture.ppt
+
+
+Mary
+
+did
+
+not
+
+slap
+
+the
+
+green
+
+witch
+Maria    no      dió     una  bofetada  a         la    bruja   verde
+
+
+
+
+
+
+
+
+
+
+
+
+(Maria, Mary) (no, did not) (slap, dió una bofetada) (la, the) (bruja, witch) (verde, green) 
+(a la, the) (dió una bofetada a, slap the)
+(Maria no, Mary did not) (no dió una bofetada, did not slap), (dió una bofetada a la, slap the) 
+(bruja verde, green witch) (Maria no dió una bofetada, Mary did not slap) 
+(a la bruja verde, the green witch) … 
+
+Word Alignment Induced Phrases
+Slide courtesy of  Kevin Knight http://www.sims.berkeley.edu/courses/is290-2/f04/lectures/mt-lecture.ppt
+
+
+Mary
+
+did
+
+not
+
+slap
+
+the
+
+green
+
+witch
+Maria    no      dió     una  bofetada  a         la    bruja   verde
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(Maria, Mary) (no, did not) (slap, dió una bofetada) (la, the) (bruja, witch) (verde, green) 
+(a la, the) (dió una bofetada a, slap the)
+(Maria no, Mary did not) (no dió una bofetada, did not slap), (dió una bofetada a la, slap the) 
+(bruja verde, green witch) (Maria no dió una bofetada, Mary did not slap) 
+(a la bruja verde, the green witch) … 
+(Maria no dió una bofetada a la bruja verde, Mary did not slap the green witch)
+Word Alignment Induced Phrases
+Slide courtesy of  Kevin Knight http://www.sims.berkeley.edu/courses/is290-2/f04/lectures/mt-lecture.ppt
+Advantages of Phrase-Based SMT
+Many-to-many mappings can handle non-compositional phrases
+Local context is very useful for disambiguating
+“Interest rate”  …
+“Interest in”  …
+The more data, the longer the learned phrases
+Sometimes whole sentences
+Slide courtesy of  Kevin Knight http://www.sims.berkeley.edu/courses/is290-2/f04/lectures/mt-lecture.ppt
+Road Map
+Multilingual Challenges for MT
+MT Approaches
+MT Evaluation
+MT Evaluation
+More art than science
+Wide range of Metrics/Techniques
+interface, …, scalability, …, faithfulness, ... space/time complexity, … etc.
+Automatic vs. Human-based
+Dumb Machines vs. Slow Humans
+
+Human-based Evaluation ExampleFidelity / Accuracy Criteria
+Human-based Evaluation ExampleFluency / Intelligibility Criteria
+Semi-Automatic Evaluation ExampleBleu Metric(Papineni et al 2001)
+Bleu 
+BiLingual Evaluation Understudy 
+Modified n-gram precision with length penalty 
+Quick, inexpensive and language independent 
+Correlates highly with human evaluation
+Compares MT output against several human translations to give a standardized score 
+Test Sentence
+(MT output)
+
+colorless green ideas sleep furiously
+Gold Standard References
+(human translations)
+
+all dull jade ideas sleep irately
+drab emerald concepts sleep furiously
+colorless immature thoughts nap angrily
+
+Automatic Evaluation ExampleBleu Metric
+Test Sentence
+
+colorless green ideas sleep furiously
+Gold Standard References
+
+all dull jade ideas sleep irately
+drab emerald concepts sleep furiously
+colorless immature thoughts nap angrily
+
+Unigram precision = 4/5
+Automatic Evaluation ExampleBleu Metric
+Test Sentence
+
+colorless green ideas sleep furiously
+colorless green ideas sleep furiously
+colorless green ideas sleep furiously
+colorless green ideas sleep furiously
+Gold Standard References
+
+all dull jade ideas sleep irately
+drab emerald concepts sleep furiously
+colorless immature thoughts nap angrily
+
+Unigram precision = 4 / 5 = 0.8
+Bigram precision = 2 / 4 = 0.5
+ 
+Bleu Score = (a1 a2 …an)1/n 
+	        = (0.8 ╳ 0.5)½ = 0.6325  63.25
+Automatic Evaluation ExampleBleu Metric
+Summary
+Multilingual Challenges for MT:
+Different writing systems, morphology, segmentation, word order; 
+Need parallel corpus, dictionaries, NLP tools
+MT Approaches: statistical v rule-based
+Gisting: word-for-word; 
+Transfer: source-to-target phrase mapping; 
+Interlingua: map to/from “semantic representation”
+MT Evaluation: Accuracy, Fluency
+IBM BLEU method: 
+	count overlaps with Reference (human) translations
+

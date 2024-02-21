@@ -1,0 +1,592 @@
+Text Classification and Naive Bayes
+The Task of Text Classification
+The Naive Bayes Classifier
+Naive Bayes: Learning
+Sentiment and Binary Naive Bayes
+More on Sentiment Classification
+NB and Language Modeling
+Precision, Recall, and F measure
+Evaluation with 3+ classes
+Avoiding Harms in Classification
+
+
+Text Classification and Naive Bayes
+The Task of Text Classification
+
+Is this spam?
+
+Who wrote which Federalist papers?
+1787-8: anonymous essays try to convince New York to ratify U.S Constitution:  Jay, Madison, Hamilton.  
+Authorship of 12 of the letters in dispute
+1963: solved by Mosteller and Wallace using Bayesian methods
+
+James Madison
+Alexander Hamilton
+
+What is the subject of this medical article?
+Antogonists and Inhibitors
+Blood Supply
+Chemistry
+Drug Therapy
+Embryology
+Epidemiology
+…
+
+5
+MeSH Subject Category Hierarchy
+?
+MEDLINE Article
+
+Positive or negative movie review?
+...zany characters and richly applied satire, and some great plot twists
+It was pathetic. The worst part about it was the boxing scenes...
+...awesome caramel sauce and sweet toasty almonds. I love this place! 
+...awful pizza and ridiculously overpriced... 
+
+
+
+
+
+
+6
++
++
+− 
+− 
+Positive or negative movie review?
+...zany characters and richly applied satire, and some great plot twists
+It was pathetic. The worst part about it was the boxing scenes...
+...awesome caramel sauce and sweet toasty almonds. I love this place! 
+...awful pizza and ridiculously overpriced... 
+
+
+
+
+
+
+7
++
++
+− 
+− 
+Why sentiment analysis?
+Movie:  is this review positive or negative?
+Products: what do people think about the new iPhone?
+Public sentiment: how is consumer confidence? 
+Politics: what do people think about this candidate or issue?
+Prediction: predict election outcomes or market trends from sentiment
+
+8
+Scherer Typology of Affective States
+Emotion: brief organically synchronized … evaluation of a major event 
+angry, sad, joyful, fearful, ashamed, proud, elated
+Mood: diffuse non-caused low-intensity long-duration change in subjective feeling
+cheerful, gloomy, irritable, listless, depressed, buoyant
+Interpersonal stances: affective stance toward another person in a specific interaction
+friendly, flirtatious, distant, cold, warm, supportive, contemptuous
+Attitudes: enduring, affectively colored beliefs, dispositions towards objects or persons
+ liking, loving, hating, valuing, desiring
+Personality traits: stable personality dispositions and typical behavior tendencies
+nervous, anxious, reckless, morose, hostile, jealous
+Scherer Typology of Affective States
+Emotion: brief organically synchronized … evaluation of a major event 
+angry, sad, joyful, fearful, ashamed, proud, elated
+Mood: diffuse non-caused low-intensity long-duration change in subjective feeling
+cheerful, gloomy, irritable, listless, depressed, buoyant
+Interpersonal stances: affective stance toward another person in a specific interaction
+friendly, flirtatious, distant, cold, warm, supportive, contemptuous
+Attitudes: enduring, affectively colored beliefs, dispositions towards objects or persons
+ liking, loving, hating, valuing, desiring
+Personality traits: stable personality dispositions and typical behavior tendencies
+nervous, anxious, reckless, morose, hostile, jealous
+Basic Sentiment Classification
+Sentiment analysis is the detection of attitudes
+Simple task we focus on in this chapter
+Is the attitude of this text positive or negative?
+We return to affect classification in later chapters
+
+
+Summary: Text Classification
+Sentiment analysis
+Spam detection
+Authorship identification
+Language Identification
+Assigning subject categories, topics, or genres
+…
+Text Classification: definition
+Input:
+ a document d
+ a fixed set of classes  C = {c1, c2,…, cJ}
+
+Output: a predicted class c  C
+Classification Methods:  Hand-coded rules
+Rules based on combinations of words or other features
+ spam: black-list-address OR (“dollars” AND “you have been selected”)
+Accuracy can be high
+If rules carefully refined by expert
+But building and maintaining these rules is expensive
+Classification Methods:Supervised Machine Learning
+Input: 
+a document d
+ a fixed set of classes  C = {c1, c2,…, cJ}
+A training set of m hand-labeled documents (d1,c1),....,(dm,cm)
+Output: 
+a learned classifier γ:d  c
+15
+Classification Methods:Supervised Machine Learning
+Any kind of classifier
+Naïve Bayes
+Logistic regression
+Neural networks
+k-Nearest Neighbors
+…
+
+Text Classification and Naive Bayes
+The Task of Text Classification
+
+Text Classification and Naive Bayes
+The Naive Bayes Classifier
+
+Naive Bayes Intuition
+Simple ("naive") classification method based on Bayes rule
+Relies on very simple representation of document
+Bag of words
+
+The Bag of Words Representation
+20
+The bag of words representation
+
+γ(
+)=c
+Bayes’ Rule Applied to Documents and Classes
+For a document d and a class c
+Naive Bayes Classifier (I)
+
+MAP is “maximum a posteriori”  = most likely class
+Bayes Rule
+Dropping the denominator
+Naive Bayes Classifier (II)
+Document d represented as features x1..xn
+"Likelihood"
+"Prior"
+Naïve Bayes Classifier (IV)
+How often does this class occur?
+O(|X|n•|C|) parameters
+We can just count the relative frequencies in a corpus
+Could only be estimated if a very, very large number of training examples was available.
+Multinomial Naive Bayes Independence Assumptions
+Bag of Words assumption: Assume position doesn’t matter
+Conditional Independence: Assume the feature probabilities P(xi|cj) are independent given the class c.
+Multinomial Naive Bayes Classifier
+Applying Multinomial Naive Bayes Classifiers to Text Classification
+positions  all word positions in test document      			
+Problems with multiplying lots of probs
+There's a problem with this:
+
+
+
+Multiplying lots of probabilities can result in floating-point underflow!
+		.0006 * .0007 * .0009 * .01 * .5 * .000008….
+Idea:   Use logs, because  log(ab) = log(a) + log(b)
+		We'll sum logs of probabilities instead of multiplying probabilities!
+
+
+
+We actually do everything in log space
+Instead of this:
+
+
+This:
+
+Notes:
+1) Taking log doesn't change the ranking of classes!
+	The class with highest probability also has highest log probability!
+2) It's a linear model:
+	Just a max of a sum of weights: a linear function of the inputs
+	So naive bayes is a linear classifier
+
+Text Classification and Naive Bayes
+The Naive Bayes Classifier
+
+Text Classification and Naïve Bayes
+Naive Bayes: Learning
+
+Learning the Multinomial Naive Bayes Model
+First attempt: maximum likelihood estimates
+simply use the frequencies in the data
+Sec.13.3
+Parameter estimation
+Create mega-document for topic j by concatenating all docs in this topic
+Use frequency of w in mega-document
+
+
+fraction of times word wi appears 
+among all words in documents of topic cj
+Problem with Maximum Likelihood
+What if we have seen no training documents with the word fantastic  and classified in the topic positive (thumbs-up)?
+
+
+
+
+Zero probabilities cannot be conditioned away, no matter the other evidence!
+Sec.13.3
+Laplace (add-1) smoothing for Naïve Bayes
+Multinomial Naïve Bayes: Learning
+Calculate P(cj) terms
+For each cj in C do
+ docsj  all docs with  class =cj
+
+Calculate P(wk | cj) terms
+Textj  single doc containing all docsj
+For each word wk in Vocabulary
+    nk  # of occurrences of wk in Textj
+From training corpus, extract Vocabulary
+Unknown words
+What about unknown words
+that appear in our test data 
+but not in our training data or vocabulary?
+We ignore them
+Remove them from the test document!
+Pretend they weren't there!
+Don't include any probability for them at all!
+Why don't we build an unknown word model?
+It doesn't help: knowing which class has more unknown words is not generally helpful!
+
+Stop words
+Some systems ignore stop words
+Stop words: very frequent words like the and a.
+Sort the vocabulary by word frequency in training set
+Call the top 10 or 50 words the stopword list.
+Remove all stop words from both training and test sets
+As if they were never there!
+But removing stop words doesn't usually help
+So in practice most NB algorithms use all words and don't use stopword lists
+
+Text Classification and Naive Bayes
+Naive Bayes: Learning
+
+Text Classification and Naive Bayes
+Sentiment and Binary Naive Bayes
+
+Let's do a worked sentiment example!
+
+A worked sentiment example with add-1 smoothing
+
+1. Prior from training:
+P(-) = 3/5
+P(+) = 2/5
+2. Drop "with"
+3. Likelihoods from training:
+4. Scoring the test set:
+
+Optimizing for sentiment analysis
+For tasks like sentiment, word occurrence seems to be more important than word frequency.
+The occurrence of the word fantastic tells us a lot
+The fact that it occurs 5 times may not tell us much more.
+Binary multinominal naive bayes, or binary NB
+Clip our word counts at 1
+Note: this is different than Bernoulli naive bayes; see the textbook at the end of the chapter.
+Binary Multinomial Naïve Bayes: Learning
+Calculate P(cj) terms
+For each cj in C do
+ docsj  all docs with  class =cj
+
+From training corpus, extract Vocabulary
+Calculate P(wk | cj) terms
+Remove duplicates in each doc:
+For each word type w in docj  
+Retain only a single instance of w
+Binary Multinomial Naive Bayes on a test document d
+46
+First remove all duplicate words from d
+Then compute NB using the same equation: 
+Binary multinominal naive Bayes
+
+
+
+Binary multinominal naive Bayes
+
+
+Binary multinominal naive Bayes
+
+Binary multinominal naive Bayes
+Counts can still be 2! Binarization is within-doc!
+Text Classification and Naive Bayes
+Sentiment and Binary Naive Bayes
+
+Text Classification and Naive Bayes
+More on Sentiment Classification
+
+Sentiment Classification: Dealing with Negation
+I really like this movie
+I really don't like this movie
+
+Negation changes the meaning of "like" to negative.
+Negation can also change negative to positive-ish 
+Don't dismiss this film
+Doesn't let us get bored
+
+
+Sentiment Classification: Dealing with Negation
+Simple baseline method:
+Add NOT_ to every word between negation and following punctuation:
+
+didn’t like this movie , but I
+
+didn’t NOT_like NOT_this NOT_movie but I
+
+Das, Sanjiv and Mike Chen. 2001. Yahoo! for Amazon: Extracting market sentiment from stock message boards. In Proceedings of the Asia Pacific Finance Association Annual Conference (APFA).
+Bo Pang, Lillian Lee, and Shivakumar Vaithyanathan.  2002.  Thumbs up? Sentiment Classification using Machine Learning Techniques. EMNLP-2002, 79—86.
+Sentiment Classification: Lexicons
+Sometimes we don't have enough labeled training data
+In that case, we can make use of pre-built word lists
+Called lexicons
+There are various publically available lexicons
+MPQA Subjectivity Cues Lexicon
+Home page: https://mpqa.cs.pitt.edu/lexicons/subj_lexicon/
+6885 words from 8221 lemmas, annotated for intensity (strong/weak)
+2718 positive
+4912 negative
++ : admirable, beautiful, confident, dazzling, ecstatic, favor, glee, great 
+− : awful, bad, bias, catastrophe, cheat, deny, envious, foul, harsh, hate 
+
+56
+Theresa Wilson, Janyce Wiebe, and Paul Hoffmann (2005). Recognizing Contextual Polarity in 
+Phrase-Level Sentiment Analysis. Proc. of HLT-EMNLP-2005.
+
+Riloff and Wiebe (2003). Learning extraction patterns for subjective expressions. EMNLP-2003.
+
+The General Inquirer
+Home page: http://www.wjh.harvard.edu/~inquirer
+List of Categories:  http://www.wjh.harvard.edu/~inquirer/homecat.htm
+Spreadsheet: http://www.wjh.harvard.edu/~inquirer/inquirerbasic.xls
+Categories:
+Positiv (1915 words) and Negativ (2291 words)
+Strong vs Weak, Active vs Passive, Overstated versus Understated
+Pleasure, Pain, Virtue, Vice, Motivation, Cognitive Orientation, etc
+Free for Research Use
+Philip J. Stone, Dexter C Dunphy, Marshall S. Smith, Daniel M. Ogilvie. 1966. The General Inquirer: A Computer Approach to Content Analysis. MIT Press
+Using Lexicons in Sentiment Classification
+Add a feature that gets a count whenever a word from the lexicon occurs
+E.g., a feature called "this word occurs in the positive lexicon" or "this word occurs in the negative lexicon"
+Now all positive words (good, great, beautiful, wonderful) or negative words count for that feature.
+Using 1-2 features isn't as good as using all the words.
+But when training data is sparse or not representative of the test set, dense lexicon features can help
+Naive Bayes in Other tasks: Spam Filtering
+SpamAssassin Features:
+Mentions millions of (dollar) ((dollar) NN,NNN,NNN.NN)
+From: starts with many numbers
+Subject is all capitals
+HTML has a low ratio of text to image area
+"One hundred percent guaranteed"
+Claims you can be removed from the list
+Naive Bayes in Language ID
+Determining what language a piece of text is written in.
+Features based on character n-grams do very well
+Important to train on lots of varieties of each language
+(e.g., American English varieties like African-American English, or English varieties around the world like Indian English)
+
+Summary: Naive Bayes is Not So Naive
+Very Fast, low storage requirements
+Work well with very small amounts of training data
+Robust to Irrelevant Features
+	Irrelevant Features cancel each other without affecting results
+Very good in domains with many equally important features
+	Decision Trees suffer from fragmentation in such cases – especially if little data
+Optimal if the independence assumptions hold: If assumed independence is correct, then it is the Bayes Optimal Classifier for problem
+A good dependable baseline for text classification
+But we will see other classifiers that give better accuracy
+
+Slide from Chris Manning
+Text Classification and Naive Bayes
+More on Sentiment Classification
+
+Text Classification and Naïve Bayes
+Naïve Bayes: Relationship to Language Modeling
+
+Generative Model for Multinomial Naïve Bayes
+
+64
+c=+
+X1=I
+
+
+
+
+
+X2=love
+X3=this
+X4=fun
+X5=film
+Naïve Bayes and Language Modeling
+Naïve bayes classifiers can use any feature, not just text
+URL, email address, dictionaries, network features
+Fake News detection: trustworthiness of source / re-tweets
+In Islam: Hadith: isnad (source: narrators) and matn (text)
+But if, as in the previous slides
+We use only word features from the text 
+we use all of the words in the text (not a subset)
+Then 
+Naive bayes has an important similarity to language modeling.
+65
+Each class = a unigram language model
+Assigning each word: P(word | c)
+Assigning each sentence: P(s|c)=Π P(word|c)
+0.1	I
+0.1	love
+0.05	this
+0.01	fun
+0.1	film
+…
+I
+love
+this
+fun
+film
+0.1
+0.1
+.05
+0.01
+0.1
+Class pos
+P(s | pos) = 0.0000005 
+Sec.13.2.1
+Naïve Bayes as a Language Model
+Which class assigns the higher probability to s?
+0.1	I
+0.1	love
+0.01	this
+0.05	fun
+0.1	film
+Model pos
+Model neg
+
+
+P(s|pos)  >  P(s|neg)
+0.2	I
+0.001	love
+0.01	this
+0.005	fun
+0.1	film
+Sec.13.2.1
+Text Classification and Naïve Bayes
+Naïve Bayes: Relationship to Language Modeling
+
+Text Classification and Naïve Bayes
+Precision, Recall, and F measure
+
+Evaluation
+Let's consider just binary text classification tasks
+Imagine you're the CEO of Delicious Pie Company
+You want to know what people are saying about your pies
+So you build a "Delicious Pie" tweet detector
+Positive class: tweets about Delicious Pie Co
+Negative class: all other tweets
+The 2-by-2 confusion matrix
+Evaluation: Accuracy
+Why don't we use accuracy as our metric?
+Imagine we saw 1 million tweets
+100 of them talked about Delicious Pie Co.
+999,900 talked about something else
+We could build a dumb classifier that just labels every tweet "not about pie"
+It would get 99.99% accuracy!!! Wow!!!!
+But useless! Doesn't return the comments we are looking for!
+That's why we use precision and recall instead
+Evaluation: Precision
+% of items the system detected (i.e., items the system labeled as positive) that are in fact positive (according to the human gold labels) 
+
+Evaluation: Recall
+% of items actually present in the input that were correctly identified by the system. 
+
+Why Precision and recall
+Our dumb pie-classifier
+Just label nothing as "about pie"
+Accuracy=99.99%
+	but
+Recall = 0
+(it doesn't get any of the 100 Pie tweets)
+Precision and recall, unlike accuracy, emphasize true positives:
+ finding the things that we are supposed to be looking for. 
+
+A combined measure: F
+F measure: a single number that combines P and R:
+
+
+
+We almost always use balanced F1 (i.e.,  = 1)		
+Development Test Sets ("Devsets") and Cross-validation
+
+
+Train on training set, tune on devset, report on testset
+This avoids overfitting (‘tuning to the test set’)
+More conservative estimate of performance
+But paradox: want as much data as possible for training, and as much for dev; how to split?
+Training set
+Development Test Set
+Test Set
+Cross-validation: multiple splits
+Pool results over splits, Compute pooled dev performance
+Text Classification and Naive Bayes
+Precision, Recall, and F measure
+
+Text Classification and Naive Bayes
+Evaluation with more than two classes
+
+Confusion Matrix for 3-class classification
+How to combine P/R from 3 classes to get one metric
+Macroaveraging: 
+compute the performance for each class, and then average over classes
+Microaveraging: 
+collect decisions for all classes into one confusion matrix
+compute precision and recall from that table. 
+
+
+
+Macroaveraging and Microaveraging
+Text Classification and Naive Bayes
+Evaluation with more than two classes
+
+Text Classification and Naive Bayes
+Avoiding Harms in Classification
+
+Harms in sentiment classifiers
+Kiritchenko and Mohammad (2018) found that most sentiment classifiers assign lower sentiment and more negative emotion to sentences with African American names in them.
+This perpetuates negative stereotypes that associate African Americans with negative emotions 
+
+Harms in toxicity classification
+Toxicity detection is the task of detecting hate speech, abuse, harassment, or other kinds of toxic language
+But some toxicity classifiers incorrectly flag as being toxic sentences that are non-toxic but simply mention identities like blind people, women, or gay people.
+This could lead to censorship of discussion about these groups. 
+
+What causes these harms?
+Can be caused by:
+Problems in the training data; machine learning systems are known to amplify the biases in their training data. 
+Problems in the human labels
+Problems in the resources used (like lexicons)
+Problems in model architecture (like what the model is trained to optimized) 
+Mitigation of these harms is an open research area
+Meanwhile: model cards
+
+Model Cards
+For each algorithm you release, document:
+training algorithms and parameters 
+training data sources, motivation, and preprocessing 
+evaluation data sources, motivation, and preprocessing 
+intended use and users 
+model performance across different demographic or other groups and environmental situations 
+(Mitchell et al., 2019)
+Text Classification and Naive Bayes
+Avoiding Harms in Classification
+
+Text Classification and Naive Bayes
+The Task of Text Classification
+The Naive Bayes Classifier
+Naive Bayes: Learning
+Sentiment and Binary Naive Bayes
+More on Sentiment Classification
+NB and Language Modeling
+Precision, Recall, and F measure
+Evaluation with 3+ classes
+Avoiding Harms in Classification
+
+

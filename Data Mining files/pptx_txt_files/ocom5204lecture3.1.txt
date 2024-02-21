@@ -1,0 +1,626 @@
+Vector Semantics & Embeddings
+Word Meaning
+“In NLP, word embedding is a term used for the representation of word meaning for text analysis, typically in the form of a real-valued vector that encodes the meaning of the word such that the words that are closer in the vector space are expected to be similar in meaning” (Wikipedia)
+Jurafsky and Martin (2022),
+Speech and Language Processing
+Chapter 6
+Vector Semantics & Embeddings
+Word Meaning
+Vector Semantics
+Words and Vectors
+Cosine metric of word similarity
+TF-IDF term freq / document freq
+PMI Pointwise Mutual Information
+Word2vec: 
+Deep Learning of word embeddings
+Properties of Embeddings
+
+
+
+
+
+
+
+What do words mean?
+N-gram or text classification methods we've seen so far
+Words are just strings (or indices wi in a vocabulary list)
+That's not very satisfactory!
+philosophical logic and KR; Computer Vision classification:
+The meaning of "dog" is DOG;  “cat” is CAT
+          e.g. ∀x DOG(x) ⟶ MAMMAL(x)
+Old linguistics joke by Barbara Partee in 1967:
+Q: What's the meaning of life?
+A: LIFE
+That seems hardly better!
+Desiderata
+What should a theory of word meaning do for us?
+Let's look at some desiderata
+From lexical semantics, the linguistic study of word meaning
+mouse (N)1. any of numerous small rodents...2. a hand-operated device that controls a cursor... 
+Lemmas and senses in dictionaries
+sense
+Lemma – dictionary entry
+A sense or “concept” is the meaning component of a word
+Lemmas can be polysemous (have multiple senses)
+Modified from the online thesaurus WordNet
+Relations between senses: Synonymy
+Synonyms have the same meaning in some or all contexts.
+couch / sofa
+big / large
+automobile / car
+vomit / throw up
+water / H20
+Relations between senses: Synonymy
+Note that there are probably no examples of perfect synonymy.
+Even if many aspects of meaning are identical
+Still may differ based on politeness, slang, register, genre, etc.
+Relation: Synonymy?
+water/H20
+	"H20" in a surfing guide?
+big/large
+	my big sister != my large sister
+The Linguistic Principle of Contrast
+Difference in form  difference in meaning
+Abbé Gabriel Girard 1718
+
+ [I do not believe that there is a synonymous word in any language]
+
+
+"
+"
+Re: "exact" synonyms
+Thanks to Mark Aronoff!
+Relation: Similarity
+Words with similar meanings.  Not synonyms, but sharing some element of meaning
+
+car, bicycle
+cow, horse
+
+Ask humans how similar 2 words are
+SimLex-999 dataset (Hill et al., 2015) 
+Relation: Word relatedness
+Also called "word association"
+Words can be related in any way, perhaps via a semantic frame or field
+
+coffee, tea:    similar
+coffee, cup:   related, not similar
+Semantic field
+Words that 
+cover a particular semantic domain 
+bear structured relations with each other. 
+
+hospitals
+	surgeon, scalpel, nurse, anaesthetic, hospital
+restaurants 
+	waiter, menu, plate, food, menu, chef 
+houses
+	door, roof, kitchen, family, bed
+
+Relation: Antonymy
+Senses that are opposites with respect to only one feature of meaning
+Otherwise, they are very similar!
+dark/light   short/long	fast/slow	rise/fall
+hot/cold	    up/down	      in/out
+More formally: antonyms can
+define a binary opposition or be at opposite ends of a scale
+ long/short, fast/slow
+Be reversives:
+ rise/fall, up/down
+Connotation (sentiment)
+Words have affective meanings
+Positive connotations (happy) 
+Negative connotations (sad)
+Connotations can be subtle:
+Positive connotation: copy, replica, reproduction 
+Negative connotation: fake, knockoff, forgery
+Evaluation (sentiment!)
+Positive evaluation (great, love) 
+Negative evaluation (terrible, hate)
+
+Connotation
+Words seem to vary along 3 affective dimensions:
+valence: the pleasantness of the stimulus
+arousal: the intensity of emotion provoked by the stimulus
+dominance: the degree of control exerted by the stimulus
+Osgood et al. (1957)
+Values from NRC VAD Lexicon  (Mohammad 2018)
+So far
+Concepts or word senses
+Have a complex many-to-many association with words (homonymy, multiple senses)
+Have relations with each other
+Synonymy
+Antonymy
+Similarity
+Relatedness
+Connotation
+Vector Semantics & Embeddings
+Word Meaning
+
+Vector Semantics & Embeddings
+Vector Semantics
+
+Every modern NLP algorithm uses embeddings as the representation of word meaning
+
+
+Computational models of word meaning
+Can we build a theory of how to represent word meaning, that accounts for at least some of the desiderata?
+We'll introduce vector semantics
+	The standard model in language processing!
+	Handles many of our goals!
+Word Meaning in Philosophy and Linguistics
+Ludwig Wittgenstein
+"The meaning of a word is its use in the language”
+
+John Firth
+”A word is characterized by the company it keeps"
+Let's define words by their usages
+One way to define "usage": 
+	words are defined by their environments (the words around them)
+
+Zellig Harris (1954): 
+If A and B have almost identical environments we say that they are synonyms.
+
+
+What does recent English borrowing ongchoi mean?
+Suppose you see these sentences:
+Ong choi is delicious sautéed with garlic. 
+Ong choi is superb over rice
+Ong choi leaves with salty sauces
+And you've also seen these:
+…spinach sautéed with garlic over rice
+Chard stems and leaves are delicious
+Collard greens and other salty leafy greens
+Conclusion:
+Ongchoi is a leafy green like spinach, chard, or collard greens
+We could conclude this based on words like "leaves" and "delicious" and "sauteed" 
+
+Ongchoi: Ipomoea aquatica "Water Spinach"
+Yamaguchi, Wikimedia Commons, public domain
+空心菜
+kangkong
+rau muống
+…
+Idea 1: Defining meaning by linguistic distribution
+Let's define the meaning of a word by its distribution in language use, meaning its neighboring words or grammatical environments. 
+
+Idea 2: Meaning as a point in space (Osgood et al. 1957)
+3 affective dimensions for a word
+valence: pleasantness 
+arousal: intensity of emotion 
+dominance: the degree of control exerted
+
+
+
+
+
+ 
+Hence the connotation of a word is a vector in 3-space
+NRC VAD Lexicon 
+ (Mohammad 2018)
+Idea 1: Defining meaning by linguistic distributionIdea 2: Meaning as a point in multidimensional space
+
+Defining meaning as a point in space based on distribution
+Each word = a vector   (not just "good" or "w45")
+Similar words are "nearby in semantic space"
+We build this space automatically by seeing which words are nearby in text
+
+
+We define meaning of a word as a vector
+“mathematical embedding from space with many dimensions per word to a continuous vector space with a much lower dimension” (Wikipedia)
+e.g. 50,000 context word-types in LOB, to 100 numbers
+The standard way to represent meaning in NLP
+	Every modern NLP algorithm uses embeddings as the representation of word meaning
+Fine-grained model of meaning to measure similarity 
+
+
+Intuition: why vectors?
+Consider sentiment analysis:
+
+With words,  a feature is a word identity
+Feature 5: 'The previous word was "terrible"'
+requires exact same word to be in training and test
+
+With embeddings: 
+Feature is a word vector
+'The previous word was vector [35,22,17…]
+Now in the test set we might see a similar vector [34,21,14]
+We can generalize to similar but unseen words!!! 
+
+We'll discuss 2 kinds of embeddings
+tf-idf 
+Information Retrieval workhorse!
+A common baseline model
+Sparse vectors
+Words are represented by (a simple function of) the counts of nearby words
+Word2vec
+Dense vectors
+Representation is created by training a classifier to predict whether a word is likely to appear nearby
+Later we'll discuss extensions called  contextual embeddings
+From now on:Computing with meaning representationsinstead of string representations
+Vector Semantics & Embeddings
+Vector Semantics
+
+Vector Semantics & Embeddings
+Words and Vectors
+
+Term-document matrix
+Each document is represented by a vector of words
+Visualizing document vectors
+Vectors are the basis of information retrieval
+Vectors are similar for the two comedies
+
+But comedies are different than the other two	
+	Comedies have more fools and wit and fewer battles.
+Idea for word meaning: Words can be vectors too!!!
+battle is "the kind of word that occurs in Julius Caesar and Henry V"
+
+fool is "the kind of word that occurs  in comedies, especially Twelfth Night"
+More common: word-word matrix(or "term-context matrix")
+Two words are similar in meaning if their context vectors are similar
+
+40
+
+Vector Semantics & Embeddings
+Words and Vectors
+
+Vector Semantics & Embeddings
+Cosine for computing word similarity
+
+Computing word similarity: Dot product and cosine
+The dot product between two vectors is a scalar:
+
+
+The dot product tends to be high when the two vectors have large values in the same dimensions
+Dot product can thus be a useful similarity metric between vectors
+
+Problem with raw dot-product
+Dot product favors long vectors
+Dot product is higher if a vector is longer (has higher values in many dimensions)
+Vector length: the square root of 
+the sum of the square of the values
+
+
+Frequent words (of, the, you) have long vectors (since they occur many times with other words).
+So dot product overly favors frequent words
+Alternative: cosine for computing word similarity
+We modify the dot product to normalize for the vector length by dividing the dot product by the lengths of each of the two vectors. This normalized dot product turns out to be the same as the cosine of the angle between the two vectors.
+Cosine as a similarity metric
+-1: vectors point in opposite directions 
++1:  vectors point in same directions
+0: vectors are orthogonal
+
+
+But since raw frequency values are non-negative, the cosine for term-term matrix vectors ranges from 0–1 
+
+
+
+47
+Cosine examples
+48
+Visualizing cosines well, angles … cos(0)=1, cos(90)=0
+Vector Semantics & Embeddings
+Cosine for computing word similarity
+
+Vector Semantics & Embeddings
+TF-IDF
+
+But raw frequency is a bad representation
+The co-occurrence matrices we have seen represent each cell by word frequencies.
+Frequency is clearly useful; if sugar appears a lot near apricot, that's useful information.
+But most frequent words like the, it, or they are not very informative/meaningful for embeddings (Atwell 1986)
+It's a paradox! How can we balance these two conflicting constraints? 
+
+Two common solutions for word weighting
+Words like "the" or "it" have very low idf
+See if words like "good" appear more often with "great" than we would expect by chance
+Term frequency (tf)
+tft,d = count(t,d)
+
+Instead of using raw count, we squash a bit:
+
+tft,d = log10(count(t,d)+1) 
+
+Document frequency (df)
+dft is the number of documents t occurs in.
+(note this is not collection frequency: total count across all documents)
+"Romeo" is very distinctive for one Shakespeare play:
+
+
+
+Inverse document frequency (idf)
+
+N is the total number of documents 
+in the collection
+What is a document?
+
+
+Could be a play or a Wikipedia article
+But for the purposes of tf-idf, documents can be anything; we often call each paragraph a document!
+In Quran AI research, each verse can be a “document”
+
+Final tf-idf weighted value for a word
+Raw counts:
+
+
+
+tf-idf:
+
+Vector Semantics & Embeddings
+TF-IDF
+
+Vector Semantics & Embeddings
+PPMI
+
+Pointwise Mutual Information
+Positive Pointwise Mutual Information
+Computing PPMI on a term-context matrix
+Matrix F with W rows (words) and C columns (contexts)
+fij is # of times wi occurs in context cj
+63
+p(w=information,c=data) = 
+p(w=information) =
+p(c=data) =
+
+64
+= .3399
+3982/111716
+7703/11716
+= .6575
+5673/11716
+= .4842
+65
+pmi(information,data) = log2 (
+.3399 /
+(.6575*.4842) )
+ = .0944
+Resulting PPMI matrix (negatives replaced by 0) 
+Weighting PMI
+PMI is biased toward infrequent events
+Very rare words have very high PMI values
+Solution:
+Use add-one smoothing (as in n-gram models etc)
+
+66
+Vector Semantics & Embeddings
+Word2vec
+
+Sparse versus dense vectors
+tf-idf (or PMI) vectors are
+long (length |V|= 20,000 to 50,000)
+sparse (most elements are zero)
+More practical: learn vectors which are
+short (length 50-1000)
+dense (most elements are non-zero)
+Sparse versus dense vectors
+Why dense vectors?
+Short vectors may be easier to use as features in machine learning (fewer weights to tune)
+Dense vectors may generalize better than explicit counts
+Dense vectors may do better at capturing synonymy:
+car and automobile are synonyms; but are distinct dimensions
+a word with car as a neighbor and a word with automobile as a neighbor should be similar, but aren't
+In practice, they work better
+69
+Common methods for getting short dense vectors
+“Neural Language Model”-inspired models
+Word2vec (skipgram, CBOW), GloVe
+Singular Value Decomposition (SVD)
+A special case of this is called LSA – Latent Semantic Analysis
+Alternative to these "static embeddings":
+Contextual Embeddings (ELMo, BERT)
+Compute distinct embeddings for a word in its context
+Separate embeddings for each token of a word
+Simple static embeddings you can download!
+Word2vec (Mikolov et al)
+https://code.google.com/archive/p/word2vec/
+
+GloVe (Pennington, Socher, Manning)
+http://nlp.stanford.edu/projects/glove/
+
+Word2vec
+Popular embedding method
+Fast to train
+Code available on the web
+Idea: predict rather than count
+Word2vec provides various options. We'll do:
+	 skip-gram with negative sampling (SGNS)
+
+ 
+Word2vec
+Instead of counting how often each word w occurs near "apricot"
+Train a classifier on a binary prediction task:
+Is w likely to show up near "apricot"?
+We don’t actually care about this task
+But we'll take the learned classifier weights as the word embeddings
+Big idea:  self-supervision: 
+A word c that occurs near apricot in the corpus acts as the gold "correct answer" for supervised learning
+No need for human labels
+Bengio et al. (2003); Collobert et al. (2011) 
+
+
+
+Approach: predict if candidate word c is a "neighbour"
+Treat the target word t and a neighboring context word c as positive examples.
+Randomly sample other words in the lexicon to get negative examples
+Use logistic regression to train a classifier to distinguish those two cases
+Use the learned weights as the embeddings
+
+
+Skip-Gram Training Data
+Assume a +/- 2 word window, given training sentence:
+
+…lemon, a [tablespoon of  apricot  jam,   a]  pinch…
+                        c1                   c2                 c3      c4
+
+
+
+		                                [target]
+Skip-Gram Classifier
+(assuming a +/- 2 word window)
+
+…lemon, a [tablespoon of  apricot  jam,   a]  pinch…
+                        c1                   c2 [target]    c3      c4
+
+Goal: train a classifier that is given a candidate (word, context) pair
+		 (apricot, jam)
+ 		 (apricot, aardvark)
+		…
+And assigns each pair a probability: 
+	P(+|w, c) 
+	P(−|w, c) = 1 − P(+|w, c) 
+
+
+
+
+
+
+Skip-gram classifier: summary
+A probabilistic classifier, given 
+a test target word w 
+its context window of L words c1:L
+Estimates probability that w occurs in this window based on similarity of w (embeddings) to c1:L (embeddings).
+
+To compute this, we just need embeddings for all the words.
+These embeddings we'll need: a set for w, a set for c
+Vector Semantics & Embeddings
+Word2vec
+
+Vector Semantics & Embeddings
+Word2vec: Learning the embeddings
+
+Skip-Gram Training data
+
+…lemon, a [tablespoon of  apricot  jam,   a]  pinch…
+                        c1                   c2 [target]    c3      c4
+
+
+81
+
+
+
+
+Skip-Gram Training data
+
+…lemon, a [tablespoon of  apricot  jam,   a]  pinch…
+                        c1                   c2 [target]    c3      c4
+
+
+82
+
+
+
+
+For each positive example we'll grab k negative examples, sampling by frequency
+Skip-Gram Training data
+
+…lemon, a [tablespoon of  apricot  jam,   a]  pinch…
+                        c1                   c2 [target]    c3      c4
+
+
+83
+
+
+
+
+Word2vec: how to learn vectors
+Given the set of positive and negative training instances, and an initial set of embedding vectors 
+The goal of learning is to adjust those word vectors such that we:
+Maximize the similarity of the target word, context word pairs (w , cpos) drawn from the positive data
+Minimize the similarity of the (w , cneg) pairs drawn from the negative data. 
+
+12/13/21
+84
+Learning the classifier
+How to learn?
+Stochastic gradient descent!
+
+We’ll adjust the word weights to
+make the positive pairs more likely 
+and the negative pairs less likely, 
+over the entire training set.
+
+Intuition of one step of gradient descent
+Two sets of embeddings
+SGNS learns two sets of embeddings
+		Target embeddings matrix W
+		Context embedding matrix C 
+It's common to just add them together, representing word i as the vector  wi + ci
+Summary: How to learn word2vec (skip-gram) embeddings
+Start with V random d-dimensional vectors as initial embeddings
+Train a classifier based on embedding similarity
+Take a corpus and take pairs of words that co-occur as positive examples
+Take pairs of words that don't co-occur as negative examples
+Train the classifier to distinguish these by slowly adjusting all the embeddings to improve the classifier performance
+Throw away the classifier code and keep the embeddings.
+Vector Semantics & Embeddings
+Word2vec: Learning the embeddings
+
+Vector Semantics & Embeddings
+Properties of Embeddings
+
+The kinds of neighbors depend on window size
+Small windows (C= +/- 2) : nearest words are syntactically similar words in same taxonomy
+Hogwarts nearest neighbors are other fictional schools
+Sunnydale, Evernight, Blandings
+Large windows (C= +/- 5) :  nearest words are related words in same semantic field
+Hogwarts nearest neighbors are Harry Potter world:
+Dumbledore, half-blood,  Malfoy
+
+Analogical relations
+The classic parallelogram model of analogical reasoning (Rumelhart and Abrahamson 1973)
+To solve: "apple is to tree as grape is to  _____"
+Add tree –  apple to grape to get vine
+
+Analogical relations via parallelogram
+The parallelogram method can solve analogies with both sparse and dense embeddings (Turney and Littman 2005, Mikolov et al. 2013b)
+		king – man + woman is close to queen
+		Paris – France + Italy is close to Rome
+
+
+Structure in GloVE Embedding space
+Caveats with the parallelogram method
+It only seems to work for frequent words, small distances and certain relations (relating countries to capitals, or parts of speech), but not others. (Linzen 2016, Gladkova et al. 2016, Ethayarajh et al. 2019a) 
+
+Understanding analogy is an open area of research (Peterson et al. 2020)
+
+Train embeddings on different decades of historical text to see meanings shift
+~30 million books, 1850-1990, Google Books data
+
+Embeddings as a window onto historical semantics
+William L. Hamilton, Jure Leskovec, and Dan Jurafsky. 2016. Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change. Proceedings of ACL.
+Embeddings reflect cultural bias!
+Ask “Paris : France :: Tokyo : x” 
+x = Japan
+Ask “father : doctor :: mother : x” 
+x = nurse
+Ask “man : computer programmer :: woman : x” 
+x = homemaker
+
+Bolukbasi, Tolga, Kai-Wei Chang, James Y. Zou, Venkatesh Saligrama, and Adam T. Kalai. "Man is to computer programmer as woman is to homemaker? debiasing word embeddings." In NeurIPS, pp. 4349-4357. 2016.
+Algorithms that use embeddings as part of e.g., hiring searches for programmers, might lead to bias in hiring
+Historical embedding as a tool to study cultural biases
+Compute a gender or ethnic bias for each adjective: e.g., how much closer the adjective is to "woman" synonyms than "man" synonyms, or names of particular ethnicities
+Embeddings for competence adjective (smart, wise, brilliant, resourceful, thoughtful, logical) are biased toward men, a bias slowly decreasing 1960-1990
+Embeddings for dehumanizing adjectives (barbaric, monstrous, bizarre)  were biased toward Asians in the 1930s, bias decreasing over the 20th century.
+These match the results of old surveys done in the 1930s
+
+Garg, N., Schiebinger, L., Jurafsky, D., and Zou, J. (2018). Word embeddings quantify 100 years of gender and ethnic stereotypes. Proceedings of the National Academy of Sciences 115(16), E3635–E3644.
+Vector Semantics & Embeddings
+Properties of Embeddings
+
+Vector Semantics & Embeddings
+SUMMARY
+Word Meaning
+Vector Semantics
+Words and Vectors
+Cosine metric of word similarity
+TF-IDF term freq / document freq
+PMI Pointwise Mutual Information
+Word2vec: Learning embeddings
+Properties of Embeddings
+
+
+
+
+
+
+

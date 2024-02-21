@@ -1,0 +1,91 @@
+As an Artificial Intelligence expert, you can join “social media” communities for data mining and text analytics professionals to ”network”, share knowledge and resources
+And get ideas for Text Analytics applied research projects … 
+General social media have AI groups/networks, eg:
+FaceBook, LinkedIn, Quora
+Other communities set up by/for academics and practitioners to share knowledge, ask questions, find resources, …
+KDnuggets, Kaggle, Weka, ICAME, ACL, SemEval, 
+EU-JRC communities, etc, etc…
+Data mining and text analytics online communities and resources	
+
+Facebook https://facebook.com 
+“Meta Platforms, Inc., doing business as Meta and formerly known as Facebook, Inc., is a multinational technology conglomerate based in Menlo Park, California. The company is the parent organization of Facebook, Instagram, and WhatsApp, among other subsidiaries…”
+Fb groups e.g. “Artificial Intelligence and Deep Learning” - open to all, eg Fb users who think AI sounds interesting …
+
+Facebook Research https://research.fb.com/ after MSc?
+
+LinkedIn https://linkedin.com 
+Set up for professionals to “network”, job-search/recruit, …
+Now has Fb-like social features: post news/ideas, followers, notifications, learning/training, job adverts, product adverts …
+
+I can use network of 6000+ AI contacts to recruit, ask advice, …
+	
+
+Quora https://www.quora.com/ 
+“Quora is a social question-and-answer website” 
+“Quora is a place to gain and share knowledge. It's a platform to ask questions and connect with people who contribute unique insights and quality answers.”
+?better than Google search for specific technical AI questions, eg “How can I avoid overfitting?”
+
+
+KDnuggets: Knowledge Discovery nuggets 
+https://kdnuggets.com  
+
+knowledge discovery: “extracting useful knowledge from data” (aka data mining  / machine learning)
+“A knowledge nugget is a small item or piece of useful knowledge in categories of interest to the user. It's "business trainers' jargon", not a general purpose idiom” (https://english.stackexchange.com/) 
+News, tutorials, reviews, jobs, …
+Originally academic, now mainly AI industry practitioners
+ 
+
+Kaggle https://www.kaggle.com/  
+competitions, data-sets, discussion… taken over by Google
+Competitors can use Kaggle/Google cloud resources
+Past contests are archived, with access to data, discussions…
+Originally “enthusiasts”, now with Industry sponsors, prizes, large data-sets useful for “real” applications
+“Kaggle offers a no-setup, customizable, Jupyter Notebooks environment. Access free GPUs and a huge repository of community published data & code.”
+
+WEKA Waikato Environment for Knowledge Analysis
+ https://www.cs.waikato.ac.nz/ml/weka/
+Website for University of Waikato ML research group, 
+Has grown into a hub for Weka users: downloads, textbook, tutorials, contribution add-ons, …
+More open, community-based than commercial AI product websites
+
+ICAME: International Computer Archive of Modern English http://icame.uib.no/
+First English text corpora: Brown, LOB, ICE etc 
+ICAME conference every year (43rd in 2022)
+
+CORPORA mailing list and email discussion forum 
+http://icame.uib.no/corpora/ 
+
+ACL: Association for Computational Linguistics https://aclweb.org 
+“Professional body” for CL/NLP/TA
+Computational Linguistics journal, conferences, resources
+ journals https://aclweb.org/aclwiki/Journals 
+conferences https://www.aclweb.org/portal/events 
+Research papers: ACL Anthology https://aclanthology.org/ 
+Many SIGs Special Interest Groups, eg SIGWAC SIGSEM
+
+SemEval: Semantic Evaluation workshops https://semeval.github.io
+Academic conference papers, plus “shared tasks” +data-sets, competitors write paper on methods and results,
+Kaggle-like contests, with academic research papers to cite
+For your own application: find a related SemEval task, see a range of approaches (and scores) to try on your own task
+Some SemEval big data-sets are archived for re-use, eg 
+Offensive Language Identification Dataset - OLID
+ https://scholar.harvard.edu/malmasi/olid 
+
+
+EU-JRC European Union Joint Research Centre communities
+ - EU-JRC fund projects to foster EU research collaboration.
+e.g. HUMAINT human behaviour and machine intelligence
+” Our project involves a core team of researchers plus a community of experts in cognitive science, machine learning, human-computer interaction and economy. 
+The project organizes a series of scientific events …”
+https://ec.europa.eu/jrc/communities/en/community/humaint 
+
+(see other EU projects in “The Language Machine”)
+Conclusion
+As an Artificial Intelligence expert, you can join “social media” communities for data mining and text analytics professionals to ”network”, share knowledge and resources
+And get ideas for Text Analytics applied research projects … 
+General social media have AI groups/networks, eg:
+FaceBook, LinkedIn, Quora
+Other communities set up by/for academics and practitioners to share knowledge, ask questions, find resources, …
+KDnuggets, Kaggle, Weka, ICAME, ACL, SemEval, 
+EU-JRC communities, etc, etc…
+Data mining and text analytics online communities and resources	

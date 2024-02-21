@@ -1,0 +1,83 @@
+In this video you will be introduced to BERT, a method and toolkit from Google Labs for understanding meaning relationships between sentences, and used in tasks which involve measuring meaning similarity between sentences. 
+Devlin et al 2019. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. Proceedings of NAACL'2019 North American Chapter of the Association for Computational Linguistics (Best Paper award) 
+https://www.aclweb.org/anthology/N19-1423.pdf  
+by Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova, Google AI Language Research- can University researchers compete with Google, MS, FB etc? 
+
+BERT: Bidirectional Encoder Representations from Transformers
+Overview: BERT
+Pre-trained representations from unlabeled text, then fine-tuned
+Unsupervised learning of morphology, syntax and semantics
+WordPiece unsupervised ML of text segmentation
+Predicting sentence-meaning from wordPiece meanings
+Assume adjacent sentences have related meanings 
+Results: BERT fine-tuned on human-labelled NLP data-sets
+“Both BERTBASE and BERTLARGE outperform all systems on all tasks by a substantial margin … the same pre-trained model can successfully tackle a broad set of NLP tasks”
+Also: Ablation Studies, References, Appendices, Questions …
+
+BERT: pre-trained representations from unlabeled text, then fine-tuned
+BERT stands for Bidirectional Encoder Representations from Transformers – language representation models, DATA not software, though you also need software to use BERT models 
+“pre-trained representations from unlabeled text” – a model of general English words and grammar “For pre-training we use the BooksCorpus (800M words) and English Wikipedia (2,500M words)” 
+“can be fine-tuned to create models for a wide range of tasks” – tweak for specific language task “state-of-the-art results on eleven natural language processing tasks” - GLUE, SQuAD etc.“The code and pre-trained models are available at https://github.com/google-research/bert  ” 
+
+Unsupervised learning of morphology, syntax and semantics
+BERT Transformer NN maps pair of texts onto a class.Train: show BERT many examples: sentence+sentence = YorNTest: show BERT new sentence+sentence; BERT predicts YorN 
+BERT learns (sentence+sentence+class) without linguistic theory of morphology (word structure), syntax, semantics (?) 
+Instead, unsupervised (or semi-supervised) learning of morphology, syntax and semantics from a large text corpus
+(like MorphoChallenge to segment words into morphemes, word2vec to learn semantics-vectors for words/morphemes,  plus learning if sentence-pairs have similar meanings)
+
+WordPiece unsupervised machine learning of text segmentation
+First, segment each sentence: not words but WordPieces
+Linguistic theory: words and morphemes
+BUT how to handle rare words and OutOfVocabulary words?
+“We use WordPiece embeddings with a 30,000 token vocabulary” 
+WordPiece is an unsupervised ML morphological analyser: common words are kept as Pieces, rare/unknown words are chopped into common Pieces (like MorphoChallenge)
+So: no rare, OOV Words; only common WordPieces
+Then each WordPiece is mapped to an Embedding, a vector representing concordance contexts (like word2vec) 
+
+Predicting sentence-meaning from wordPiece meanings
+Assumes 25 wordPieces per sentence; if not, truncate or fill. 
+Semantics of a sentence: join meaning vectors of wordPieces. 
+“We do not use traditional left-to-right or right-to-left language models to pre-train BERT ... we simply mask some percentage of the input tokens at random, and then predict those masked tokens. This is a “masked LM” (MLM), although it is often referred to as a Cloze task” 
+
+Assume adjacent sentences have related meanings 
+Novel idea: in a text, each sentence is related in meaning to the next sentence: sentence-meaning ”bigram model”
+“human-labelled”? Assumes author write coherent text, where each sentence “follows on from” the previous sentence
+“We pre-train for a next sentence prediction (NSP) task: in training sentences A and B, 50% of the time B is the actual next sentence that follows A (labeled as IsNext), and 50% of the time it is a random sentence from the corpus (labeled as NotNext). ... the input sentence A and sentence B from pre-training are analogous to (1) sentence pairs in paraphrasing, (2) hypothesis-premise pairs in entailment, (3) question-passage pairs in question answering, and (4) text-0 pairs in text classification ... fed into an output layer for classification” 
+
+Experiments: BERT fine-tuned results on human-labelled NLP data-sets
+GLUE General Language Understanding Evaluation tasks:
+SST-2: Given a movie review, predict sentiment: + or –
+CoLA: Given a sentence, is it linguistically “acceptable”? YorN
+STS-B, MRPC: Given a pair of sentences, do they have similar meaning? YorN 
+QQP: Given a pair of questions on Quora, are the two questions semantically equivalent? YorN 
+QNLI: Given a question and a sentence, does the sentence contain the correct answer? YorN 
+MNLI, RTE: Given first sentence, is the second sentence an entailment, contradiction, or neutral? 
+
+Experiments on large human-labelled data-sets
+SQuAD Stanford Question Answering Dataset - 100,000 question/answer-passage pairs Given a question, predict the answer text span in a Wikipedia passage. 
+SWAG Situations With Adversarial Generations - 100,000 sentence-completion examples Given a sentence, choose the most plausible continuation from 4 choices. 
+
+“Both BERTBASE and BERTLARGE outperform all systems on all tasks by a substantial margin; BERTLARGE significantly outperforms BERTBASE across all tasks.” (NN layers: BASE 12, LARGE 24) 
+
+In addition…
+Ablation Studies – experiments to cut out components to see how this affects performance 
+Conclusion – “deep bidirectional architectures allow the same pre-trained model to successfully tackle a broad set of NLP tasks” 
+References - a survey of state-of-the-art NLP research!
+Appendices- “implementation details”; more details on experiments and ablation studies 
+
+Questions about BERT
+The authors pack a LOT into 9 pages (+refs+appendices) BUT some issues are not specified: 
+Implementation details - code examples to copy and try (URL)How are sentences with different lengths encoded as inputs?BIG computing resources required – what works on a laptop?Examples of good and bad results (and analysis/explanation)
+What sort of data/tasks do NOT suit BERT?English only – how does this transfer to other languages?Assumes WordPiece tokenization; what about Multi Word Expressions, and languages with rich morphology? 
+Can we “understand” how BERT works? It seems counter-intuitive: BERT learns (sentence+sentence+class) without linguistic theory: rules of morphology, syntax, semantics 
+
+Summary: BERT
+Pre-trained representations from unlabeled text, then fine-tuned
+Unsupervised learning of morphology, syntax and semantics
+WordPiece unsupervised ML of text segmentation
+Predicting sentence-meaning from wordPiece meanings
+Assume adjacent sentences have related meanings 
+Results: BERT fine-tuned on human-labelled NLP data-sets
+“Both BERTBASE and BERTLARGE outperform all systems on all tasks by a substantial margin … the same pre-trained model can successfully tackle a broad set of NLP tasks”
+Also: Ablation Studies, References, Appendices, Questions …
+

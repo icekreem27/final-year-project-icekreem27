@@ -1,0 +1,134 @@
+CHEAT, NLTK, etc: text analytics in Python 
+Introduction to Python tools for text analytics, and the CHEAT approach to a text analytics challenge MorphoChallenge 
+Website: https://www.nltk.org/  
+Texts:
+E Atwell. 2005. Combinatory Hybrid Elementary Analysis of Text atwell05cheat.pdf    
+S Bird. 2006. NLTK: The Natural Language Toolkit bird06nltk.pdf  
+
+Text Analytics in Python
+SketchEngine, Weka etc enable linguists to try text analytics experiments without programming
+To develop and test a new ML algorithm, you need to write code, eg in Python using NLTK
+Example from 2005: CHEAT.py
+Don’t code from scratch: Google code archive, NLTK, etc … Smart program can be a few lines
+Don’t code unless you have to: SketchEngine etc
+NLTK Natural Language Toolkit https://www.nltk.org/  
+”NLTK is a leading platform for building Python programs to work with human language data. It provides easy-to-use interfaces to over 50 corpora and lexical resources such as WordNet, along with a suite of text processing libraries for classification, tokenization, stemming, tagging, parsing, and semantic reasoning, wrappers for industrial-strength NLP libraries, and an active discussion forum.”
+
+NLTK Natural Language Toolkit https://www.nltk.org/
+“... hands-on guide introducing programming fundamentals alongside topics in computational linguistics, plus comprehensive API documentation”
+
+ … Natural Language Processing with Python book
+
+… tools for testing and display …
+
+NLTK: display a parse tree
+>>> from nltk.corpus import treebank 
+>>> t = treebank.parsed_sents('wsj_0001.mrg')[0] >>> t.draw()
+
+
+Other Python NLP tools
+SpaCy https://spacy.io/ 
+Specific NLP tasks: Gensim for Topic Modelling
+Surveys of Python NLP toolkits
+https://kleiber.me/blog/2020/08/26/top-10-python-nlp-libraries-2020/ 
+https://towardsdatascience.com/python-libraries-for-natural-language-processing-be0e5a35dd64 
+shared tasks for AI research 
+AI / ML / CL conferences invite researchers to present their research
+May include “shared tasks” to promote research
+eg SemEval, MorphoChallenge http://morpho.aalto.fi/events/morphochallenge/ 
+Unsupervised ML segmentation of words into morphemes
+New ML algorithms, not available in toolkits; coded in progamming language, eg Python
+
+MorphoChallenge2005, CHEAT
+First MorphoChallenge in 2005: MSc coursework
+Some Leeds students entered the real contest
+CHEAT ensemble combined student results
+Youtube started 2005, max 10 minute “TikToks”
+https://www.youtube.com/watch?v=Uoj6RjZpAkk
+Academics set up VideoLectures.net for lectures
+http://videolectures.net/pcw06_atwell_cheat/  
+ - CHEAT 2005 ppt, sorry for crackly sound!
+Combinatory Hybrid Elementary Analysis of Text: the CHEAT approach to MorphoChallenge2005 
+Eric Atwell
+School of Computing
+University of Leeds
+Leeds LS2 9JT
+
+Andrew Roberts
+Pearson Longman
+Edinburgh Gate
+Harlow CM20 2JE
+With the help of Eric Atwell’s Computational Modelling MSc class…
+Khurram AHMAD
+Rodolfo 
+     ALLENDES OSORIO 
+Lois BONNIER 
+Saad CHOUDRI
+Minh DANG
+Gerard David HOWARD 
+Simon HUGHES 
+
+Iftikhar HUSSAIN 
+Lee KITCHING 
+Nicolas   MALLESON 
+Edward MANLEY 
+Khalid Ur REHMAN
+Ross WILLIAMSON
+Hongtao ZHAO  
+Our guiding principle: get others to do the work
+PLAGIARISM is BAD … but
+in Software Engineering, REUSE is GOOD !
+We can’t just copy results from another entrant … but we may get away with smart copying
+
+We can copy results from MANY systems, then use these to “vote” on analysis of each word
+
+BUT – how can we get results from other contestants? … set MorphoChallenge as MSc coursework, students must submit their results to lecturer for assessment!
+But is this really “unsupervised learning”?
+“… the program cannot be given a training file containing example answers…”
+Our program is given several “candidate answer files”, BUT does not know which (if any) is correct
+So it IS unsupervised learning; moreover, it is… 
+Triple-layer Super-Sized Unsupervised Learning:
+Unsupervised Learning by students
+Unsupervised Learning by student programs
+Unsupervised Learning by cheat.py
+Unsupervised Learning by students
+Eric Atwell gave background lectures on Machine Learning, and Morphological Analysis
+Students were NOT give “example answers”: unsupervised morphology learning algorithms
+So, student learning was Unsupervised Learning
+Unsupervised Learning by student programs
+Pairs of students developed MorphoChallenge entries, e.g.:
+Saad CHOUDRI and Minh DANG
+Khalid REHMAN and Iftikar HUSSAIN
+
+Student programs were “black boxes” – we just needed results
+
+Unsupervised learning by cheat.py
+Read outputs of other systems, line by line
+Select majority-vote analysis
+If there is a tie, select result from best system (highest F-measure)
+Output this – “our” result!
+
+cheat.py and cheat2.py
+This worked in theory, but…
+… some student programs re-ordered the wordlist, so outputs were not aligned, like-with-like
+Andrew Roberts developed more robust cheat2.py, which REALLY worked!
+Results: cheating works!
+See results tables in the full paper.
+For all 3 languages (English, Finnish, Turkish), our cheat system scored a higher F-measure than any of the contributing systems!
+?? We added Morfessor output, this did not change our scores !! Maybe there is something fishy going on? 
+
+F-measure with reference algorithms
+
+F-measure with reference algorithms
+
+Conclusions: Machine Learning and Student Learning 
+cheat.py is actually a committee of unsupervised learners,  used previously in ML (Banko and Brill 2001)
+(but we didn’t learn this from the literature till afterwards – a fourth layer in Super-Sized Unsupervised Learning?)
+BUT cheat is also a novel idea in Student Learning: get students to implement the learners, so students learn (about ML as well as domain: in this case, morphology) 
+MorphoChallenge inspired our students to produce outstanding coursework!
+Thank you!
+We’d like to thank the MorphoChallenge organisers for an inspiring contest!
+And thanks to the audience for sitting through our presentation
+
+Eric Atwell eric@comp.leeds.ac.uk
+Andrew Roberts andrew.roberts@pearson.com 

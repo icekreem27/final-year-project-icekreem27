@@ -1,0 +1,587 @@
+Chatbots and Dialogue Systems
+Introduction to Chatbots and Dialogue Systems
+Properties of Human Conversation
+Rule-based Chatbots: ELIZA, PARRY, AIML, ALICE, HUBERT
+Corpus-based Chatbots
+The Dialogue-State Architecture
+Evaluating Dialogue Systems
+Chatbots and Ethical Issues
+
+
+
+
+
+
+
+
+
+Chatbots and Dialogue Systems
+Introduction to Chatbots and Dialogue Systems
+
+Conversational Agents  (AKA  Dialogue Systems AKA Dialogue Agents AKA Chatbots)
+Personal Assistants on phones or other devices
+	SIRI, Alexa, Cortana, Google Assistant
+Playing music, setting timers and clocks
+Chatting for fun
+Booking travel reservations
+Answering “general knowledge” questions
+Clinical uses for mental health
+Two kind of chatbots
+Converational agents
+	- mimic informal human chatting
+	- for fun, or even for therapy
+Task-based Dialogue Agents
+	- booking flights or restaurants 
+	- interfaces to personal assistants
+	- cars, robots, appliances
+Question Answering: 1 or 2? 
+
+Chatbot Architectures
+Rule-based
+Pattern-action rules (ELIZA, Question-Answer)
++ A mental model (PARRY):
+		The first system to pass the Turing Test! 
+
+Corpus-based
+Information Retrieval (XiaoIce)
+Neural encoder-decoder (BlenderBot)
+BlenderBot (Roller et al. 2020)
+XiaoIce (Zhou et al., 2020)
+Task-based dialogue agents
+"Task-based" or "goal-based" dialogue agents
+Systems that have the goal of helping a user solve a task
+Setting a timer
+Making a travel reservation
+Playing a song
+Buying a product
+Architecture: 
+Frames with slots and values
+A knowledge structure representing user intentions
+The Frame
+A set of slots, to be filled with information of a given type
+Each associated with a question to the user
+
+Slot		Type	Question
+ORIGIN	city		"What city are you leaving from?
+DEST	  	city		"Where are you going?
+DEP DATE date	"What day would you like to leave?
+DEP TIME time	"What time would you like to leave?
+AIRLINE	line		"What is your preferred airline?
+Chatbots and Dialogue Systems
+Introduction to Chatbots and Dialogue Systems
+
+Chatbots and Dialogue Systems
+Properties of Human Conversation
+
+A telephone conversation between a human travel agent (A) and a human client (C)
+Properties of Human Conversation
+Turns
+We call each contribution a "turn"
+As if conversation was the kind of game where everyone takes turns.
+
+A turn can be a sentence (e.g. C1), a single word (C13) or multiple sentences (A10). 
+
+13
+
+
+
+Properties of Human Conversation
+Turn-taking issues
+When to take the floor?
+When to yield the floor?
+Interruptions
+Notice A16, C17: the client interrupts here, and the human agent knows to stop talking (and also knows that the the client might be making a correction or change).  Systems need to be able to handle this.  
+
+15
+
+
+Implications for Conversational Agents
+Barge-in
+Allowing the user to interrupt
+End-pointing
+The task for a speech system of deciding whether the user has stopped talking.
+Very hard, since people often pause in the middle of turns
+17
+Language as Action
+Each turn in a dialogue is a kind of action
+Wittgenstein (1953) and Austin (1962)
+Speech Acts (aka Dialogue Acts)
+Bach and Harnish (1979)
+Speech acts
+"Turn up the music!" 
+Directive
+
+"What day in May do you want to travel?"
+ Directive
+
+"I need to travel in May"
+Constative
+
+Thanks
+Acknowledgement
+Grounding
+Participants in conversation or any joint activity need to establish common ground.
+Principle of closure.  Agents performing an action require evidence, sufficient for current purposes, that they have succeeded in performing it  (Clark 1996, after Norman 1988)
+Speech is an action too!  So speakers need to ground each other’s utterances. 
+Grounding: acknowledging that the hearer has understood
+
+Grounding
+Grounding is relevant for human-machine interaction
+Why do elevator buttons light up?
+to acknowledge that the elevator has indeed been called
+
+Grounding: Establishing Common Ground
+A: And you said returning on May 15th?C: Uh, yeah, at the end of the day.A: OK
+
+C: OK I’ll take the 5ish flight on the night before on the 11th.A: On the 11th? OK. 
+
+C: ...I need to travel in May.A: And, what day in May did you want to travel?
+
+Conversations have structure
+Local structure between adjacent speech acts, from the field of conversational analysis (Sacks et al. 1974)
+
+Called adjacency pairs:
+	Question… Answer
+Proposal… Acceptance/Rejection
+Compliments ("Nice jacket!")… Downplayer ("Oh, this old thing?")
+Another kind of structure: Subdialogues
+Agent:  OK.  There's #two non-stops#
+Client:                     #Act- actually#, what day of the week is the 15th?Agent: It’s a Friday.
+Client: Uh hmm. I would consider staying there an extra day til Sunday. 
+Agent: OK...OK. On Sunday I have ... 
+
+25
+Correction subdialogue
+Clarification Subdialogues
+User: What do you have going to UNKNOWN WORD on the 5th?
+System:  Let’s see, going where on the 5th?
+User: Going to Hong Kong. 
+System: OK, here are some flights... 
+
+26
+Presequences
+User: Can you make train reservations?
+System: Yes I can.
+User: Great, I’d like to reserve a seat on the 4pm train to New York. 
+
+Conversational Initiative
+Some conversations are controlled by one person
+A reporter interviewing a chef asks questions, and the chef responds.
+This reporter has the conversational initiative (Walker and Whittaker 1990)
+Most human conversations have mixed initiative: 
+I lead, then you lead, then I lead.
+Mixed initiative is very hard for NLP systems, which often default to simpler styles that can be frustrating for humans:
+User initiative (user asks or commands, system responds)
+System initiative (system asks user questions to fill out a form, user can't change the direction)
+
+Even harder problems:  Inference
+Agent: And, what day in May did you want to travel?Client: OK, uh, I need to be there for a meeting that’s from the 12th to the 15th. 
+
+Chatbots and Dialogue Systems
+Properties of Human Conversation
+
+Chatbots and Dialogue Systems
+Rule-based Chatbots: ELIZA, PARRY, AIML, ALICE, HUBERT
+
+ELIZA: Weizenbaum (1966)
+Men are all alike.IN WHAT WAYThey're always bugging us about something or other. 
+CAN YOU THINK OF A SPECIFIC EXAMPLE 
+Well, my boyfriend made me come here.YOUR BOYFRIEND MADE YOU COME HERE 
+He says I'm depressed much of the time.I AM SORRY TO HEAR YOU ARE DEPRESSED 
+...
+You are like my father in some ways.
+WHAT RESEMBLANCE DO YOU SEE
+You are not very aggressive but I think you don’t want me to notice that.
+WHAT MAKES YOU THINK I AM NOT AGGRESSIVE
+You don’t argue with me.
+WHY DO YOU THINK I DON’T ARGUE WITH YOU
+You are afraid of me.
+DOES IT PLEASE YOU TO BELIEVE I’M AFRAID OF YOU
+My father is afraid of everybody.
+WHAT ELSE COMES TO MIND WHEN YOU THINK OF YOUR FATHER
+Bullies.
+DOES THAT HAVE ANYTHING TO DO WITH THE FACT THAT YOUR BOYFRIEND MADE YOU COME HERE
+Weizenbaum, Joseph. 1966, "ELIZA - A Computer Program For the Study of Natural Language Communication Between Man And Machine", Communications of the ACM 9 (1): 36-45
+
+ELIZA's trick: be a Rogerian psychologist
+Draw the patient out by reflecting patient’s statements back at them
+Rare type of conversation in which one can “assume the pose of knowing almost nothing of the real world”
+
+Rogerian psychologist
+
+Patient: "I went for a long boat ride”
+Psychologist: "Tell me about boats”
+
+You don’t assume she didn’t know what a boat is
+You assume she had some conversational goal
+Chatbots trying to pass the Turing test usually choose some such domain
+Eliza pattern/transform rules
+(0 YOU 0 ME)    					  [pattern]
+ 
+(WHAT MAKES YOU THINK I 3 YOU) [transform]
+
+0  means Kleene * (any text)
+The 3 is the constituent # in pattern
+
+You hate me
+WHAT MAKES YOU THINK I HATE YOU
+
+
+
+Eliza Rules
+keyword
+pattern
+list of transforms
+Keyword:  	YOU
+Pattern: 	(0 YOU 0 ME)    		
+Transforms: 	(WHAT MAKES YOU THINK I 3 YOU)
+		(WHY DO YOU THINK I 3 YOU)
+Rules are organized by keywords
+Each keyword has a pattern and a list of possible transform
+Keywords are ranked from specific to general
+User: I know everybody laughed at me
+“I” is very general:
+I: (I *) -> (YOU SAY YOU 2)
+ELIZA: YOU SAY YOU KNOW EVERYBODY LAUGHED AT YOU
+
+“Everybody” is more specific and interesting
+Everybody: (Everybody *) -> (WHO IN PARTICULAR ARE YOU THINKING OF)
+ELIZA: WHO IN PARTICULAR ARE YOU THINKING OF?
+ Implementation: keywords stored with their rank 
+Everybody 5 (list of transformation rules)
+I 		 0 (list of transformation rules)
+
+
+
+NONE
+PLEASE GO ON
+THAT’S VERY INTERESTING
+I SEE
+
+Memory
+(MEMORY MY (0 MY 0 = LETS DISCUSS FURTHER WHY YOUR 3)
+ (0 MY 0 = EARLIER YOU SAID YOUR 3)
+ (0 MY 0 = DOES THAT HAVE ANYTHING TO DO WITH THE FACT THAT YOUR 3))
+
+Whenever “MY” is highest keyword
+Randomly select a transform on the MEMORY list 
+Apply to sentence
+Store on a (first-in-first-out) queue
+Later, if no keyword matches a sentence
+Return the top of the MEMORY queue instead
+
+
+Ethical implications: Anthropomorphism and Privacy
+People  became deeply emotionally involved with the program
+One of Weizenbaum's staff asked him to leave the room when she talked with ELIZA
+When he suggested that he might want to store all the ELIZA conversations for later analysis, people immediately pointed out the privacy implications
+Suggesting that they were having quite private conversations with ELIZA
+Despite knowing that it was just software. 
+
+PARRY: A computational model of schizophrenia
+Another chatbot with a clinical psychology focus
+Colby, K. M., Weber, S., and Hilf, F. D. (1971). Artificial paranoia. Artificial Intelligence 2(1), 1–25. 
+Used to study schizophrenia
+Same pattern-response structure as Eliza
+But a much richer:
+control structure 
+language understanding capabilities
+model of mental state.
+variables modeling levels of Anger, Fear, Mistrust
+41
+Affect variables
+Fear  (0-20)                    Anger (0-20)                  Mistrust  (0-15)
+
+Start with all variables low
+After each user turn
+Each user statement can change Fear and Anger
+E.g., Insults increases Anger, Flattery decreases Anger
+Mentions of his delusions increase Fear
+Else if nothing malevolent in input
+Anger, Fear, Mistrust all drop
+
+Parry's responses depend on mental state
+Modify
+Affect variables
+excessive fear
+Escape
+excessive anger
+Hostility
+Input mentions delusion topic
+question
+Fear
+answer
+User Input
+condition
+response
+…
+
+
+
+
+
+PARRY passes the Turing test in 1972
+The first system to pass a version of the Turing test 
+Psychiatrists couldn’t distinguish interviews with PARRY from (text transcripts of) interviews with people diagnosed with paranoid schizophrenia
+Colby, K. M., Hilf, F. D., Weber, S., and Kraemer, H. C. (1972). Turing-like indistinguishability tests for the validation of a computer simulation of paranoid processes. Artificial Intelligence 3, 199–221. 
+
+44
+ALICE and AIML
+Based on ELIZA-like architecture, AIML
+https://pandorabots.com/docs/aiml-fundamentals/
+Richard Wallace put ALICE online, then reviewed interactions
+If ALICE gave a poor response, Wallace added rule(s) to fix this
+Over time, ALICE built a very large pattern-list of plausible replies
+
+ALICE won the Loebner prize competition three times in 2000, 2001, and 2004. 
+
+Limited-domain QA chatbots, eg Hubert
+For some practical applications, a limited QA chatbot is sufficient.
+Eg FAQchat answers Frequently Asked Questions given an FAQ list.
+
+B Abu Shawar and E Atwell. 2007. Chatbots: are they really useful? 
+
+Hubert: student feedback interviews, job applicant interviews
+
+N Abbas et al. 2021. University student surveys using chatbots: AI conversational agents 
+Chatbots and Dialogue Systems
+Rule-based Chatbots: ELIZA, PARRY, AIML, ALICE, HUBERT
+
+Chatbots and Dialogue Systems
+Corpus-based Chatbots
+
+Two architectures for corpus-based chabots
+Response by retrieval
+Use information retrieval to grab a response (that is appropriate to the context) from some corpus
+Response by generation
+Use a language model or encoder-decoder to generate the response given the dialogue context
+
+49
+What conversations to draw on?
+Spoken text in corpora: British National Corpus BNC, International Corpus of English ICE, Korpus Gesproke Afrikaans KGA
+Transcripts of telephone conversations between volunteers
+Switchboard, CallHome corpora of telephone conversations
+Question+Answer data-sets, FAQchat, IT helpdesk
+Movie dialogue
+Various corpora of movie subtitles
+Hire human crowdworkers to have conversations on a topic
+Pseudo-conversations from public posts on social media
+Drawn from Twitter, Reddit, Weibo, etc. 
+Tend to be noisy; often used just as pre-training.
+Crucial to remove personally identifiable information (PII) 
+
+
+
+Response by retrieval: classic IR method
+Given a user turn q, and a training corpus C of conversation
+Find in C the turn r that is most similar (tf-idf cosine) to q
+Say r
+Or say the response to r (question+answer corpus)
+
+
+Response by retrieval: neural IR method
+Given a user turn q, and a training corpus C of conversation
+Find in C the turn r that is most similar (BERT dot product) to q
+Say r
+Or say the response to r (question+answer corpus)
+
+
+
+
+Response by generation
+Think of response production as an encoder-decoder task
+Generate each token rt of the response by conditioning on the encoding of the entire query q and the response so far r1...rt−1 
+
+P.G. Wodehouse predicts neural chatbots
+“What ho!” I said.“What ho!” said Motty.“What ho! What ho!”“What ho! What ho! What ho!”After that it seemed rather difficult to go on with the conversation.” 
+			Wodehouse My Man Jeeves, 1919 
+
+Ongoing research problem:Neural chatbots can get repetitive and boring
+A: Where are you going?B: I’m going to the restroom.A: See you later.B: See you later.A: See you later.B: See you later.
+A: How old are you?B: I’m 16.A: 16?B: I don’t know what you are talking about.A: You don’t know what you are saying.B: I don’t know what you are talking about.A: You don’t know what you are saying.
+
+Response by retrieving and refining knowledge 
+Can generate responses from informative text rather than dialogue
+ To respond to turns like “Tell me something about Beijing”
+XiaoIce collects sentences from public lectures and news articles.
+And searches them using IR based on query expansion from user’s turn
+
+
+
+
+
+Chatbots: pro and con
+Pro:
+Fun
+Good for narrow, scriptable applications
+Cons:
+They don't really understand
+Giving the appearance of understanding may be problematic
+Rule-based chatbots are expensive and brittle
+IR-based chatbots can only mirror training data
+Next steps: integrating chatbot ability into frame-based agents
+Chatbots and Dialogue Systems
+Corpus-based Chatbots
+
+Chatbots and Dialogue Systems
+The Dialogue-State Architecture
+
+Dialogue-State or Belief-State Architecture
+A more sophisticated version of the frame-based architecture
+	Has dialogue acts, more ML, better generation
+The basis for modern research systems
+Slowly making its way into industrial systems
+Some aspects (ML for slot-understanding) already widely used industrially
+
+The Dialogue-State Architecture
+Williams, Jason D., Antoine Raux, and Matthew Henderson. "The dialog state tracking challenge series: A review." Dialogue & Discourse 7, no. 3 (2016): 4-33.
+Components in a dialogue-state architecture
+NLU: extracts slot fillers from the user’s utterance using machine learning
+Dialogue state tracker: maintains the current state of the dialogue (user’s most recent dialogue act, set of slot-filler constraints from user
+Dialogue policy: decides what the system should do or say next
+GUS policy: ask questions until the frame was full then report back
+More sophisticated: know when to answer questions, when to ask a clarification question, etc.
+NLG: produce more natural, less templated utterances
+
+
+The task of dialogue state tracking
+Example from Mrkšić, N., O Séaghdha, D., Wen, T.-H., Thomson, B., and 
+Young, S. (2017). Neural belief tracker: Data-driven dialogue state tracking. ACL. 
+
+Chatbots and Dialogue Systems
+The Dialogue-State Architecture
+
+Chatbots and Dialogue Systems
+Evaluating Dialogue Systems
+
+Evaluating chatbots and task-based dialogue
+Task-based dialogue:  
+mainly by measuring task performance
+Conversational chatbots: 
+	mainly by human evaluation
+Chatbots are evaluated by humans
+Participant evaluation: The human who talked to the chatbot assigns a score
+Observer evaluation: third party who reads a transcript of a human/chatbot conversation assigns a score.
+Participant evaluation
+Human chats with model for 6 turns and rates 8 dimensions of quality:
+avoiding repetition, interestingness, making sense, fluency, listening, inquisitiveness, humanness, engagingness, 
+(1) Avoiding Repetition: How repetitive was this user? 
+•Repeated themselves over and over •Sometimes said the same thing twice • Always said something new 
+(3) Making sense: How often did this user say something which didn't make sense? 
+•Never made any sense •Most responses didn’t make sense •Some responses didn’t make sense •Everything made perfect sense 
+(8) Engagingness:  How much did you enjoy talking to this user?
+ •Not at all •A little •Somewhat •A lot
+
+Abigail See, Stephen Roller, Douwe Kiela, Jason Weston. 2019.  What makes a good conversation? How controllable attributes affect human judgments. NAACL.
+Observer evaluation: acute-eval
+Annotators look at two conversations (A + B) and decide which is better:
+Engagingness:  Who would you prefer to talk to for a long conversation? 
+Interestingness:  If you had to say one of these speakers is interesting and one is boring, who would you say is more interesting? 
+Humanness: Which speaker sounds more human? 
+Knowledgeable:  If you had to say that one speaker is more knowledgeable and one is more ignorant, who is more knowledgeable? 
+
+Li, M., Weston, J., and Roller, S. (2019). Acute-eval: Improved dialogue evaluation with optimized questions and multi-turn comparisons. NeurIPS19 Workshop on Conversational AI. 
+Automatic evaluation is an open problem
+Automatic evaluation methods (like the BLEU scores used for Machine Translation) are generally not used for chatbots. 
+They correlate poorly with human judgements.
+One current research direction: Adversarial Evaluation
+Inspired by the Turing Test
+train a ``Turing-like'' classifier to distinguish between human responses and machine responses.
+The more successful a dialogue system is at fooling the evaluator, the better the system.
+
+
+
+
+More fine-grained metrics: User Satisfaction Survey
+Walker, Marilyn, Candace Kamm, and Diane Litman. "Towards developing general models of usability with PARADISE." Natural Language Engineering 6, no. 3 & 4 (2000): 363-377.
+Other Heuristics
+Efficiency cost: 
+total elapsed time for the dialogue in seconds, 
+the number of total turns or of system turns
+total number of queries 
+“turn correction ratio”: % of turns that were used to correct errors
+Quality cost: 
+number of ASR rejection prompts. 
+number of times the user had to barge in
+
+
+Chatbots and Dialogue Systems
+Evaluating Dialogue Systems
+
+Chatbots and Dialogue Systems
+Chatbots and Ethical Issues
+
+Dialog System Design: User-centered Design
+Study the users and task
+Build simulations
+ Wizard of Oz study
+Iteratively test design on users
+
+
+Ethical design
+Ethical issues have long been known to be crucial in artificial agents
+Mary Shelley's Frankenstein
+creating agents without a consideration of ethical and humanistic concerns 
+Ethical issues:
+Safety:  Systems abusing users, distracting drivers, or giving bad medical advice
+Representational harm: Systems demeaning particular social groups
+Privacy: Information Leakage 
+
+
+Safety
+Chatbots for mental health
+Extremely important not to say the wrong thing
+In-vehicle conversational agents
+Must be aware of environment, driver's level of attention
+Abuse and Representation Harm: The case of Microsoft Tay
+Experimental Twitter chatbot launched in 2016
+given the profile personality of an 18- to 24-year-old American woman
+could share horoscopes, tell jokes, 
+asked people to send selfies
+used informal language, slang, emojis, and GIFs, 
+Designed to learn from users (IR-based) 
+The case of Microsoft Tay
+Immediately Tay turned offensive and abusive
+Obscene and inflammatory tweets
+Nazi propaganda, conspiracy theories
+Began harassing women online
+Reflecting racism and misogyny of Twitter users
+Microsoft took Tay down after 16 hours
+Lessons:
+User response must be considered in the design phase
+
+
+
+Bias in training datasets
+Henderson et al. ran hate-speech and bias detectors on standard training sets for dialogue systems:
+Twitter, Reddit, other dialogue datasets
+Found bias and hate-speech
+In training data
+In dialogue models trained on the data
+Privacy: Training on user data
+Accidental information leakage
+“Computer, turn on the lights [answers the phone] Hi, yes, my password is...”
+Henderson show in simulation that this leakage can occur.
+Intentional information leakage
+Dialogue systems that are designed to send user data to developer or advertisers
+Important to consider privacy-preserving dialogue systems
+Chatbots and Dialogue Systems
+Chatbots and Ethical Issues
+
+Chatbots and Dialogue Systems
+Introduction to Chatbots and Dialogue Systems
+Properties of Human Conversation
+Rule-based Chatbots: ELIZA, PARRY, AIML, ALICE, HUBERT
+Corpus-based Chatbots
+The Dialogue-State Architecture
+Evaluating Dialogue Systems
+Chatbots and Ethical Issues
+
+
+
+
+
+
+
+
+

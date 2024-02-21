@@ -1,0 +1,163 @@
+In this video you will be introduced to 
+lecturer: Eric Atwell 
+- Overview of the module structure
+The assessment for this module
+Unit 1, part 1.1: background and practical applications 
+	of corpus linguistics and text analytics
+ 
+Texts you should read for part 1.1: 
+E Atwell. 1999. The language machine. British Council.
+Assessment specification
+
+Welcome to the module!
+Lecturer: Eric Atwell
+Professor of Artificial Intelligence for Language
+Turing Fellow in DS+AI
+www.comp.leeds.ac.uk/eric 
+Religious Text Analytics
+Arabic Corpus Linguistics
+Chatbots for Education
+Decolonising Reading Lists
+(40% LITE Fellowship)
+Module overview
+Week 1: Introduction to data mining, text analytics, and SketchEngine
+Week 2: Text classification, data mining open resources, CRISP-DM and WEKA
+Week 3: Word meanings, text tagging, scaling to big data
+Week 4: Test 1, work on group project
+Week 5: Machine Translation, Information Extraction, and Python tools for text analytics
+Week 6: Data clustering & association, chatbots for education
+Week 7: Current research in text analytics, BERT
+Weeks 8-10: Test 2, complete and submit group project report
+
+ 
+
+
+Jurafsky, D., & Martin, J. (2022).
+Speech and Language Processing, 3rd edition. Pearson See: https://web.stanford.edu/~jurafsky/slp3/  Core 
+
+Witten, I. H., Frank, E., Hall, M. A., & Pal, C. J. (2016).
+ Data Mining: Practical machine learning tools and techniques, 4th edition. Morgan Kaufmann. See: https://www.cs.waikato.ac.nz/ml/weka/book.html  
+
+PLUS: research conference papers, websites
+Background Reading	
+Assessments
+Online test 1 (20%), 1 hr, to cover U1-3
+Online test 2 (20%), 2 hrs, to cover U1-6
+MAQs: MCQs, choose 0/1/2/3/4/… correct answers
+
+Group project report (60%), max 7 pages
+
+Choose your own group/team of 4-6 students
+If you cannot work in a group, email me: e.s.atwell@leeds.ac.uk
+
+
+Data Mining / Machine Learning
+Machine Learning: focus on ML algorithms, optimal accuracy
+Data Mining: applied ML, with a focus on:
+ML as part of a toolkit to tackle practical problems
+Data collection, understanding, annotation, “wrangling”
+“Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data” https://en.wikipedia.org/wiki/Data_wrangling 
+CRISP-DM – “modelling” (ML) is only 1 of 6 phases
+
+CS490D
+7
+CRISP-DM:  6 Phases
+Business Understanding
+Understanding project objectives and requirements
+Data mining problem definition
+Data Understanding
+Initial data collection and familiarization
+Identify data quality issues
+Initial, obvious results
+Data Preparation
+Record and attribute selection
+Data cleansing
+Modeling
+Run the data analysis and data mining tools
+Evaluation
+Determine if results meet business objectives
+Identify business issues that should have been addressed earlier
+Deployment
+Put the resulting models into practice
+Set up for repeated/continuous mining of the data
+Text Analytics
+Data Mining applied to text … aka Text Mining, or …
+Computational Linguistics / Natural Language Processing /    Speech and Language Processing / Corpus Linguistics 
+ - CL/NLP: focus on theory, algorithms
+ - TA: CL/NLP as part of a toolkit to tackle practical problems,
+and text data collection, understanding, annotation, wrangling
+Https://en.wikipedia.org/wiki/Text_analytics   text mining
+
+Text data (CORPUS) is mapped to number vectors for ML 
+The Language Machine
+“This book, commissioned by The British Council from Eric Atwell at the University of Leeds, explores some of the technological, social and educational implications of language machines in the years to come. … 
+This book provides a survey of the current state of speech and language technology … highlighting the histories and academic disciplines contributing to their development; it examines the components and technologies; possible pitfalls; main developers; current and potential uses; predicted developments; and paints some likely scenarios for the future impact of the language machine.” 
+20+ years old, but the concepts are still relevant …
+ 
+
+Linguistics: science of language
+Phonetics: the study of speech production, perception, and analysis from an acoustic and a physiological point of view. 
+Lexicography: the study of words or vocabulary items in a language, with individual meaning and grammatical function. 
+Syntax: the study of the grammatical arrangement of words and morphemes in the sentences of a language or languages. 
+Semantics: the study of meaning in language, the relationship between words and sentences and their meanings. 
+Pragmatics: the analysis of language in practice, taking account of the context of language use. 
+Discourse modelling: the analysis of linguistic phenomena that range over more than one utterance in a discourse or dialogue 
+
+Why develop text analytics?
+ - Computer models of language 
+ - Computerised language resources: corpus, dictionary,…
+ - Natural communication between people and computers 
+ - Assisting communication between people: MT, social media
+ - Wealth creation: Government and Industry interest
+
+
+
+
+Challenges for text analytics
+ - expensive to compete: Google, Apple, Amazon, Microsoft 
+ - difficult to elicit user requirements: users don’t know
+ - high customer expectations: “natural English language”
+ - not appropriate for some tasks, eg spreadsheets?
+ - we need to rethink how we approach i/o, eg keyboards? 
+ - we need training and time to learn to use new methods
+ - many applications involve all of the above 
+ 
+
+UK and EU research in text analytics
+ - UK: Engineering and Physical Science Research Council
+    https://epsrc.ukri.org/funding/applicationprocess/preparing/writing  
+ - EU funds research project with several partners, e.g.
+    EduBots: chatbots in HE – 4 unis (Leeds ++), 2 companies
+ 	https://www.edubots.eu/ 
+
+
+
+The BT Technology Calendar 
+ - 2000: visual computer personalities on screens
+ - 2003 IT literacy essential for any employment
+ - 2005 full voice interaction with machines
+ - 2007 domestic robots; small, attractive
+ - 2012 robots for almost any job in home or hospital
+ - 2018 AI imitating thinking processes of the brain
+ - 2025 thought recognition i/o, human learning superseded 
+ - 2030 human brain intelligence enhancement by link to AI
+Examples of real applications
+ - “Soldiers in Bosnia ... wear a small computer on their chests and say to it “Hands up” or “Get out of the car” or other things that soldiers have cause to order Bosnian civilians to do.”
+ - “Text editing: ‘smart tools’ to check grammar, idioms, and style are now options available in many word processors.”
+ - “AltaVista, owned by computer giant Digital, launched a free machine translation service on the Internet”
+ - ‘Lufthansa has ALF, a friendly flight information service which holds conversations with callers at some 300 airports” 
+ - “car and lorry drivers use voice commands to activate normal telephone services but also to get e-mail messages converted to listen to them on the move, to dictate replies …” 
+
+ 
+ 
+ 
+
+Summary
+In this video you were introduced to 
+- lecturer: Eric Atwell http://www.comp.leeds.ac.uk/eric 
+- Overview of Data Mining and Text Analytics module
+Assessment: test1, test2, group project report
+- Unit 1, part 1.1:
+  Practical applications of corpus linguistics and text analytics
+Text you should read for part 1.1: 
+E Atwell. 1999. The language machine. British Council.

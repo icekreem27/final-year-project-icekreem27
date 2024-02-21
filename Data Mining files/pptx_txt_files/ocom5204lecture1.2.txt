@@ -1,0 +1,498 @@
+Basic Text Processing
+Regular Expressions
+More Regular Expressions: Substitutions and ELIZA
+Words and Corpora
+Word tokenization
+Byte Pair Encoding
+Word Normalization and other issues
+
+
+
+
+
+from Textbook: 
+Dan Jurafsky and James Martin 2022.
+ Speech and Language Processing
+ (3rd ed.), Pearson
+Basic Text Processing
+Regular Expressions
+from Textbook: 
+Dan Jurafsky and James Martin 2022.
+ Speech and Language Processing
+ (3rd ed.), Pearson
+Regular expressions
+A formal language for specifying text strings
+How can we search for any of these?
+woodchuck
+woodchucks
+Woodchuck
+Woodchucks
+
+
+Regular Expressions: Disjunctions
+Letters inside square brackets []
+
+
+
+Ranges [A-Z]
+
+		
+
+Regular Expressions: Negation in Disjunction
+Negations [^Ss]
+Carat means negation only when first in []
+
+Regular Expressions: More Disjunction
+Woodchuck is another name for groundhog!
+The pipe | for disjunction
+
+Regular Expressions: ? *+.
+
+
+Stephen C Kleene
+Kleene *,   Kleene +   
+Regular Expressions: Anchors  ^   $
+
+Example
+Find me all instances of the word “the” in a text.
+the
+Misses capitalized examples
+[tT]he
+Incorrectly returns other or theology
+[^a-zA-Z][tT]he[^a-zA-Z]
+                                          
+
+Errors
+The process we just went through was based on fixing two kinds of errors:
+
+Matching strings that we should not have matched (there, then, other)
+False positives (Type I errors)
+
+Not matching things that we should have matched (The)
+False negatives (Type II errors)
+Errors cont.
+In NLP we are always dealing with these kinds of errors.
+Reducing the error rate for an application often involves two antagonistic efforts: 
+Increasing accuracy or precision (minimizing false positives)
+Increasing coverage or recall (minimizing false negatives).
+Summary
+Regular expressions play a surprisingly large role
+Sophisticated sequences of regular expressions are often the first model for any text processing text
+For hard tasks, we use machine learning classifiers
+But regular expressions are still used for pre-processing, or as features in the classifiers
+Can be very useful in capturing generalizations
+
+12
+Basic Text Processing
+Regular Expressions
+
+Basic Text Processing
+More Regular Expressions: Substitutions and ELIZA
+
+Substitutions
+Substitution in Python and UNIX commands:
+
+s/regexp1/pattern/ 
+e.g.:
+s/colour/color/ 
+
+Capture Groups
+Say we want to put angles around all numbers:
+           the 35 boxes  the <35> boxes 
+Use parens () to "capture" a pattern into a numbered register (1, 2, 3…)
+Use \1  to refer to the contents of the register
+s/([0-9]+)/<\1>/ 
+
+Capture groups: multiple registers
+/the (.*)er they (.*), the \1er we \2/ 
+Matches
+     the faster they ran, the faster we ran 
+But not
+     the faster they ran, the faster we ate 
+
+Lookahead assertions
+(?= pattern) is true if pattern matches, but is zero-width; doesn't advance character pointer
+(?! pattern) true if a pattern does not match 
+How to match, at the beginning of a line, any single word that doesn’t start with “Volcano”: 
+/ˆ(?!Volcano)[A-Za-z]+/ 
+
+
+Simple Application: ELIZA
+Early NLP system that imitated a Rogerian psychotherapist 
+Joseph Weizenbaum, 1966. 
+
+Uses pattern matching to match, e.g.,:
+“I need X” 
+and translates them into, e.g.
+“What would it mean to you if you got X? 
+Simple Application: ELIZA
+Men are all alike.IN WHAT WAY
+They're always bugging us about something or other. CAN YOU THINK OF A SPECIFIC EXAMPLE 
+Well, my boyfriend made me come here.YOUR BOYFRIEND MADE YOU COME HERE 
+He says I'm depressed much of the time.I AM SORRY TO HEAR YOU ARE DEPRESSED 
+How ELIZA works
+s/.* I’M (depressed|sad) .*/I AM SORRY TO HEAR YOU ARE \1/ 
+s/.* I AM (depressed|sad) .*/WHY DO YOU THINK YOU ARE \1/
+s/.* all .*/IN WHAT WAY?/ 
+s/.* always .*/CAN YOU THINK OF A SPECIFIC EXAMPLE?/ 
+
+Basic Text Processing
+More Regular Expressions: Substitutions and ELIZA
+
+Basic Text Processing
+Words and Corpora
+
+
+How many words in a sentence?
+"I do uh main- mainly business data processing"
+Fragments, filled pauses
+"Seuss’s cat in the hat is different from other cats!" 
+Lemma: same stem, part of speech, rough word sense
+cat and cats = same lemma
+Wordform: the full inflected surface form
+cat and cats = different wordforms
+How many words in a sentence?
+they lay back on the San Francisco grass and looked at the stars and their
+
+Type: an element of the vocabulary.
+Token: an instance of that type in running text.
+How many?
+15 tokens (or 14)
+13 types (or 12) (or 11?)
+How many words in a corpus?
+N = number of tokens
+V = vocabulary = set of types, |V| is size of vocabulary
+Heaps Law = Herdan's Law =                                 where often .67 < β < .75
+i.e., vocabulary size grows with > square root of the number of word tokens
+
+
+
+
+
+Corpora
+Words don't appear out of nowhere! 
+A text is produced by 
+a specific writer(s), 
+at a specific time, 
+in a specific variety,
+of a specific language, 
+for a specific function.
+Corpora vary along dimension like
+Language: 7097 languages in the world
+Variety, like African American Language varieties.
+AAE Twitter posts might include forms like "iont" (I don't)
+Code switching, e.g., Spanish/English, Hindi/English:
+	S/E: Por primera vez veo a @username actually being hateful! It was beautiful:) 
+	   [For the first time I get to see @username actually being hateful! it was beautiful:) ] 
+	H/E: dost tha or ra- hega ... dont wory ... but dherya rakhe 
+	   [“he was and will remain a friend ... don’t worry ... but have faith”] 
+Genre: newswire, fiction, scientific articles, Wikipedia
+Author Demographics: writer's age, gender, ethnicity, SES 
+
+
+Corpus datasheets - metadata
+Motivation: 
+Why was the corpus collected?
+By whom? 
+Who funded it? 
+Situation: In what situation was the text written?
+Collection process: If it is a subsample how was it sampled? Was there consent? Pre-processing?
+  +Annotation process, language variety, demographics, etc.
+
+
+Gebru et al (2020), Bender and Friedman (2018)
+Basic Text Processing
+Words and Corpora
+
+
+Basic Text Processing
+Word tokenization
+
+
+Text Normalization
+Every NLP task requires text normalization: 
+Tokenizing (segmenting) words
+Normalizing word formats
+Segmenting sentences
+
+
+Space-based tokenization
+A very simple way to tokenize
+For languages that use space characters between words
+Latin (e.g. English), Arabic, Cyrillic, Greek, etc., based writing systems 
+Segment off a token between instances of spaces
+Unix tools for space-based tokenization
+The "tr" command
+Inspired by Ken Church's UNIX for Poets
+Given a text file, output the word tokens and their frequencies
+
+Simple Tokenization in UNIX (or Mac-OS)
+(Inspired by Ken Church’s UNIX for Poets.)
+Given a text file, output the word tokens and their frequencies
+tr -sc ’A-Za-z’ ’\n’ < shakes.txt 
+     | sort 
+     | uniq –c 
+
+1945 A
+  72 AARON
+  19 ABBESS
+   5 ABBOT
+ ... ...
+    
+25 Aaron
+ 6 Abate
+ 1 Abates
+ 5 Abbess
+ 6 Abbey
+ 3 Abbot
+....   …
+Change all non-alpha to newlines
+Sort in alphabetical order
+Merge and count each type
+The first step: tokenizing
+tr -sc ’A-Za-z’ ’\n’ < shakes.txt | head
+
+THE
+SONNETS
+by
+William
+Shakespeare
+From
+fairest
+creatures
+We
+...    
+The second step: sorting
+tr -sc ’A-Za-z’ ’\n’ < shakes.txt | sort | head
+
+A
+A
+A
+A
+A
+A
+A
+A
+A
+...   
+More counting
+Merging upper and lower case
+tr ‘A-Z’ ‘a-z’ < shakes.txt | tr –sc ‘A-Za-z’ ‘\n’ | sort | uniq –c 
+Sorting the counts
+tr ‘A-Z’ ‘a-z’ < shakes.txt | tr –sc ‘A-Za-z’ ‘\n’ | sort | uniq –c | sort –n –r
+23243 the
+22225 i
+18618 and
+16339 to
+15687 of
+12780 a
+12163 you
+10839 my
+10005 in
+8954  d
+
+What happened here?
+Issues in Tokenization
+Can't just blindly remove punctuation:
+m.p.h., Ph.D., AT&T, cap’n
+prices ($45.55)
+dates (01/02/06)
+URLs (http://www.stanford.edu)
+hashtags (#nlproc)
+email addresses (someone@cs.colorado.edu)
+Clitic: a word that doesn't stand on its own
+"are" in we're, French "je" in j'ai, "le" in l'honneur
+When should multiword expressions (MWE) be words?
+New York, rock ’n’ roll 
+
+
+
+
+Tokenization in NLTK
+
+Bird, Loper and Klein (2009), Natural Language Processing with Python. O’Reilly
+Tokenization in languages without spaces 
+Many languages (like Chinese, Japanese, Thai) don't use spaces to separate words!
+
+How do we decide where the token boundaries should be?
+Word tokenization in Chinese
+Chinese words are composed of characters called "hanzi" (or sometimes just "zi")
+Each one represents a meaning unit called a morpheme.
+Each word has on average 2.4 of them.
+But deciding what counts as a word is complex and not agreed upon.
+How to do word tokenization in Chinese?
+姚明进入总决赛  “Yao Ming reaches the finals”
+
+3 words?
+姚明        进入      总决赛 
+YaoMing  reaches  finals 
+
+5 words?
+姚       明      进入         总          决赛 
+Yao    Ming    reaches    overall    finals 
+
+7 characters? (don't use words at all):
+姚   明        进      入       总         决         赛 
+Yao Ming enter enter overall decision game
+
+
+
+
+How to do word tokenization in Chinese?
+姚明进入总决赛  “Yao Ming reaches the finals”
+
+3 words?
+姚明        进入      总决赛 
+YaoMing  reaches  finals 
+
+5 words?
+姚       明      进入         总          决赛 
+Yao    Ming    reaches    overall    finals 
+
+7 characters? (don't use words at all):
+姚   明        进      入       总         决         赛 
+Yao Ming enter enter overall decision game
+
+
+
+How to do word tokenization in Chinese?
+姚明进入总决赛  “Yao Ming reaches the finals”
+
+3 words?
+姚明        进入      总决赛 
+YaoMing  reaches  finals 
+
+5 words?
+姚       明      进入         总          决赛 
+Yao    Ming    reaches    overall    finals 
+
+7 characters? (don't use words at all):
+姚   明        进      入       总         决         赛 
+Yao Ming enter enter overall decision game
+
+
+How to do word tokenization in Chinese?
+姚明进入总决赛  “Yao Ming reaches the finals”
+
+3 words?
+姚明        进入      总决赛 
+YaoMing  reaches  finals 
+
+5 words?
+姚       明      进入         总          决赛 
+Yao    Ming    reaches    overall    finals 
+
+7 characters? (don't use words at all):
+姚   明        进      入       总         决         赛 
+Yao Ming enter enter overall decision game
+
+Word tokenization / segmentation
+So in Chinese it's common to just treat each character (zi) as a token.
+So the segmentation step is very simple
+In other languages (like Thai and Japanese), more complex word segmentation is required.
+The standard algorithms are neural sequence models trained by supervised machine learning.
+Basic Text Processing
+Word tokenization
+
+
+Basic Text Processing
+Byte Pair Encoding
+
+Another option for text tokenization
+Instead of 
+white-space segmentation
+single-character segmentation 
+
+Use the data to tell us how to tokenize.
+
+Subword tokenization (because tokens can be parts of words as well as whole words)
+Basic Text Processing
+Byte Pair Encoding
+
+Basic Text Processing
+Word Normalization and other issues
+
+
+Word Normalization
+Putting words/tokens in a standard format
+U.S.A. or USA
+uhhuh or uh-huh
+Fed or fed
+am, is, be, are 
+
+Case folding
+Applications like IR: reduce all letters to lower case
+Since users tend to use lower case
+Possible exception: upper case in mid-sentence?
+e.g., General Motors
+Fed vs. fed
+SAIL vs. sail
+For sentiment analysis, MT, Information extraction
+Case is helpful (US versus us is important)
+Lemmatization
+Represent all words as their lemma, their shared root 
+	= dictionary headword form:
+am, are, is  be
+car, cars, car's, cars'  car
+Spanish quiero (‘I want’), quieres (‘you want’) 
+ querer ‘want'
+
+He is reading detective stories 
+ He be read detective story 
+Lemmatization is done by Morphological Parsing
+Morphemes:
+The small meaningful units that make up words
+Stems: The core meaning-bearing units
+Affixes: Parts that adhere to stems, often with grammatical functions
+Morphological Parsers:
+Parse  cats into two morphemes cat and s
+Parse Spanish amaren (‘if in the future they would love’) into morpheme amar ‘to love’, and the morphological features 3PL and future subjunctive. 
+Stemming
+Reduce terms to stems, chopping off affixes crudely
+
+This was not the map we found in Billy Bones’s chest, but an accurate copy, complete in all things-names and heights and soundings-with the single exception of the red crosses and the written notes. 
+
+Thi wa not the map we found in Billi Bone s chest but an accur copi complet in all thing name and height and sound with the singl except of the red cross and the written note 
+. 
+Porter Stemmer
+Based on a series of rewrite rules run in series
+A cascade, in which output of each pass fed to next pass
+Some sample rules:
+Dealing with complex morphology is necessary for many languages
+e.g., the Turkish word:
+Uygarlastiramadiklarimizdanmissinizcasina
+`(behaving) as if you are among those whom we could not civilize’
+Uygar `civilized’ + las `become’ 
++ tir `cause’ + ama `not able’ 
++ dik `past’ + lar ‘plural’
++ imiz ‘p1pl’ + dan ‘abl’ 
++ mis ‘past’ + siniz ‘2pl’ + casina ‘as if’ 
+
+Sentence Segmentation
+!, ? mostly unambiguous but period “.” is very ambiguous
+Sentence boundary
+Abbreviations like Inc. or Dr.
+Numbers like .02% or 4.3
+Common algorithm: Tokenize first: use rules or ML to classify a period as either (a) part of the word or (b) a sentence-boundary. 
+An abbreviation dictionary can help
+Sentence segmentation can then often be done by rules based on this tokenization.
+Basic Text Processing
+Word Normalization and other issues
+
+
+Basic Text Processing
+Regular Expressions
+More Regular Expressions: Substitutions and ELIZA
+Words and Corpora
+Word tokenization
+Byte Pair Encoding
+Word Normalization and other issues
+
+
+
+
+
+from Textbook: 
+Dan Jurafsky and James Martin 2022.
+ Speech and Language Processing
+ (3rd ed.), Pearson

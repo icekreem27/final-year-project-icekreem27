@@ -1,0 +1,60 @@
+In this video you will be introduced to 
+SketchEngine web tool for corpus linguistics 
+WebBootCat tool in SkE to collect a corpus from the Web
+how to use SkE to collect and analyse text data from the Web
+Leeds Internet Corpora with seed-words for a large corpus
+ACL SIGWAC:  Association for Computational Linguistics Special Interest Group on Web as Corpus. 
+Texts you should read for part 1.3: 
+A Kilgarriff et al. 2014. The SketchEngine ten years on. 
+Websites – see Minerva learning resources
+
+Introduction to SketchEngine 
+and Web as Corpus research 
+SketchEngine
+Word sketch – summary of a word's collocational behaviour
+Concordance – examples of a word, lemma, phrase in context
+Distributional Thesaurus –words with similar meaning / context
+Parallel corpus – bilingual corpus, for translation examples
+WebBootCat – create specialized corpus from web-pages
+Terminology – key words and multi-word terms in a specialism
+And more …
+Word sketch – summary of a word's collocational behaviour
+Word sketch – summary of a word's collocational behaviour (Arabic) 
+Word sketch – summary of a word's collocational behaviour (Chinese)
+Concordance – examples of a word, lemma, phrase in context
+Distributional Thesaurus –words with similar meaning / context
+Parallel corpus – bilingual corpus, for translation examples
+WebBootCat – create corpus from web-pages
+Terminology – key words and multi-word terms in a specialism
+More SketchEngine functions
+Word lists – frequency lists filtered with user criteria
+n-grams – frequency lists of multi-word expressions
+Collocations – word co-occurrence analysis 
+Word sketch difference – compares two words by collocations
+Diachronic analysis (Trends) – word usage change over time
+Part-of-Speech tagging and lemmatization, in many languages
+
+Web as Corpus research
+Use SkE to collect and analyse text data from the Web
+Leeds Internet Corpora with seed-words for a large corpus
+ACL SIGWAC:  Association for Computational Linguistics Special Interest Group on Web as Corpus. 
+
+Let’s try them …
+SketchEngine  www.sketchengine.eu
+Leeds Internet Corpora  corpus.leeds.ac.uk/internet.html
+ACL SIGWAC  www.sigwac.org.uk  
+
+SketchEngine licence is for on-campus use, or via VPN
+ it.leeds.ac.uk  How to connect to the University VPN: 
+it.leeds.ac.uk/it?id=kb_article&sysparm_article=KB0014410 
+
+Summary
+In this video you were introduced to 
+SketchEngine web tool for corpus linguistics 
+WebBootCat tool in SkE to collect a corpus from the Web
+Leeds Internet Corpora with seed-words for a large corpus
+ACL SIGWAC:  Association for Computational Linguistics Special Interest Group on Web as Corpus. 
+Texts you should read for part 1.3: 
+A Kilgarriff et al. 2014. The SketchEngine ten years on. 
+Websites – see Minerva learning resources
+

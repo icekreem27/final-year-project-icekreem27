@@ -1,0 +1,251 @@
+1()
+Information Extraction: extracting Named Entities and Relations from text
+
+
+Based on a presentation by Diana Maynard
+Natural Language Processing Group
+University of Sheffield, UK
+
+
+2()
+Diana Maynard
+3()
+Outline
+Information Extraction applications
+Knowledge Engineering v ML
+Rule-based Named Entity Recognition
+MUSE MUlti-Source Entity recognition
+Research in Information Extraction
+4()
+IE is not IR
+IR pulls documents from large text collections (e.g. “google search” the Web) in response to specific keywords or queries. You analyse the documents.
+IE pulls facts and structured information (Named Entities and Relations) from the content of large text collections (e.g corpora). You analyse the facts.
+
+
+
+5()
+IE for Document Access
+With traditional query engines, getting the facts can be hard and slow
+Where has the Queen visited in the last year?
+Which places on the East Coast of the US  have had cases of West Nile Virus? 
+Which search terms would you use to get this kind of information?
+IE would return information in a structured way
+IR would return documents containing the relevant information somewhere (if you were lucky)
+
+6()
+IE as an alternative to IR
+IE returns knowledge at a deeper level than IR
+Constructing a database through IE and linking it back to the documents can provide a valuable alternative search tool.
+Even if results are not always accurate, they can be valuable if linked back to the original text
+
+
+7()
+When would you use IE?
+For access to news
+identify major relations and event types (e.g. within foreign affairs or business news)
+For access to scientific reports
+identify principal relations of a scientific subfield (e.g. pharmacology, genomics)
+
+
+8()
+Application 1 – HaSIE
+Aims to find out how companies report about health and safety information
+Answers questions such as:
+“how many members of staff died or had accidents in the last year?”
+“is there anyone responsible for health and safety”
+“what measures have been put in place to improve health and safety in the workplace?”
+9()
+HASIE
+Identification of such information is too time-consuming and arduous to be done manually
+IR systems can’t cope with this because they return whole documents, which could be hundreds of pages
+System identifies relevant sections of each document, pulls out sentences about health and safety issues, and populates a database with relevant information
+10()
+Application 2: KIM
+Ontotext’s KIM query and results
+
+11()
+Application 3: Threat tracker
+12()
+What is Named Entity Recognition?
+Identification of proper names in texts, and their classification into a set of predefined categories of interest
+Persons
+Organisations (companies, government organisations, committees, etc)
+Locations (cities, countries, rivers, etc)
+Date and time expressions
+Various other types as appropriate
+13()
+Why is NER important
+NER provides a foundation from which to build more complex IE systems
+Relations between NEs can provide tracking, ontological information and scenario building
+Tracking co-reference “Dr Anthrax, Huda, she”
+Ontologies “Person, Event, Country”
+Relations “Dr Head became the new director of Shiny Rockets Corp”
+
+14()
+Two kinds of approaches (to IE, and to other NLP, eg PoS-tagger)
+Knowledge Engineering
+
+“hand-crafted” rule-based system 
+developed by experienced knowledge engineers 
+makes use of human intuition 
+requires only small amount of example training data
+may not require high performance computing
+development can be time consuming 
+some changes may require checking entire rule set
+Machine Learning 
+
+use statistical language models and machine learning 
+developers do not need domain expertise 
+requires large amounts of annotated training data 
+requires high performance computing: processor, memory
+some changes may require re-annotation of the entire training corpus
+15()
+Basic Problems in Named Entity Recognition 
+Variation of NEs – e.g. John Smith, Mr Smith, John. 
+Ambiguity of NE types: John Smith (company vs. person) 
+June (person vs. month) 
+Washington (person vs. location) 
+1945 (date vs. time) 
+Ambiguity between common words and proper nouns, e.g. “may”
+16()
+Complex problems in NER
+Issues of style, structure, domain, genre etc. 
+Punctuation, spelling, spacing, formatting
+
+Dept. of Computing and Maths
+Manchester Metropolitan University
+Manchester
+United Kingdom
+
+> Tell me more about Leonardo                         
+> Da Vinci
+
+17()
+List lookup approach - baseline
+System that recognises only entities stored in its lists (gazetteers). 
+Advantages - Simple, fast, language independent, easy to retarget (just create new lists)
+Disadvantages - collection and maintenance of lists, cannot deal with name variants, cannot resolve ambiguity
+18()
+Shallow Parsing Approach (internal structure)
+Internal evidence – names often have internal structure. These components can be either stored or guessed, e.g. location: 
+
+Cap. Word + {City, Forest, Center, River}
+e.g. Sherwood Forest
+
+Cap. Word + {Street, Boulevard, Avenue, Crescent, Road}
+e.g. Portobello Street
+
+
+19()
+Problems with the shallow parsing approach
+Ambiguously capitalised words (first word in sentence)[All American Bank]  vs.  All [State Police] 
+Semantic ambiguity	"John F. Kennedy" = airport (location) "Philip Morris" = organisation 
+Structural ambiguity [Cable and Wireless]    vs. 
+   [Microsoft] and [Dell] 
+  [Center for Computational Linguistics]   vs. 
+  message from [City Hospital] for [John Smith]
+20()
+Shallow Parsing Approach with Context
+Use of context-based patterns is helpful in ambiguous cases 
+"David Walton" and "Goldman Sachs" are indistinguishable 
+But with the phrase "David Walton of Goldman Sachs" and the Person entity "David Walton" recognised, we can use the pattern "[Person] of [Organization]" to identify "Goldman Sachs“ correctly.
+21()
+Identification of Contextual Information
+Use KWIC concordance eg SketchEngine to find windows of context around entities 
+Search for repeated contextual patterns of entities
+Manually post-edit list of patterns, and incorporate useful patterns into new rules 
+Repeat with new entities
+22()
+Examples of semantic patternswith entity types and relations
+[PERSON] earns [MONEY]
+[PERSON] joined [ORGANIZATION]
+[PERSON] left [ORGANIZATION]
+[PERSON] joined [ORGANIZATION] as [JOBTITLE]
+[ORGANIZATION]'s [JOBTITLE] [PERSON]
+[ORGANIZATION] [JOBTITLE] [PERSON]
+the [ORGANIZATION] [JOBTITLE]
+part of the [ORGANIZATION]
+[ORGANIZATION] headquarters in [LOCATION]
+price of [ORGANIZATION]
+sale of [ORGANIZATION]
+investors in [ORGANIZATION]
+[ORGANIZATION] is worth [MONEY]
+[JOBTITLE] [PERSON]
+[PERSON], [JOBTITLE]
+23()
+MUSE – MUlti-Source Entity Recognition
+An IE system developed within GATE General Architecture for Text Engineering https://gate.ac.uk/ 
+Performs NE and coreference on different text types and genres
+Uses knowledge engineering approach with hand-crafted rules
+Performance rivals that of machine learning methods
+
+24()
+MUSE Modules
+Document format and genre analysis
+Tokenisation 
+Sentence splitting
+POS tagging (Verb, Adjective, Noun, ProperNoun)
+Gazetteer lookup (NE dictionaries)
+Semantic grammar ([PERSON] earns [MONEY])
+Name coreference (Mr Smith, John)
+Pronoun coreference (John, he)
+
+25()
+Multilingual MUSE
+MUSE has been adapted to deal with different languages: English, French, German, Romanian, Bulgarian, Russian, Cebuano, Hindi, Chinese, Arabic, …
+Separation of language-dependent and language-independent modules and sub-modules makes adaptation easier.
+
+26()
+IE in  Surprise Languages
+Adaptation to an unknown language in a very short timespan
+Cebuano:
+Latin script, capitalisation, words are spaced
+Few resources and little work already done
+Medium difficulty
+Hindi:
+Non-Latin script, different encodings used, no capitalisation, words are spaced
+Many resources available
+Medium difficulty
+27()
+What does multilingual NER require?
+Extensive support for non-Latin scripts and text encodings, including conversion utilities
+Takes up to 2/3 of the effort 
+Bilingual dictionaries
+Annotated corpus for evaluation
+Internet resources for gazetteer list collection (e.g., phone books, yellow pages, bi-lingual pages)
+28()
+
+                       
+
+ GATE Unicode Kit (GUK)  
+	Complements Java’s facilities
+
+
+
+ Support for defining    Input Methods (IMs)
+
+ currently 30 IMs    for 17 languages
+
+ Pluggable in other    applications (e.g.    JEdit)
+
+Editing Multilingual Data
+29()
+
+Processing Multilingual Data
+All processing, visualisation and editing tools use GUK
+30()
+Research in Information Extraction
+Tools for semantic web
+Need for IE in bioinformatics and medicine
+IE for finance, eg IE from news to predict share prices
+Cross fertilisation of IE and IR , eg.  Question Answering
+Relations between entities 
+see Jurafsky and Martin textbook
+31()
+Summary
+Information Extraction: extracting Named Entities and Relations from text
+Information Extraction applications
+Knowledge Engineering v ML
+Rule-based Named Entity Recognition
+MUSE MUlti-Source Entity recognition
+Research in Information Extraction
