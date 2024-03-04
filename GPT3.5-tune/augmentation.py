@@ -2,7 +2,7 @@ import json
 import nltk
 import random
 from nltk.corpus import wordnet
-from translate import Translator
+from googletrans import Translator
 from tqdm import tqdm
 
 # Ensure necessary NLTK data is downloaded for processing
@@ -37,21 +37,28 @@ def synonym_replacement(sentence, n=3):
 
 def back_translation(sentence, src_lang='en', intermediate_lang='fr'):
     """Perform back-translation on the sentence through an intermediate language."""
-    # Translates the sentence to the intermediate language and back to the source language
-    translator_to_intermediate = Translator(to_lang=intermediate_lang, from_lang=src_lang)
-    translated_to_intermediate = translator_to_intermediate.translate(sentence)
-    
-    translator_to_source = Translator(to_lang=src_lang, from_lang=intermediate_lang)
-    back_translated = translator_to_source.translate(translated_to_intermediate)
+    translator = Translator()
+    # Translate from source to intermediate language
+    translated_to_intermediate = translator.translate(sentence, src=src_lang, dest=intermediate_lang).text
+    # Translate back to source language
+    back_translated = translator.translate(translated_to_intermediate, src=intermediate_lang, dest=src_lang).text
     
     return back_translated
 
 def augment_data(jsonl_file_path, output_file_path):
     """Augment a dataset with synonym replacement and back-translation."""
     augmented_data = []
-    
+        
+    # First pass to count lines for the progress bar
     with open(jsonl_file_path, 'r', encoding='utf-8') as f:
-        for line in tqdm(f, desc="Augmenting data", unit="line"):
+        total_lines = sum(1 for line in f)
+
+    # Second pass to process the lines with a progress bar
+    augmented_data = []
+    with open(jsonl_file_path, 'r', encoding='utf-8') as f:
+        # Initialize the progress bar with the total number of lines
+        progress_bar = tqdm(f, total=total_lines, desc="Augmenting data", unit="line")
+        for line in progress_bar:
             data = json.loads(line)
             # Extracts questions and answers
             question = data['messages'][1]['content']
