@@ -1,0 +1,15 @@
+ChatterBot==1.0.4
+datasets==2.16.1
+fitz==0.0.1.dev2
+googletrans==4.0.0rc1
+nltk==3.8.1
+numpy==1.22.4
+openai==1.13.3
+python_pptx==0.6.23
+Requests==2.31.0
+selenium==4.18.1
+tiktoken==0.5.2
+torch==2.0.1
+tqdm==4.66.1
+transformers==4.29.2
+webdriver_manager==4.0.1
