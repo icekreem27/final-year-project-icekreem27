@@ -2,10 +2,10 @@ import json
 import nltk
 import random
 from nltk.corpus import wordnet
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 from tqdm import tqdm
 
-# Ensure necessary NLTK data is downloaded for processing
+# Ensure necessary NLTK data is downloaded
 nltk.download('wordnet')
 
 def get_synonyms(word):
@@ -37,13 +37,17 @@ def synonym_replacement(sentence, n=3):
 
 def back_translation(sentence, src_lang='en', intermediate_lang='fr'):
     """Perform back-translation on the sentence through an intermediate language."""
-    translator = Translator()
-    # Translate from source to intermediate language
-    translated_to_intermediate = translator.translate(sentence, src=src_lang, dest=intermediate_lang).text
-    # Translate back to source language
-    back_translated = translator.translate(translated_to_intermediate, src=intermediate_lang, dest=src_lang).text
-    
-    return back_translated
+    try:
+        # Translate from source to intermediate language
+        translated_to_intermediate = GoogleTranslator(source='auto', target=intermediate_lang).translate(sentence)
+        # Translate back to source language
+        back_translated = GoogleTranslator(source='auto', target=src_lang).translate(translated_to_intermediate)
+        return back_translated
+    except Exception as e:
+        print(e)
+        print(translated_to_intermediate)
+        return
+
 
 def augment_data(jsonl_file_path, output_file_path):
     """Augment a dataset with synonym replacement and back-translation."""
