@@ -3,7 +3,7 @@ import tiktoken # for token counting
 import numpy as np
 from collections import defaultdict
 
-data_path = "Datasets/QA_dataset.jsonl"
+data_path = "Datasets/final_QA.jsonl"
 
 # Load the dataset
 with open(data_path, 'r', encoding='utf-8') as f:
@@ -112,7 +112,7 @@ print(f"\n{n_too_long} examples may be over the 4096 token limit, they will be t
 # Pricing and default n_epochs estimate
 MAX_TOKENS_PER_EXAMPLE = 4096
 
-TARGET_EPOCHS = 5
+TARGET_EPOCHS = 10
 MIN_TARGET_EXAMPLES = 100
 MAX_TARGET_EXAMPLES = 25000
 MIN_DEFAULT_EPOCHS = 1

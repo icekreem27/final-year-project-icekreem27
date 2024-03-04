@@ -11,7 +11,7 @@ system_message = {"role": "system", "content": "You are a factual chatbot that w
 while True:
     user_input = input("User> ")
     response = client.chat.completions.create(
-        model="ft:gpt-3.5-turbo-0613:personal::8sUn174X", # model ID
+        model="ft:gpt-3.5-turbo-0613:personal::8ukklgNe", # model ID
         messages=[
             system_message,
             {"role": "user", "content": user_input}

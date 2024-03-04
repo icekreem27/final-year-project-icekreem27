@@ -15,14 +15,14 @@ def create_fine_tune(file_name):
         training_file = file_name, 
         model = "gpt-3.5-turbo",
         hyperparameters = {
-            "n_epochs" : 5
+            "n_epochs" : 10
         }
     )
 
 
 # main
 client = OpenAI()
-file_path = "/Datasets/augmented_dataset_2.0.jsonl"
+file_path = "Datasets/final_QA.jsonl"
 
 # create file on OpenAI
 fileID = create_file(file_path)
