@@ -47,12 +47,13 @@ folder_path = "Data Mining files/pdf_txt_files"
 files = [f for f in os.listdir(folder_path) if f.endswith('.txt')]
 all_qa = []
 
+# Loop through all files in the directory
 for file_name in tqdm(files, desc="Processing files"):
     file_path = os.path.join(folder_path, file_name)
     loader = TextLoader(file_path)
     doc = loader.load()[0]  # Assuming each file contains a single document
     chain = QAGenerationChain.from_llm(chat, text_splitter=text_splitter)
-    qa = chain.run(doc.page_content)
+    qa = chain.invoke(doc.page_content)
     all_qa.extend(qa)
 
 # Set directory and output
