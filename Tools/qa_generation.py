@@ -12,6 +12,9 @@ from gptcache.embedding import Onnx
 from gptcache.manager import CacheBase, VectorBase, get_data_manager
 from gptcache.similarity_evaluation.distance import SearchDistanceEvaluation
 
+# Explicitly disable tokenizers parallelism to avoid deadlocks
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 # Start the default Milvus server
 default_server.start()
 
@@ -52,7 +55,11 @@ for file_name in tqdm(files, desc="Processing files"):
     qa = chain.run(doc.page_content)
     all_qa.extend(qa)
 
-# Save the Q&A pairs to a JSON file
-output_path = "/Datasets/QA_Pairs/pdf_QA_Pairs.json"
+# Set directory and output
+output_dir = "/Datasets/QA_Pairs"
+os.makedirs(output_dir, exist_ok=True)
+output_path = os.path.join(output_dir, "pdf_QA_Pairs.json")
+
+# Save the Q&A pairs to the JSON file
 with open(output_path, "w", encoding="utf-8") as json_file:
     json.dump(all_qa, json_file, ensure_ascii=False, indent=4)
