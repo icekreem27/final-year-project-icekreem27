@@ -49,18 +49,23 @@ all_qa = []
 
 # Loop through all files in the directory
 for file_name in tqdm(files, desc="Processing files"):
+    # Construct the full file path
     file_path = os.path.join(folder_path, file_name)
+    
+    # Load the document
     loader = TextLoader(file_path)
     doc = loader.load()[0]  # Assuming each file contains a single document
+
+    # Create the Q&A Generation Chain
     chain = QAGenerationChain.from_llm(chat, text_splitter=text_splitter)
-    qa = chain.invoke(doc.page_content)
+
+    # Generate Q&A for the current document and then append it to the all_qa list
+    qa = chain.run(doc.page_content)
     all_qa.extend(qa)
 
 # Set directory and output
-output_dir = "/Datasets/QA_Pairs"
-os.makedirs(output_dir, exist_ok=True)
-output_path = os.path.join(output_dir, "pdf_QA_Pairs.json")
+output_path = "Datasets/QA_Pairs/pdf_QA_Pairs.json"
 
 # Save the Q&A pairs to the JSON file
-with open(output_path, "w", encoding="utf-8") as json_file:
+with open(output_path, 'x', encoding='utf-8') as json_file:
     json.dump(all_qa, json_file, ensure_ascii=False, indent=4)
