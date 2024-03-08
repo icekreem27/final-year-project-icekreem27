@@ -8,7 +8,7 @@ from langchain_core._api.deprecation import LangChainDeprecationWarning
 from langchain_openai import ChatOpenAI
 from langchain.chains import QAGenerationChain
 
-def spacy_text_splitter(text, chunk_size=512):
+def spacy_text_splitter(text, chunk_size=100):
     # Load the spaCy model
     nlp = spacy.load("en_core_web_sm")
     
@@ -52,10 +52,10 @@ warnings.filterwarnings("ignore", category=LangChainDeprecationWarning)
 
 
 # Set the chat model using LangChain's OpenAI integration
-chat = ChatOpenAI(temperature=1.4)
+chat = ChatOpenAI(temperature=0)
 
 # Specify the folder path containing your text files
-folder_path = "Data Mining files/pdf_txt_files"
+folder_path = "Data Mining files/pptx_txt_files"
 files = [f for f in os.listdir(folder_path) if f.endswith('.txt')]
 all_qa = []
 
@@ -83,10 +83,12 @@ for file_name in tqdm(files, desc="Processing files"):
             all_qa.extend(qa)
 
     # Error handling
+    except json.JSONDecodeError as e:
+        pass
     except Exception as e:
         print(f"Error processing file {file_name}: {e}")
 
 # Save the Q&A pairs to the JSON file
-output_path = "Datasets/QA_Pairs/pdf_QA_Pairs.json"
+output_path = "Datasets/QA_Pairs/pptx_QA_Pairs.json"
 with open(output_path, 'w', encoding='utf-8') as json_file:
     json.dump(all_qa, json_file, ensure_ascii=False, indent=4)
