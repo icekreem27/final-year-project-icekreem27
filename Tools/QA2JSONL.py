@@ -3,7 +3,7 @@ import json
 # Set file paths for two input files and one output file
 QA_file_path1 = 'Datasets/QA_Pairs/pdf_QA_Pairs.json'
 QA_file_path2 = 'Datasets/QA_Pairs/pptx_QA_Pairs.json'
-output_file_path = 'Datasets/QA_dataset.jsonl'
+output_file_path = 'Datasets/QA_Pairs/QA_dataset.jsonl'
 
 # Function to read and load data from a file
 def read_data(file_path):
