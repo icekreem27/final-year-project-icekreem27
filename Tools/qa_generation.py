@@ -17,7 +17,7 @@ def clean_text(text):
     cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
     return cleaned_text
 
-def spacy_text_splitter(text, chunk_size=100):
+def spacy_text_splitter(text, chunk_size=400):
     # Load the spaCy model
     nlp = spacy.load("en_core_web_sm")
     
