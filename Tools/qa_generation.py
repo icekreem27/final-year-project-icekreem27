@@ -2,11 +2,20 @@ import os
 import json
 import spacy
 import warnings
+import re
 from tqdm import tqdm  # for progress bar
 from langchain_community.document_loaders import TextLoader
 from langchain_core._api.deprecation import LangChainDeprecationWarning
 from langchain_openai import ChatOpenAI
 from langchain.chains import QAGenerationChain
+
+def clean_text(text):
+    # Regex, keeps english letters, numbers, punctuation, and whitespace
+    cleaned_text = re.sub(r'[^\x00-\x7F]+', ' ', text)
+    
+    # Remove extra spaces
+    cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
+    return cleaned_text
 
 def spacy_text_splitter(text, chunk_size=100):
     # Load the spaCy model
@@ -69,8 +78,11 @@ for file_name in tqdm(files, desc="Processing files"):
         loader = TextLoader(file_path)
         doc = loader.load()[0]  # Assuming each file contains a single document
 
+        # Clean before further processing
+        cleaned_content = clean_text(doc.page_content)
+
         # Split the cleaned text into fixed chunks
-        texts = text_splitter = spacy_text_splitter(doc.page_content)
+        texts = spacy_text_splitter(cleaned_content)
 
         # Initialize the Q&A Generation Chain directly with LangChain's OpenAI integration
         chain = QAGenerationChain.from_llm(chat)        
