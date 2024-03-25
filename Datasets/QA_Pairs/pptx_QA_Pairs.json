@@ -1,586 +1,190 @@
 [
     {
-        "question": "Who is the lecturer introducing the module in the text?",
-        "answer": "Eric Atwell"
+        "question": "What is the focus of Unit 1, part 1.1 in the module?",
+        "answer": "The focus of Unit 1, part 1.1 is on the background and practical applications of corpus linguistics and text analytics."
     },
     {
-        "question": "What is the title of the book mentioned in the text?",
-        "answer": "Data Mining: Practical machine learning tools and techniques, 4th edition"
+        "question": "What topics are covered in Week 5 of the module on text analytics?",
+        "answer": "Machine Translation, Information Extraction, and Python tools for text analytics"
     },
     {
-        "question": "What are the two types of assessments mentioned in the text for this course?",
-        "answer": "Online test 1 and Online test 2"
+        "question": "What is the title of the book by Witten, Frank, Hall, and Pal that is mentioned in the lecture?",
+        "answer": "Data Mining: Practical machine learning tools and techniques"
     },
     {
-        "question": "What are some of the academic disciplines highlighted in the book about speech and language technology?",
-        "answer": "Linguistics, Phonetics, Lexicography, Syntax, Semantics, Pragmatics, and Discourse modelling"
+        "question": "What are the six phases of the CRISP-DM modelling process in the context of Data Mining?",
+        "answer": "The six phases of the CRISP-DM modelling process in Data Mining are: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, and Deployment."
     },
     {
-        "question": "What are some challenges for text analytics mentioned in the text?",
-        "answer": "Some challenges for text analytics mentioned in the text include expensive competition from tech giants like Google, Apple, Amazon, and Microsoft, difficulty in understanding user requirements as users may not know what they want, high customer expectations for natural language processing, and the need to rethink input/output methods such as keyboards."
+        "question": "What are some of the academic disciplines highlighted in the book regarding speech and language technology?",
+        "answer": "Some of the academic disciplines highlighted in the book include Linguistics, Phonetics, Lexicography, and Syntax."
     },
     {
-        "question": "What are some examples of real applications mentioned in the text?",
-        "answer": "Soldiers in Bosnia wearing small computers on their chests to give orders to civilians, and smart tools in word processors to check grammar, idioms, and style."
+        "question": "What are some key topics covered in the lecture on Information Retrieval?",
+        "answer": "Some key topics covered in the lecture on Information Retrieval include Google search, Inverted file for efficient match, Boolean set theoretic model, weighted vector model, Worked examples, Evaluation, Query broadening to improve matching, and the problem of finding strings in a database."
     },
     {
-        "question": "What are some examples of technology mentioned in the text that assist users in various tasks?",
-        "answer": "Some examples of technology mentioned in the text include a free machine translation service by AltaVista, ALF - a flight information service by Lufthansa, and voice commands for car and lorry drivers to access telephone services and convert email messages."
+        "question": "What is the purpose of the given SQL query?",
+        "answer": "The purpose of the SQL query is to find all modules that match the terms 'database', 'AI', or 'knowledge base'."
     },
     {
-        "question": "What is the purpose of using an inverted file in Information Retrieval?",
-        "answer": "The purpose of using an inverted file in Information Retrieval is for efficient matching."
+        "question": "Why will the given SQL query not match any record?",
+        "answer": "The SQL query will not match any record because the condition 't.value = database AND t.value = AI AND t.value = knowledge base' cannot be simultaneously true for any record in the database."
     },
     {
-        "question": "What is the issue with the initial SQL query provided in the text?",
-        "answer": "The issue with the initial SQL query is that it tries to find records where a single term is equal to 'database', 'AI', and 'knowledge base' simultaneously, which is not possible. This results in the query not matching any records."
+        "question": "What is the main difference between Information Extraction (IE) and Information Retrieval (IR)?",
+        "answer": "The main difference is that IR pulls documents from large text collections in response to specific keywords or queries, while IE pulls facts and structured information (Named Entities and Relations) from the content of large text collections."
     },
     {
-        "question": "What is the main idea behind the inverted file structure in information retrieval systems?",
-        "answer": "The main idea behind the inverted file structure is to store the list of terms used in the whole collection of documents and for each term point to the list of documents that are indexed by the term."
+        "question": "When would you use Information Extraction (IE)?",
+        "answer": "Information Extraction (IE) would be used when you need to extract knowledge at a deeper level than Information Retrieval (IR), such as constructing a database through IE and linking it back to the documents to provide a valuable alternative search tool."
     },
     {
-        "question": "What type of files are mentioned in the text?",
-        "answer": "Inverted or postings file, Data file"
+        "question": "What is the aim of the HaSIE application mentioned in the lecture segment?",
+        "answer": "The aim of the HaSIE application is to find out how companies report about health and safety information."
     },
     {
-        "question": "What is the purpose of the inverted file in information retrieval?",
-        "answer": "The inverted file in information retrieval contains a list of pointers into the data file (or object-ids, or URLs) identifying the objects indexed by the dictionary term. It may also contain positional information within each document and term frequency (or weight) within each document."
-    },
-    {
-        "question": "What is the disjunctive normal form for the Boolean query (A or B) and C?",
-        "answer": "(A and C) or (B and C) or (A and B and C)"
-    },
-    {
-        "question": "What is the purpose of sorting (ranking) the list according to the similarity coefficient in the context of the inverted file?",
-        "answer": "The purpose of sorting (ranking) the list according to the similarity coefficient in the context of the inverted file is to prioritize and present the most relevant documents to the user based on their similarity to the query."
-    },
-    {
-        "question": "What are some pros and cons of using an inverted file for indexing?",
-        "answer": "Some pros of using an inverted file for indexing include the ability to distinguish between terms in proximity and the support for Boolean, weighted, and positional queries. Some cons include expensive updates when information objects change and demanding storage requirements."
-    },
-    {
-        "question": "What type of queries are inverted file structures purpose made for?",
-        "answer": "Inverted file structures are purpose made for search-engine type queries."
-    },
-    {
-        "question": "What is central to Information Retrieval (IR) according to the text?",
-        "answer": "Representation of a document by a set of descriptors or index terms"
-    },
-    {
-        "question": "What is the purpose of the Boolean model mentioned in the text?",
-        "answer": "The purpose of the Boolean model is to form queries using Boolean expressions and match documents with those queries."
-    },
-    {
-        "question": "What are some questions raised in the text regarding information retrieval systems?",
-        "answer": "Some questions raised in the text regarding information retrieval systems include: Where do the index terms come from? What determines the weights? How well can we expect these systems to work for practical applications? How can we improve them? How do we integrate IR into more traditional DB management?"
-    },
-    {
-        "question": "What are some examples of issues related to synonyms and homonyms mentioned in the text?",
-        "answer": "Some examples include the confusion between football and soccer as synonyms, tap and faucet as synonyms, lead as a metal or a leash as homonyms, and tap as a verb or a noun as homonyms."
-    },
-    {
-        "question": "What are some of the evaluation/effectiveness measures mentioned in the text?",
-        "answer": "Some of the evaluation/effectiveness measures mentioned in the text include effort required by users in formulating queries, time between receipt of user query and production of list of hits, presentation of the output, coverage of the collection, recall (fraction of relevant items retrieved), precision (fraction of retrieved items that are relevant), and user satisfaction with the retrieved items."
-    },
-    {
-        "question": "What is the purpose of using relevance feedback in information retrieval systems?",
-        "answer": "The purpose of using relevance feedback is to improve search results by creating a replacement query that includes index terms from known relevant documents, increasing the weight of shared index terms, and reducing the weight of terms found in non-relevant documents."
-    },
-    {
-        "question": "What is one drawback of relevance feedback?",
-        "answer": "One drawback of relevance feedback is that it is not fully automatic."
-    },
-    {
-        "question": "What are the first two documents that match the query q = (0.78, 0.52, 0.1, 0.12, 0.2) in the text?",
-        "answer": "The first two documents that match the query q = (0.78, 0.52, 0.1, 0.12, 0.2) are d1: Recipe for jam pudding and d3: Recipe for treacle pud."
-    },
-    {
-        "question": "How can using a thesaurus improve precision and recall in information retrieval?",
-        "answer": "By replacing words from documents and query words with synonyms from a controlled language, we can improve precision and recall."
-    },
-    {
-        "question": "What is NLTK and what is its purpose in text analytics?",
-        "answer": "NLTK stands for Natural Language Toolkit and it is a leading platform for building Python programs to work with human language data. It provides easy-to-use interfaces to over 50 corpora and lexical resources, text processing libraries, and wrappers for NLP libraries."
-    },
-    {
-        "question": "What is the name of the toolkit introduced in the text that provides a hands-on guide to programming fundamentals and computational linguistics?",
-        "answer": "NLTK (Natural Language Toolkit)"
-    },
-    {
-        "question": "What is the guiding principle mentioned in the text?",
-        "answer": "The guiding principle mentioned in the text is 'get others to do the work'."
-    },
-    {
-        "question": "What type of learning is described in the text?",
-        "answer": "Unsupervised learning"
-    },
-    {
-        "question": "What is the novel idea in Student Learning mentioned in the text?",
-        "answer": "The novel idea in Student Learning is to get students to implement the learners, so students learn about Machine Learning as well as the domain."
-    },
-    {
-        "question": "What is the difference between Information Extraction (IE) and Information Retrieval (IR)?",
-        "answer": "Information Retrieval (IR) pulls documents from large text collections in response to specific keywords or queries, while Information Extraction (IE) pulls facts and structured information (Named Entities and Relations) from the content of large text collections."
-    },
-    {
-        "question": "What questions does HaSIE aim to answer regarding health and safety information in companies?",
-        "answer": "HaSIE aims to find out how companies report about health and safety information and answers questions such as: how many members of staff died or had accidents in the last year? Is there anyone responsible for health and safety? What measures have been put in place to improve health and safety in the workplace?"
+        "question": "What is Named Entity Recognition?",
+        "answer": "Named Entity Recognition is a process where a system identifies relevant sections of each document, pulls out sentences about specific entities, such as health and safety issues, and populates a database with this information."
     },
     {
         "question": "Why is Named Entity Recognition (NER) important?",
         "answer": "NER provides a foundation from which to build more complex Information Extraction (IE) systems. Relations between Named Entities (NEs) can provide tracking, ontological information, and scenario building."
     },
     {
-        "question": "What are some advantages and disadvantages of the list lookup approach in Named Entity Recognition (NER)?",
-        "answer": "Advantages of the list lookup approach include being simple, fast, language independent, and easy to retarget by creating new lists. Disadvantages include the collection and maintenance of lists, inability to deal with name variants, and inability to resolve ambiguity."
+        "question": "What are some examples of ambiguity in Named Entity (NE) types mentioned in the lecture?",
+        "answer": "Some examples of ambiguity in NE types mentioned are: John Smith (company vs. person), June (person vs. month), Washington (person vs. location), and 1945 (date vs. time)."
     },
     {
-        "question": "What is one example provided in the text to illustrate the use of context-based patterns in the shallow parsing approach?",
-        "answer": "The example of 'David Walton of Goldman Sachs' is used to show how the pattern '[Person] of [Organization]' can help identify 'Goldman Sachs' correctly."
-    },
-    {
-        "question": "What is the purpose of using KWIC concordance and SketchEngine in the text analysis process described?",
-        "answer": "The purpose is to find windows of context around entities and search for repeated contextual patterns of entities."
-    },
-    {
-        "question": "What does multilingual NER require according to the text?",
-        "answer": "Extensive support for non-Latin scripts and text encodings, including conversion utilities; Bilingual dictionaries; Annotated corpus for evaluation; Internet resources for gazetteer list collection"
+        "question": "What are some advantages and disadvantages of the shallow parsing approach?",
+        "answer": "Advantages include being simple, fast, language independent, and easy to retarget by creating new lists. Disadvantages include the collection and maintenance of lists, inability to deal with name variants, and inability to resolve ambiguity."
     },
     {
         "question": "What is BERT and what is it used for?",
-        "answer": "BERT is a method and toolkit from Google Labs for understanding meaning relationships between sentences, and it is used in tasks which involve measuring meaning similarity between sentences."
+        "answer": "BERT is a method and toolkit from Google Labs for understanding meaning relationships between sentences, and is used in tasks which involve measuring meaning similarity between sentences."
     },
     {
-        "question": "What does BERT stand for and what is its purpose?",
-        "answer": "BERT stands for Bidirectional Encoder Representations from Transformers and its purpose is to provide pre-trained representations from unlabeled text, which can then be fine-tuned for various natural language processing tasks."
+        "question": "What are some of the challenges in Machine Translation mentioned in the lecture?",
+        "answer": "Some of the challenges in Machine Translation mentioned in the lecture include complex orthography, lexical ambiguity, morphological complexity and variation, tokenization issues, and translation divergences."
     },
     {
-        "question": "What approach does BERT take to learn morphology, syntax, and semantics from a large text corpus?",
-        "answer": "BERT takes an unsupervised (or semi-supervised) learning approach to morphology, syntax, and semantics from a large text corpus."
+        "question": "Why is it important to have a parallel corpus with source and target sentences aligned for machine translation?",
+        "answer": "It is important to have a parallel corpus with source and target sentences aligned for machine translation in order to train translation models effectively by having corresponding sentences in different languages for comparison and learning."
     },
     {
-        "question": "What is the pre-training task referred to as in the text?",
-        "answer": "The pre-training task is referred to as a masked LM (MLM) and a next sentence prediction (NSP) task."
+        "question": "What is GIZA++ and how is it used in statistical machine translation?",
+        "answer": "GIZA++ is a statistical machine translation toolkit used to train word alignments."
     },
     {
-        "question": "What is the purpose of BERT fine-tuned experiments on human-labelled NLP data-sets?",
-        "answer": "The purpose is for classification tasks such as sentiment prediction, linguistic acceptability, similarity detection, semantic equivalence, answer verification, entailment detection, and text completion."
+        "question": "What are some advantages of Phrase-Based Statistical Machine Translation (SMT)?",
+        "answer": "Some advantages of Phrase-Based SMT include many-to-many mappings for non-compositional phrases, the use of local context for disambiguation, and the ability to handle longer learned phrases with more data."
     },
     {
-        "question": "What is the main conclusion drawn from the Ablation Studies experiments mentioned in the text?",
-        "answer": "The main conclusion is that deep bidirectional architectures, like BERT, allow the same pre-trained model to successfully tackle a broad set of NLP tasks."
+        "question": "What is the purpose of the Bleu Metric in automatic evaluation of machine translation?",
+        "answer": "The purpose of the Bleu Metric is to compare machine translation output against several human translations to give a standardized score that correlates highly with human evaluation."
     },
     {
-        "question": "What type of learning does BERT use to understand morphology, syntax, and semantics?",
-        "answer": "BERT uses unsupervised learning to understand morphology, syntax, and semantics."
+        "question": "Where can Artificial Intelligence experts join social media communities for networking, sharing knowledge, and getting ideas for research projects?",
+        "answer": "Artificial Intelligence experts can join social media communities like Facebook, LinkedIn, Quora, as well as communities set up by/for academics and practitioners such as KDnuggets, Kaggle, Weka, ICAME, ACL, SemEval, and EU-JRC communities."
     },
     {
-        "question": "What are some of the challenges mentioned in machine translation according to the text?",
-        "answer": "Some of the challenges mentioned in machine translation include complex orthography, lexical ambiguity, morphological complexity and variation, translation divergences, and the need for corpus resources for training."
+        "question": "What are some of the subsidiaries of the parent organization mentioned in the lecture?",
+        "answer": "Facebook, Instagram, WhatsApp"
     },
     {
-        "question": "What is the purpose of having a PARALLEL corpus with SOURCE and TARGET sentences ALIGNED?",
-        "answer": "The purpose is to have a resource for Machine Translation (MT) that includes aligned sentences in different languages for translation purposes."
+        "question": "What is a knowledge nugget according to the lecture material?",
+        "answer": "A knowledge nugget is a small item or piece of useful knowledge in categories of interest to the user."
     },
     {
-        "question": "What is the advantage of Phrase-Based Statistical Machine Translation (SMT) mentioned in the text?",
-        "answer": "Many-to-many mappings can handle non-compositional phrases and local context is very useful for disambiguating."
+        "question": "What platform offers a customizable Jupyter Notebooks environment, access to free GPUs, and a large repository of community published data & code?",
+        "answer": "Kaggle offers a no-setup, customizable, Jupyter Notebooks environment. Access free GPUs and a huge repository of community published data & code."
     },
     {
-        "question": "What is the purpose of the Bleu Metric in machine translation evaluation?",
-        "answer": "The purpose of the Bleu Metric is to compare machine translation output against several human translations to give a standardized score."
+        "question": "What is the purpose of the WEKA software mentioned in the lecture segment?",
+        "answer": "The purpose of WEKA is to provide a platform for knowledge analysis and is a hub for users to access downloads, textbooks, tutorials, and contribution add-ons in a more open and community-based environment."
     },
     {
-        "question": "What are some examples of social media communities for data mining and text analytics professionals mentioned in the text?",
-        "answer": "Some examples include Facebook, LinkedIn, Quora, KDnuggets, Kaggle, Weka, ICAME, ACL, SemEval, and EU-JRC communities."
+        "question": "What areas of expertise are involved in the HUMAINT project?",
+        "answer": "The areas of expertise involved in the HUMAINT project include cognitive science, machine learning, human-computer interaction, and economy."
     },
     {
-        "question": "What platform is described as a place to ask questions, connect with people, and contribute unique insights and quality answers?",
-        "answer": "KDnuggets"
+        "question": "What method was used by Mosteller and Wallace to determine the authorship of the disputed letters in the Federalist papers?",
+        "answer": "Bayesian methods"
     },
     {
-        "question": "What is the purpose of the ICAME conference mentioned in the text?",
-        "answer": "The purpose of the ICAME conference is to discuss English text corpora and related topics. It is held annually and had its 43rd conference in 2022."
-    },
-    {
-        "question": "What are some examples of social media communities mentioned in the text where Artificial Intelligence experts can join to network and share knowledge?",
-        "answer": "Some examples of social media communities mentioned in the text include FaceBook, LinkedIn, Quora, KDnuggets, Kaggle, Weka, ICAME, ACL, SemEval, EU-JRC communities, etc."
-    },
-    {
-        "question": "What is the purpose of sentiment analysis?",
-        "answer": "Sentiment analysis is used to determine whether a text expresses positive or negative sentiment."
-    },
-    {
-        "question": "What types of topics are mentioned in the text?",
-        "answer": "Movie reviews, products (specifically the new iPhone), public sentiment (consumer confidence), and politics (opinions on a candidate or issue)."
-    },
-    {
-        "question": "What is the focus of sentiment analysis as discussed in the text?",
-        "answer": "The focus of sentiment analysis is the detection of attitudes."
-    },
-    {
-        "question": "What is the Naive Bayes Classifier based on?",
-        "answer": "The Naive Bayes Classifier is based on Bayes rule and relies on a simple representation of documents known as Bag of Words."
-    },
-    {
-        "question": "Why is it suggested to use logs when applying the Multinomial Naive Bayes Classifier to text classification?",
-        "answer": "Using logs helps avoid floating-point underflow when multiplying lots of probabilities."
-    },
-    {
-        "question": "What is the problem with using maximum likelihood estimates in the Naive Bayes model when encountering a word that was not seen in the training data?",
-        "answer": "The problem is that zero probabilities cannot be conditioned away, no matter the other evidence."
-    },
-    {
-        "question": "What is the purpose of building an unknown word model in text classification?",
-        "answer": "The purpose of building an unknown word model is to handle words that are not present in the training data and improve the accuracy of text classification."
-    },
-    {
-        "question": "What method is suggested for dealing with negation in sentiment classification?",
-        "answer": "Adding NOT_ to every word between negation and following punctuation"
-    },
-    {
-        "question": "What are some examples of positive words from the MPQA Subjectivity Cues Lexicon?",
-        "answer": "Some examples of positive words from the MPQA Subjectivity Cues Lexicon are: admirable, beautiful, confident, dazzling, ecstatic, favor, glee, great."
-    },
-    {
-        "question": "What type of feature can be added to improve sentiment classification using lexicons?",
-        "answer": "A feature that gets a count whenever a word from the lexicon occurs, such as 'this word occurs in the positive lexicon' or 'this word occurs in the negative lexicon'."
-    },
-    {
-        "question": "What are some features of Naive Bayes mentioned in the text?",
-        "answer": "Some features of Naive Bayes mentioned in the text include being very fast, having low storage requirements, working well with very small amounts of training data, being robust to irrelevant features, and being a good dependable baseline for text classification."
-    },
-    {
-        "question": "Why is accuracy not a suitable metric for evaluating the 'Delicious Pie' tweet detector?",
-        "answer": "Accuracy is not suitable because a dumb classifier that labels every tweet as 'not about pie' could achieve a high accuracy even though it does not return the comments about Delicious Pie Company that we are looking for."
-    },
-    {
-        "question": "What are precision and recall, and why are they important in evaluating a system's performance?",
-        "answer": "Precision is the percentage of items the system detected that are actually positive, while recall is the percentage of items actually present in the input that were correctly identified by the system. Precision and recall are important because they emphasize true positives, finding the things that we are supposed to be looking for, unlike accuracy which may not capture this aspect effectively."
-    },
-    {
-        "question": "What did Kiritchenko and Mohammad (2018) find regarding sentiment classifiers and sentences with African American names?",
-        "answer": "They found that most sentiment classifiers assign lower sentiment and more negative emotion to sentences with African American names in them."
-    },
-    {
-        "question": "What are some factors that can contribute to problems in machine learning models?",
-        "answer": "Some factors that can contribute to problems in machine learning models include human labels, resources used (like lexicons), and model architecture."
+        "question": "What is the goal of probabilistic language models discussed in the lecture?",
+        "answer": "The goal is to assign a probability to a sentence."
     },
     {
         "question": "What is the goal of probabilistic language modeling?",
-        "answer": "The goal of probabilistic language modeling is to assign a probability to a sentence or sequence of words."
+        "answer": "The goal is to compute the probability of a sentence or sequence of words."
     },
     {
-        "question": "What is the method described in the text for computing the joint probability of a sequence of words?",
-        "answer": "The method described is to apply the Chain Rule of Probability, where the joint probability of the words is calculated by multiplying the individual probabilities of each word given the previous words in the sequence."
+        "question": "How can we compute the joint probability of a sequence of words using the Chain Rule of Probability?",
+        "answer": "We can compute the joint probability of a sequence of words using the Chain Rule by multiplying the individual probabilities of each word given the previous words in the sequence."
     },
     {
-        "question": "What is the Markov Assumption and how is it used in language modeling?",
-        "answer": "The Markov Assumption is a simplifying assumption where each component in the product is approximated based on the previous component. In language modeling, it is used to generate sequences of words by conditioning each word on the previous word, such as in unigram and bigram models."
+        "question": "Why might it be challenging to accurately predict the next word in a sentence based on the given text 'No! Too many possible sentences!'?",
+        "answer": "It might be challenging because there are too many possible combinations and variations of sentences that could follow the given text."
     },
     {
-        "question": "What kinds of knowledge are discussed in the text?",
-        "answer": "The text discusses N-gram models, language modeling, estimating N-gram probabilities, bigram probabilities, maximum likelihood estimate, raw bigram counts, raw bigram probabilities, and normalizing by unigrams."
+        "question": "What are the two kinds of chatbots discussed in the lecture?",
+        "answer": "The two kinds of chatbots discussed in the lecture are Conversational agents and Task-based Dialogue Agents."
     },
     {
-        "question": "What is the purpose of using log space in language modeling?",
-        "answer": "The purpose of using log space in language modeling is to avoid underflow, as adding is faster than multiplying in log space."
-    },
-    {
-        "question": "What is the purpose of extrinsic evaluation of N-gram models and how is it different from intrinsic evaluation?",
-        "answer": "The purpose of extrinsic evaluation of N-gram models is to compare models A and B by running them in real tasks such as spelling correction, speech recognition, or machine translation. This evaluation is different from intrinsic evaluation, which measures the model's performance based on how well it predicts the next word in a text."
-    },
-    {
-        "question": "What is perplexity in the context of language modeling?",
-        "answer": "Perplexity is the inverse probability of the test set, normalized by the number of words. Minimizing perplexity is the same as maximizing probability."
-    },
-    {
-        "question": "What is one kind of generalization mentioned in the text for training robust models?",
-        "answer": "Zeros"
-    },
-    {
-        "question": "What is the purpose of Add-one (Laplace) smoothing in language modeling?",
-        "answer": "The purpose of Add-one (Laplace) smoothing in language modeling is to steal probability mass to generalize better when dealing with sparse statistics."
-    },
-    {
-        "question": "What is the purpose of using add-1 estimation in N-gram language models?",
-        "answer": "Add-1 estimation is used to smooth some NLP models."
-    },
-    {
-        "question": "What is the purpose of using a held-out corpus in language modeling?",
-        "answer": "The purpose of using a held-out corpus is to maximize the probability of held-out data by fixing the N-gram probabilities on the training data and searching for the best parameters that give the largest probability to the held-out set."
-    },
-    {
-        "question": "What data structure is recommended for efficiently removing singletons of higher-order n-grams?",
-        "answer": "Efficient data structure like trie or bloom filter"
-    },
-    {
-        "question": "What are two types of chatbots mentioned in the text?",
-        "answer": "Conversational agents and Task-based Dialogue Agents"
-    },
-    {
-        "question": "What is the purpose of 'Task-based' or 'goal-based' dialogue agents?",
-        "answer": "Systems that have the goal of helping a user solve a task, such as setting a timer, making a travel reservation, playing a song, or buying a product."
-    },
-    {
-        "question": "Why is it important for systems to be able to handle interruptions during conversations?",
-        "answer": "It is important for systems to be able to handle interruptions during conversations because when a client interrupts, the human agent needs to know to stop talking and be prepared for a possible correction or change from the client."
-    },
-    {
-        "question": "What is the field of study that focuses on the local structure between adjacent speech acts in conversations?",
-        "answer": "Conversational analysis"
-    },
-    {
-        "question": "What is the term used to describe conversations where one person leads, then the other leads, and so on?",
-        "answer": "Mixed initiative"
-    },
-    {
-        "question": "Why does the speaker's boyfriend think she is not very aggressive?",
-        "answer": "The speaker's boyfriend thinks she is not very aggressive because she doesn't argue with him."
-    },
-    {
-        "question": "In the conversation between the patient and the psychologist in the text, what technique does the psychologist use to draw out the patient?",
-        "answer": "The psychologist uses the technique of reflecting the patient's statements back at them to draw them out."
-    },
-    {
-        "question": "What are some of the ethical implications discussed in the text regarding the interaction with chatbots?",
-        "answer": "Some of the ethical implications discussed include anthropomorphism, privacy concerns, and emotional involvement with the program."
-    },
-    {
-        "question": "What was the significance of PARRY passing the Turing test in 1972?",
-        "answer": "Psychiatrists couldn't distinguish interviews with PARRY from interviews with people diagnosed with paranoid schizophrenia."
-    },
-    {
-        "question": "Who won the Loebner prize competition three times in 2000, 2001, and 2004?",
-        "answer": "ALICE"
-    },
-    {
-        "question": "What method is used in the classic IR method to find the turn most similar to a user turn in a conversation corpus?",
-        "answer": "tf-idf cosine similarity"
-    },
-    {
-        "question": "According to the text, what is an ongoing research problem related to neural chatbots?",
-        "answer": "Neural chatbots can get repetitive and boring."
-    },
-    {
-        "question": "What are some pros and cons of chatbots mentioned in the text?",
-        "answer": "Pros: Fun, good for narrow, scriptable applications. Cons: They don't really understand, giving the appearance of understanding may be problematic."
-    },
-    {
-        "question": "What is the role of the Dialogue state tracker in a dialogue-state architecture?",
-        "answer": "The Dialogue state tracker maintains the current state of the dialogue, including the user's most recent dialogue act and set of slot-filler constraints from the user."
-    },
-    {
-        "question": "According to the text, what are the 8 dimensions of quality that participants rate in a conversation?",
-        "answer": "The 8 dimensions of quality that participants rate in a conversation are avoiding repetition, interestingness, making sense, fluency, listening, inquisitiveness, humanness, and engagingness."
-    },
-    {
-        "question": "What is one current research direction mentioned in the text for improving dialogue evaluation?",
-        "answer": "Adversarial Evaluation Inspired by the Turing Test"
-    },
-    {
-        "question": "What were some of the unethical behaviors exhibited by the Microsoft Tay chatbot?",
-        "answer": "The Microsoft Tay chatbot exhibited obscene and inflammatory tweets, shared Nazi propaganda and conspiracy theories, harassed women online, and reflected racism and misogyny of Twitter users."
-    },
-    {
-        "question": "What did the researchers find when they ran hate-speech and bias detectors on standard training sets for dialogue systems?",
-        "answer": "The researchers found bias and hate-speech in the training data and in dialogue models trained on the data."
+        "question": "Which chatbot architecture was the first system to pass the Turing Test?",
+        "answer": "A mental model (PARRY) was the first system to pass the Turing Test."
     },
     {
         "question": "What is a formal language used for specifying text strings?",
         "answer": "Regular expressions"
     },
     {
-        "question": "What are the two kinds of errors discussed in the text related to NLP?",
-        "answer": "The two kinds of errors discussed in the text related to NLP are false positives (Type I errors) and false negatives (Type II errors)."
+        "question": "What are the two kinds of errors discussed in the lecture regarding Regular Expressions?",
+        "answer": "The two kinds of errors discussed are: 1. Matching strings that should not have been matched (false positives or Type I errors) and 2. Not matching things that should have been matched (false negatives or Type II errors)."
     },
     {
-        "question": "What are some examples of how regular expressions are used in text processing?",
-        "answer": "Regular expressions are used for pre-processing, as features in machine learning classifiers, and for capturing generalizations."
+        "question": "What are the two antagonistic efforts involved in reducing the error rate for an application?",
+        "answer": "The two antagonistic efforts involved in reducing the error rate for an application are increasing accuracy or precision (minimizing false positives) and increasing coverage or recall (minimizing false negatives)."
     },
     {
-        "question": "What is the main concept behind the ELIZA Early NLP system?",
-        "answer": "The main concept behind the ELIZA Early NLP system is pattern matching to imitate a Rogerian psychotherapist."
+        "question": "What is word embedding in the context of NLP?",
+        "answer": "Word embedding is a term used for the representation of word meaning for text analysis, typically in the form of a real-valued vector that encodes the meaning of the word such that the words that are closer in the vector space are expected to be similar in meaning."
     },
     {
-        "question": "According to Heaps Law, how does the size of vocabulary grow in relation to the number of word tokens?",
-        "answer": "The size of vocabulary grows with the square root of the number of word tokens."
+        "question": "According to the lecture, what is the meaning of 'dog' in the context of Computer Vision classification?",
+        "answer": "DOG"
     },
     {
-        "question": "What is the purpose of text normalization in natural language processing?",
-        "answer": "Text normalization is necessary for every NLP task and involves tokenizing words, normalizing word formats, and segmenting sentences to make the text more structured and easier to process."
-    },
-    {
-        "question": "What Unix tool can be used for space-based tokenization?",
-        "answer": "The 'tr' command"
-    },
-    {
-        "question": "What are the steps involved in processing a text file to output word tokens and their frequencies?",
-        "answer": "The steps involved are: 1. Tokenizing by removing non-alphabetic characters and splitting into words. 2. Sorting the words alphabetically. 3. Merging and counting each type of word. 4. Merging upper and lower case words. 5. Sorting the word counts numerically."
-    },
-    {
-        "question": "What is a clitic and can you provide examples of clitics in different languages?",
-        "answer": "A clitic is a word that doesn't stand on its own. Examples of clitics include 'are' in 'we're' in English, 'je' in 'j'ai' in French, and 'le' in 'l'honneur' in French."
-    },
-    {
-        "question": "What is a common approach to word tokenization in Chinese?",
-        "answer": "Treating each character as a token"
-    },
-    {
-        "question": "What is the purpose of lemmatization in text processing?",
-        "answer": "The purpose of lemmatization is to represent all words as their lemma, their shared root or dictionary headword form."
-    },
-    {
-        "question": "What is the purpose of stemming in text processing?",
-        "answer": "Stemming is used to reduce terms to their stems by chopping off affixes crudely."
-    },
-    {
-        "question": "What can an abbreviation dictionary help with?",
-        "answer": "Sentence segmentation"
-    },
-    {
-        "question": "What is word embedding in the context of NLP and how is it represented?",
-        "answer": "Word embedding is the representation of word meaning for text analysis in the form of a real-valued vector that encodes the meaning of the word such that words closer in the vector space are expected to be similar in meaning."
-    },
-    {
-        "question": "What is the meaning component of a word according to dictionaries?",
+        "question": "What is the meaning component of a word according to the lecture material?",
         "answer": "A sense or concept"
     },
     {
-        "question": "What is the term used to describe words that cover a particular semantic domain and bear structured relations with each other?",
-        "answer": "Semantic field"
+        "question": "What tool is introduced in the video for corpus linguistics?",
+        "answer": "SketchEngine web tool"
     },
     {
-        "question": "What are the three affective dimensions that words seem to vary along, according to Osgood et al. (1957)?",
-        "answer": "The three affective dimensions that words seem to vary along are valence, arousal, and dominance."
+        "question": "What are some of the functions of SketchEngine mentioned in the lecture segment?",
+        "answer": "Some of the functions of SketchEngine mentioned in the lecture segment include Word sketch summary, Concordance examples, Distributional Thesaurus, Parallel corpus creation, and Part-of-Speech tagging."
     },
     {
-        "question": "Based on the text, how could we conclude that Ong choi is a leafy green like spinach, chard, or collard greens?",
-        "answer": "We could conclude this based on words like 'leaves' and 'delicious' and 'sauteed' mentioned in the sentences about Ong choi and other leafy greens."
+        "question": "What is the purpose of the SketchEngine web tool mentioned in the lecture segment?",
+        "answer": "The SketchEngine web tool is used for corpus linguistics."
     },
     {
-        "question": "What are the 3 affective dimensions for a word's valence according to the NRC VAD Lexicon?",
-        "answer": "The 3 affective dimensions for a word's valence are pleasantness, arousal, and dominance."
+        "question": "What are word embeddings and what is their significance in natural language processing?",
+        "answer": "Word embeddings are numerical vector representations of word meanings. They are significant in natural language processing as they capture semantic relationships between words and are used in various NLP tasks such as language modeling, document classification, and machine translation."
     },
     {
-        "question": "What is the difference between a feature in sentiment analysis with words and a feature with embeddings?",
-        "answer": "A feature in sentiment analysis with words is a word identity, while a feature with embeddings is a word vector."
+        "question": "Where can you find word2vec code and the associated research paper?",
+        "answer": "You can find the word2vec code on Google code archive at code.google.com/archive/p/word2vec/ and the research paper in the document titled Efficient Estimation of Word Representations in Vector Space by Mikolov."
     },
     {
-        "question": "What is the alternative method mentioned for computing word similarity in the text?",
-        "answer": "Cosine for computing word similarity"
+        "question": "What are the key components of an AI research paper, as mentioned in the lecture segment?",
+        "answer": "The key components of an AI research paper include research aims & objectives, background related research, methods, programme of research work, conclusions, and results."
     },
     {
-        "question": "What is the range of cosine values for term-term matrix vectors?",
-        "answer": "The range of cosine values for term-term matrix vectors is from -1 to 1."
-    },
-    {
-        "question": "What is the total count across all documents called in the context of tf-idf?",
-        "answer": "Inverse document frequency (idf)"
-    },
-    {
-        "question": "What is the reason for using add-one smoothing in Pointwise Mutual Information (PMI) calculations?",
-        "answer": "PMI is biased toward infrequent events, and very rare words have very high PMI values, so add-one smoothing is used to address this issue."
-    },
-    {
-        "question": "What are some common methods for getting short dense vectors in machine learning?",
-        "answer": "Neural Language Model-inspired models, Word2vec (skipgram, CBOW), GloVe, Singular Value Decomposition (SVD), Latent Semantic Analysis"
-    },
-    {
-        "question": "What is the big idea behind the approach mentioned in the text?",
-        "answer": "The big idea is self-supervision, where a word that occurs near a specific word in the corpus acts as the 'correct answer' for supervised learning without the need for human labels."
-    },
-    {
-        "question": "What is the goal of training a Skip-Gram classifier?",
-        "answer": "The goal is to train a classifier that is given a candidate (word, context) pair and assigns each pair a probability of occurrence."
-    },
-    {
-        "question": "What is the goal of learning in the context of Word2vec?",
-        "answer": "The goal of learning is to adjust word vectors to maximize the similarity of target word, context word pairs drawn from positive data and minimize the similarity of pairs drawn from negative data."
-    },
-    {
-        "question": "What is the common way to represent a word in the SGNS model?",
-        "answer": "It's common to represent a word as the sum of its target embedding and context embedding vectors."
-    },
-    {
-        "question": "According to the text, what are the nearest neighbors of 'Hogwarts' when using small windows (C=+/-2) in the embeddings?",
-        "answer": "The nearest neighbors of 'Hogwarts' when using small windows are other fictional schools such as Sunnydale, Evernight, and Blandings."
-    },
-    {
-        "question": "What is the focus of the study mentioned in the text?",
-        "answer": "The study focuses on training embeddings on different decades of historical text to observe how meanings shift over time."
-    },
-    {
-        "question": "According to the text, what were the embeddings for competence adjectives biased toward and how has this bias changed over time?",
-        "answer": "The embeddings for competence adjectives (smart, wise, brilliant, resourceful, thoughtful, logical) were biased toward men, with a bias slowly decreasing from 1960-1990."
-    },
-    {
-        "question": "What is the main focus of the video mentioned in the text?",
-        "answer": "The main focus of the video is to introduce the SketchEngine web tool for corpus linguistics and demonstrate how to collect and analyze text data from the Web."
-    },
-    {
-        "question": "What are some of the functions provided by SketchEngine for analyzing text data?",
-        "answer": "Some of the functions provided by SketchEngine for analyzing text data include Word sketch summary, Concordance examples, Distributional Thesaurus, Parallel corpus, WebBootCat, Terminology, Word lists, n-grams, Collocations analysis, Diachronic analysis, and Part-of-Speech tagging."
-    },
-    {
-        "question": "What is the purpose of the SketchEngine licence mentioned in the text?",
-        "answer": "The SketchEngine licence is for on-campus use, or via VPN."
-    },
-    {
-        "question": "What are word embeddings and what is their purpose?",
-        "answer": "Word embeddings are numerical vector representations of word meanings. Their purpose is to learn word meanings from corpora and to scale from small data to large real-world data-sets."
-    },
-    {
-        "question": "What were the methods used in the parsing expert system described in the AI research paper?",
-        "answer": "The methods used in the parsing expert system included comparing context-lists of frequent words, listing left-contexts and right-contexts, and comparing all possible pairings of one word with another word."
-    },
-    {
-        "question": "What is the main conclusion drawn from the evaluation of different learning methods on large corpora for natural language disambiguation?",
-        "answer": "The main conclusion is that more data leads to higher accuracy for all classifiers, prompting a reconsideration of the trade-off between investing in algorithm development versus corpus development."
-    },
-    {
-        "question": "What is the advantage of using ensemble methods for natural language disambiguation according to the text?",
-        "answer": "Ensemble methods are generally better than using a single classifier, especially when dealing with very large training sets."
-    },
-    {
-        "question": "What is the purpose of the new comprehensive test set mentioned in the text?",
-        "answer": "The purpose of the new comprehensive test set is to measure both syntactic and semantic regularities of word representations."
-    },
-    {
-        "question": "What is the purpose of the word2vec tool mentioned in the text?",
-        "answer": "The word2vec tool takes a text corpus as input and produces the word vectors as output. It first constructs a vocabulary from the training text data and then learns vector representation of words."
-    },
-    {
-        "question": "What is the purpose of learning word embeddings from corpora according to the text?",
-        "answer": "The purpose is to obtain numerical vector representations of word meanings."
-    },
-    {
-        "question": "According to the text, who is attributed with the classification of words into 8 parts of speech?",
+        "question": "Who is attributed with the classification of 8 parts of speech in the 1st century BCE?",
         "answer": "Dionysius Thrax of Alexandria"
-    },
-    {
-        "question": "What are the two major classes of words mentioned in the text?",
-        "answer": "Closed v Open"
-    },
-    {
-        "question": "Why is Part of Speech Tagging important in natural language processing tasks?",
-        "answer": "Part of Speech Tagging can be useful for tasks such as syntactic parsing, machine translation, sentiment analysis, text-to-speech, and linguistic computational tasks. It helps in distinguishing between different parts of speech in a sentence."
-    },
-    {
-        "question": "What is the accuracy rate for POS tagging in English according to the text?",
-        "answer": "About 97%"
-    },
-    {
-        "question": "What are some of the standard algorithms used for Part of Speech tagging?",
-        "answer": "Some of the standard algorithms used for Part of Speech tagging include Constraint Grammar, Hidden Markov Models, Conditional Random Fields, Maximum Entropy Markov Models, Neural sequence models, and Large Language Models."
-    },
-    {
-        "question": "What is the task of named entity recognition (NER) and why is it important?",
-        "answer": "The task of named entity recognition (NER) is to find spans of text that constitute proper names and tag the type of the entity. NER is important for tasks such as sentiment analysis, question answering, and information extraction."
-    },
-    {
-        "question": "What does the 'B' tag represent in BIO Tagging?",
-        "answer": "The 'B' tag in BIO Tagging represents a token that begins a span."
     }
 ]
