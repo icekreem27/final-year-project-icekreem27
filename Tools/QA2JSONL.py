@@ -25,7 +25,7 @@ with open(output_file_path, 'w') as output_file:
         # Prepare the formatted structure
         formatted_data = {
             "messages": [
-                {"role": "system", "content": "You are a factual chatbot that will help students learn about the COMP2121 Data Mining module"},
+                {"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"},
                 {"role": "user", "content": item['question']},
                 {"role": "assistant", "content": item['answer']}
             ]

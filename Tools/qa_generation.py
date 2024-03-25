@@ -17,7 +17,7 @@ def clean_text(text):
     cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
     return cleaned_text
 
-def spacy_text_splitter(text, chunk_size=400):
+def spacy_text_splitter(text, chunk_size=150):
     # Load the spaCy model
     nlp = spacy.load("en_core_web_sm")
     
@@ -61,7 +61,7 @@ warnings.filterwarnings("ignore", category=LangChainDeprecationWarning)
 
 
 # Set the chat model using LangChain's OpenAI integration
-chat = ChatOpenAI(temperature=0)
+chat = ChatOpenAI(temperature=0.6)
 
 # Specify the folder path containing your text files
 folder_path = "Data Mining files/pptx_txt_files"

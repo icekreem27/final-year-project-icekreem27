@@ -2,10 +2,10 @@
 
 from openai import OpenAI
 
-def create_file(file_path, purpose="fine-tune"):
+def create_file(file_path):
     response = client.files.create(
         file=open(file_path, "rb"),
-        purpose=purpose
+        purpose="fine-tune"
     )
     
     file_id = response.id
@@ -17,7 +17,8 @@ def create_fine_tune(training_file_name, validation_file_name):
         validation_file=validation_file_name,
         model="gpt-3.5-turbo",
         hyperparameters={
-            "n_epochs": 10
+            "n_epochs":2,
+            "learning_rate_multiplier":0.2
         }
     )
 
