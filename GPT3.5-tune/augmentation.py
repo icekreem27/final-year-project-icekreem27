@@ -1,17 +1,17 @@
 import json
 import nltk
 import random
-import time
 from nltk.corpus import wordnet as wn
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
-from random import choice, sample
-from deep_translator import GoogleTranslator
 from tqdm import tqdm
+import language_tool_python
+from deep_translator import GoogleTranslator
+
 
 # Ensure necessary NLTK data is downloaded
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
 
 def get_wordnet_pos(treebank_tag):
     """Converts treebank POS tags to WordNet POS tags."""
@@ -41,53 +41,40 @@ def synonym_replacement(sentence, n=3):
     words = word_tokenize(sentence)
     tagged_words = pos_tag(words)
     
-    # Select words that are alphanumeric and have a valid WordNet POS tag
     valid_words_indices = [(index, (word, get_wordnet_pos(pos))) for index, (word, pos) in enumerate(tagged_words) if word.isalnum() and get_wordnet_pos(pos)]
     if not valid_words_indices:
         return sentence  # no valid words to replace
     
-    # Randomly pick words to replace
-    replace_candidates_indices = sample(valid_words_indices, min(n, len(valid_words_indices)))
+    replace_candidates_indices = random.sample(valid_words_indices, min(n, len(valid_words_indices)))
     
-    replaced_indices = []
     new_words = words[:]
     for index, (word, pos) in replace_candidates_indices:
-        if index not in replaced_indices:  # ensure word hasn't been replaced
-            synonyms = get_synonyms_pos(word, pos)
-            if synonyms:
-                chosen_synonym = choice(list(synonyms))
-                if chosen_synonym not in new_words:  # Avoid repetition of words
-                    new_words[index] = chosen_synonym
-                    replaced_indices.append(index)
+        synonyms = get_synonyms_pos(word, pos)
+        if synonyms:
+            new_words[index] = random.choice(list(synonyms))
     
-    return ' '.join(new_words)
+    return ' '.join(new_words).replace(" ,", ",").replace(" .", ".").replace(" !", "!").replace(" ?", "?")
 
 
 def back_translation(sentence, src_lang='en', intermediate_langs=['fr', 'de', 'es']):
     """Perform back-translation on the sentence through a randomly selected intermediate language."""
-    # Select a random language
     intermediate_lang = random.choice(intermediate_langs)
     
-    max_retries = 3  # Maximum number of retries
-    retry_delay = 10  # Time to wait between retries
-    
-    for attempt in range(max_retries):
-        try:
-            # Translate from source to intermediate language
-            translated_to_intermediate = GoogleTranslator(source='auto', target=intermediate_lang).translate(sentence)
-            # Translate back to source language
-            back_translated = GoogleTranslator(source='auto', target=src_lang).translate(translated_to_intermediate)
-            return back_translated
-        except Exception as e:
-            if attempt < max_retries - 1:
-                print(f"Translation failed, retrying... (Attempt {attempt + 1}/{max_retries})")
-                time.sleep(retry_delay)
-            else:
-                print(f"Translation failed after {max_retries} attempts. Error: {e}")
-                return sentence  # return the original sentence
+    try:
+        translated_to_intermediate = GoogleTranslator(source='auto', target=intermediate_lang).translate(sentence)
+        back_translated = GoogleTranslator(source='auto', target=src_lang).translate(translated_to_intermediate)
+        return back_translated
+    except Exception as e:
+        return sentence
 
-    return sentence
-
+def correct_grammar(sentences):
+    tool = language_tool_python.LanguageTool('en-US')
+    corrected_sentences = []
+    for sentence in sentences:
+        matches = tool.check(sentence)
+        corrected_sentence = language_tool_python.utils.correct(sentence, matches)
+        corrected_sentences.append(corrected_sentence)
+    return corrected_sentences
 
 def augment_data(jsonl_file_path, output_file_path):
     """Augment a dataset with synonym replacement and back-translation."""
@@ -99,64 +86,109 @@ def augment_data(jsonl_file_path, output_file_path):
 
     # Second pass to process the lines with a progress bar
     augmented_data = []
+    
     with open(jsonl_file_path, 'r', encoding='utf-8') as f:
-        # Initialize the progress bar with the total number of lines
+        total_lines = sum(1 for line in f)
+
+    sentence_counter = 0  # Initialize a counter to keep track of the sentence number
+
+    with open(jsonl_file_path, 'r', encoding='utf-8') as f:
         progress_bar = tqdm(f, total=total_lines, desc="Augmenting data", unit="line")
         for line in progress_bar:
             data = json.loads(line)
-            # Extracts questions and answers
             question = data['messages'][1]['content']
             answer = data['messages'][2]['content']
+
+            # Alternate augmentation method based on sentence_counter
+            if sentence_counter % 2 == 0:  # Even - Synonym Replacement
+                question_aug = correct_grammar(synonym_replacement(question))
+                answer_aug = correct_grammar(synonym_replacement(answer))
+            else:  # Odd - Back Translation
+                question_aug = correct_grammar(back_translation(question))
+                answer_aug = correct_grammar(back_translation(answer))
+                
+                # Check for exact matches with the original before adding
+                if question_aug == question:
+                    question_aug = None
+                if answer_aug == answer:
+                    answer_aug = None
             
-            # Performs synonym replacement and back-translation
-            syn_question = synonym_replacement(question)
-            syn_answer = synonym_replacement(answer)
-            bt_question = back_translation(question)
-            bt_answer = back_translation(answer)
+            # Only add augmented pairs if they're not exact matches
+            if question_aug and answer_aug:
+                augmented_data.append({"messages": [{"role": "system", "content": data['messages'][0]['content']}, {"role": "user", "content": question_aug}, {"role": "assistant", "content": answer_aug}]})
             
-            # Appends original and augmented data to the dataset
-            augmented_data.append(data)  # Original data
-            augmented_data.append({"messages": [{"role": "system", "content": "You are a factual chatbot that will help students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": syn_question}, {"role": "assistant", "content": syn_answer}]})
-            
-            # Checks if back translated sentence is the same as orignal
-            if bt_question != question or bt_answer != answer:
-                augmented_data.append({"messages": [{"role": "system", "content": "You are a factual chatbot that will help students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": bt_question}, {"role": "assistant", "content": bt_answer}]})
+            sentence_counter += 1
     
     # Writes augmented data to file
     with open(output_file_path, 'w', encoding='utf-8') as f_out:
         for item in tqdm(augmented_data, desc="Writing data", unit="item"):
             f_out.write(json.dumps(item) + '\n')
 
-def split_data(full_dataset_path, training_file_path, validation_file_path, validation_split=0.2): # 80/20 split
-    """Split the dataset into training and validation sets."""
-    # Loads the dataset and shuffles it
-    # Avoids removing certain units alltogether
-    with open(full_dataset_path, 'r', encoding='utf-8') as f:
-        augmented_data = [json.loads(line) for line in f]
+def process_data(data, method):
+    if method == "synonym_replacement":
+        return synonym_replacement(data)
+    elif method == "back_translation":
+        return back_translation(data)
+    else:
+        raise ValueError("Unknown method")
     
-    random.shuffle(augmented_data)
-    # Calculates the size of the validation set
-    validation_size = int(len(augmented_data) * validation_split)
-    # Splits the data
-    validation_data = augmented_data[:validation_size]
-    training_data = augmented_data[validation_size:]
     
-    # Writes the training and validation data to separate files
-    with open(training_file_path, 'w', encoding='utf-8') as f_out:
-        for item in tqdm(training_data, desc="Writing training data", unit="item"):
-            f_out.write(json.dumps(item) + '\n')
-    
-    with open(validation_file_path, 'w', encoding='utf-8') as f_val:
-        for item in tqdm(validation_data, desc="Writing validation data", unit="item"):
-            f_val.write(json.dumps(item) + '\n')
+def augment_and_split_data(input_path, train_path, val_path, val_split=0.2):
+    """Augment data and split into training and validation sets."""
+    with open(input_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
 
-# Defines file paths for input and output
-jsonl_file_path = 'Datasets/QA_Pairs/QA_dataset.jsonl'
+    augmented_lines = []
+    for line in tqdm(lines, desc="Augmenting"):
+        data = json.loads(line)
+        question = data['messages'][1]['content']
+        answer = data['messages'][2]['content']
 
-full_dataset_path = 'Datasets/Augmented/full_dataset.jsonl'
-training_file_path = 'Datasets/Augmented/training_dataset.jsonl'
-validation_file_path = 'Datasets/Augmented/validation_dataset.jsonl'
+        # Apply augmentation methods alternately
+        if len(augmented_lines) % 2 == 0:
+            method = "synonym_replacement"
+        else:
+            method = "back_translation"
+        
+        question_aug = process_data(question, method)
+        answer_aug  = process_data(answer, method)
 
-# Executes data augmentation and splits the dataset
-augment_data(jsonl_file_path, full_dataset_path)
-split_data(full_dataset_path, training_file_path, validation_file_path)
+        # Correct grammar in batches could be implemented here if necessary
+        # For simplicity, we're correcting them individually in this example
+        question_aug = correct_grammar([question_aug])[0]
+        answer_aug = correct_grammar([answer_aug])[0]
+
+        augmented_data = {
+            "messages": [
+                {"role": "system", "content": data['messages'][0]['content']},
+                {"role": "user", "content": question_aug},
+                {"role": "assistant", "content": answer_aug}
+            ]
+        }
+
+        augmented_lines.append(json.dumps(augmented_data))
+
+    # Split data
+    random.shuffle(augmented_lines)
+    split_index = int(len(augmented_lines) * (1 - val_split))
+
+    training_data = augmented_lines[:split_index]
+    validation_data = augmented_lines[split_index:]
+
+    # Write training and validation data to separate files
+    with open(train_path, 'w', encoding='utf-8') as f_train:
+        f_train.write('\n'.join(training_data))
+
+    with open(val_path, 'w', encoding='utf-8') as f_val:
+        f_val.write('\n'.join(validation_data))
+
+
+# Set file paths for input and output
+input_path = 'Datasets/QA_Pairs/QA_dataset.jsonl'
+train_path = 'Datasets/Augmented/training_dataset.jsonl'
+val_path = 'Datasets/Augmented/validation_dataset.jsonl'
+
+augment_and_split_data(input_path, train_path, val_path)
+
+# will train the model on the full dataset
+# then the validation file would be the second time augmented validation_dataset
