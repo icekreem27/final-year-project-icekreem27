@@ -15,7 +15,7 @@ BATCH_SIZE = 1000
 # Initialize the OpenAI client for API requests
 client = OpenAI()
 
-def split_into_chunks(text: str, max_tokens: int = MAX_CHUNK_TOKENS) -> List[str]:
+def split_into_chunks(text: str, max_tokens: int = MAX_CHUNK_TOKENS):
     """Splits a text into chunks of specified maximum token length."""
     tokens = text.split()
     for i in range(0, len(tokens), max_tokens):
