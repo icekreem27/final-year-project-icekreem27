@@ -16,9 +16,9 @@ def create_fine_tune(training_file_name, validation_file_name):
         training_file=training_file_name, 
         validation_file=validation_file_name,
         model="gpt-3.5-turbo",
+        suffix="FullDataset-0.25LR",
         hyperparameters={
-            "n_epochs":2,
-            "learning_rate_multiplier":0.2
+            "learning_rate_multiplier":0.25
         }
     )
 
@@ -26,7 +26,7 @@ def create_fine_tune(training_file_name, validation_file_name):
 client = OpenAI()
 
 # File paths for the training and validation datasets
-training_file_path = "Datasets/Augmented/training_dataset.jsonl"
+training_file_path = "Datasets/Augmented/full_dataset.jsonl"
 validation_file_path = "Datasets/Augmented/validation_dataset.jsonl" 
 
 # Upload the training file to OpenAI
