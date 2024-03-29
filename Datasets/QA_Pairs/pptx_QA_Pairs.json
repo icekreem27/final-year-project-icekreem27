@@ -1,131 +1,255 @@
 [
     {
-        "question": "What is the focus of Unit 1, part 1.1 in the module?",
-        "answer": "The focus of Unit 1, part 1.1 is on the background and practical applications of corpus linguistics and text analytics."
+        "question": "What is the title of the text recommended for Unit 1, part 1.1 of the module?",
+        "answer": "The language machine"
     },
     {
         "question": "What topics are covered in Week 5 of the module on text analytics?",
         "answer": "Machine Translation, Information Extraction, and Python tools for text analytics"
     },
     {
-        "question": "What is the title of the book by Witten, Frank, Hall, and Pal that is mentioned in the lecture?",
-        "answer": "Data Mining: Practical machine learning tools and techniques"
+        "question": "Which textbook is recommended for Speech and Language Processing?",
+        "answer": "Speech and Language Processing, 3rd edition by Pearson"
     },
     {
-        "question": "What are the six phases of the CRISP-DM modelling process in the context of Data Mining?",
-        "answer": "The six phases of the CRISP-DM modelling process in Data Mining are: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, and Deployment."
+        "question": "According to the lecture material, what is the focus of Machine Learning and Data Mining?",
+        "answer": "Machine Learning focuses on ML algorithms and optimal accuracy, while Data Mining focuses on applied ML as part of a toolkit to tackle practical problems."
     },
     {
-        "question": "What are some of the academic disciplines highlighted in the book regarding speech and language technology?",
-        "answer": "Some of the academic disciplines highlighted in the book include Linguistics, Phonetics, Lexicography, and Syntax."
+        "question": "What are some of the aspects covered in the survey of speech and language technology provided in the book?",
+        "answer": "The aspects covered in the survey include histories and academic disciplines contributing to development, components and technologies, possible pitfalls, main developers, current and potential uses, predicted developments, and likely scenarios for the future impact of the language machine."
     },
     {
-        "question": "What are some key topics covered in the lecture on Information Retrieval?",
-        "answer": "Some key topics covered in the lecture on Information Retrieval include Google search, Inverted file for efficient match, Boolean set theoretic model, weighted vector model, Worked examples, Evaluation, Query broadening to improve matching, and the problem of finding strings in a database."
+        "question": "What are some methods discussed for efficient information retrieval in the lecture?",
+        "answer": "Some methods discussed for efficient information retrieval in the lecture include the inverted file for efficient match, Boolean set theoretic model, weighted vector model, and query broadening to improve matching."
+    },
+    {
+        "question": "What is the suggested approach to storing index terms (keywords) in a relational database?",
+        "answer": "The suggested approach is to perform content analysis, extract the index terms (keywords), and hold these in a relational database."
     },
     {
         "question": "What is the purpose of the given SQL query?",
-        "answer": "The purpose of the SQL query is to find all modules that match the terms 'database', 'AI', or 'knowledge base'."
+        "answer": "The purpose of the SQL query is to find all modules that match the terms 'database', 'AI', or 'knowledge base' by performing a distinct selection on the module table with specific join conditions and term value comparisons."
     },
     {
         "question": "Why will the given SQL query not match any record?",
-        "answer": "The SQL query will not match any record because the condition 't.value = database AND t.value = AI AND t.value = knowledge base' cannot be simultaneously true for any record in the database."
+        "answer": "The SQL query will not match any record because the condition 't.value = database AND t.value = AI AND t.value = knowledge base' cannot be simultaneously true since a single value cannot be equal to all three values at the same time."
+    },
+    {
+        "question": "What is the CHEAT approach in text analytics?",
+        "answer": "The CHEAT approach in text analytics stands for Combinatory Hybrid Elementary Analysis of Text."
+    },
+    {
+        "question": "What is NLTK and what is its role in text analytics?",
+        "answer": "NLTK stands for Natural Language Toolkit and it is a leading platform for building Python programs to work with human language data in text analytics."
+    },
+    {
+        "question": "What are some of the features provided by the text processing libraries mentioned in the lecture segment?",
+        "answer": "The text processing libraries mentioned in the lecture segment provide interfaces to corpora and lexical resources, classification, tokenization, stemming, tagging, parsing, and semantic reasoning."
+    },
+    {
+        "question": "What are some of the Python NLP tools mentioned in the lecture segment?",
+        "answer": "Some of the Python NLP tools mentioned in the lecture segment are NLTK (Natural Language Toolkit), SpaCy, and Gensim."
     },
     {
         "question": "What is the main difference between Information Extraction (IE) and Information Retrieval (IR)?",
-        "answer": "The main difference is that IR pulls documents from large text collections in response to specific keywords or queries, while IE pulls facts and structured information (Named Entities and Relations) from the content of large text collections."
+        "answer": "Information Extraction (IE) extracts specific information such as Named Entities and Relations from text, while Information Retrieval (IR) pulls documents from large text collections in response to specific keywords or queries."
     },
     {
-        "question": "When would you use Information Extraction (IE)?",
-        "answer": "Information Extraction (IE) would be used when you need to extract knowledge at a deeper level than Information Retrieval (IR), such as constructing a database through IE and linking it back to the documents to provide a valuable alternative search tool."
+        "question": "What is the purpose of Information Extraction (IE) in analysing large text collections?",
+        "answer": "IE pulls facts and structured information (Named Entities and Relations) from the content of large text collections."
     },
     {
-        "question": "What is the aim of the HaSIE application mentioned in the lecture segment?",
-        "answer": "The aim of the HaSIE application is to find out how companies report about health and safety information."
+        "question": "What places on the East Coast of the US have had cases of West Nile Virus?",
+        "answer": "The places on the East Coast of the US that have had cases of West Nile Virus are not specified in the given text."
+    },
+    {
+        "question": "What is the difference between Information Extraction (IE) and Information Retrieval (IR)?",
+        "answer": "IE returns information in a structured way at a deeper level, while IR returns documents containing the relevant information somewhere."
+    },
+    {
+        "question": "When would you use IE?",
+        "answer": "IE would be used when results are not always accurate, but can still be valuable if linked back to the original text."
+    },
+    {
+        "question": "What is the aim of the HaSIE application mentioned in the text?",
+        "answer": "The aim of the HaSIE application is to find out how companies report about health and safety information, including details such as the number of staff who died or had accidents in the last year."
+    },
+    {
+        "question": "Who is responsible for health and safety in the workplace?",
+        "answer": "There are designated individuals responsible for health and safety in the workplace."
     },
     {
         "question": "What is Named Entity Recognition?",
-        "answer": "Named Entity Recognition is a process where a system identifies relevant sections of each document, pulls out sentences about specific entities, such as health and safety issues, and populates a database with this information."
+        "answer": "Named Entity Recognition is a system that identifies relevant sections of each document, pulls out sentences about specific issues, and populates a database with the extracted information."
     },
     {
         "question": "Why is Named Entity Recognition (NER) important?",
         "answer": "NER provides a foundation from which to build more complex Information Extraction (IE) systems. Relations between Named Entities (NEs) can provide tracking, ontological information, and scenario building."
     },
     {
-        "question": "What are some examples of ambiguity in Named Entity (NE) types mentioned in the lecture?",
-        "answer": "Some examples of ambiguity in NE types mentioned are: John Smith (company vs. person), June (person vs. month), Washington (person vs. location), and 1945 (date vs. time)."
+        "question": "What are some examples of ambiguity in Named Entity types?",
+        "answer": "Some examples of ambiguity in Named Entity types include John Smith (company vs. person), June (person vs. month), Washington (person vs. location), and 1945 (date vs. time)."
+    },
+    {
+        "question": "What is the baseline system that recognises only entities stored in its lists called?",
+        "answer": "List lookup approach"
     },
     {
         "question": "What are some advantages and disadvantages of the shallow parsing approach?",
-        "answer": "Advantages include being simple, fast, language independent, and easy to retarget by creating new lists. Disadvantages include the collection and maintenance of lists, inability to deal with name variants, and inability to resolve ambiguity."
+        "answer": "Advantages of the shallow parsing approach include simplicity, speed, language independence, and ease of retargeting by creating new lists. Disadvantages include the collection and maintenance of lists, inability to handle name variants, and inability to resolve ambiguity."
+    },
+    {
+        "question": "What is an example of a compound word formed by combining 'Sherwood' and 'Forest'?",
+        "answer": "Sherwood Forest"
+    },
+    {
+        "question": "How can the shallow parsing approach be improved with context?",
+        "answer": "The shallow parsing approach can be improved with context by using context-based patterns to help in ambiguous cases."
+    },
+    {
+        "question": "What is the purpose of using a KWIC concordance, such as SketchEngine, in the process of identifying contextual information?",
+        "answer": "The purpose of using a KWIC concordance is to find windows of context around entities and search for repeated contextual patterns of entities."
+    },
+    {
+        "question": "What are some of the challenges involved in adapting to the Cebuano language?",
+        "answer": "Adapting to the Cebuano language involves challenges such as using the Latin script, capitalization, and having words spaced out, with few resources and little previous work done."
+    },
+    {
+        "question": "What are some of the resources and tools mentioned for processing multilingual data in the lecture segment?",
+        "answer": "Some of the resources and tools mentioned include bilingual dictionaries, annotated corpus for evaluation, Internet resources for gazetteer list collection, GATE Unicode Kit (GUK), support for defining Input Methods (IMs), and tools for semantic web."
+    },
+    {
+        "question": "What is the goal of Information Extraction in the context of the lecture?",
+        "answer": "The goal of Information Extraction is to extract Named Entities and Relations from text."
     },
     {
         "question": "What is BERT and what is it used for?",
-        "answer": "BERT is a method and toolkit from Google Labs for understanding meaning relationships between sentences, and is used in tasks which involve measuring meaning similarity between sentences."
+        "answer": "BERT is a method and toolkit from Google Labs used for understanding meaning relationships between sentences, and is used in tasks that involve measuring meaning similarity between sentences."
     },
     {
-        "question": "What are some of the challenges in Machine Translation mentioned in the lecture?",
-        "answer": "Some of the challenges in Machine Translation mentioned in the lecture include complex orthography, lexical ambiguity, morphological complexity and variation, tokenization issues, and translation divergences."
+        "question": "Who are the authors of the paper 'Proceedings of NAACL'2019 North American Chapter of the Association for Computational Linguistics'?",
+        "answer": "Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova"
     },
     {
-        "question": "Why is it important to have a parallel corpus with source and target sentences aligned for machine translation?",
-        "answer": "It is important to have a parallel corpus with source and target sentences aligned for machine translation in order to train translation models effectively by having corresponding sentences in different languages for comparison and learning."
+        "question": "What are some of the challenges in Machine Translation mentioned in the lecture segment?",
+        "answer": "Some of the challenges in Machine Translation mentioned in the lecture segment include complex orthography, lexical ambiguity, morphological complexity and variation, tokenization issues, and translation divergences."
     },
     {
-        "question": "What is GIZA++ and how is it used in statistical machine translation?",
+        "question": "What type of corpus is needed for aligning source and target sentences?",
+        "answer": "A parallel corpus."
+    },
+    {
+        "question": "What are some examples of languages that have few resources, especially non-European languages?",
+        "answer": "Some examples of languages with few resources include Bengali and Amharic."
+    },
+    {
+        "question": "In what year was the methodology arrived at?",
+        "answer": "1988"
+    },
+    {
+        "question": "What is the purpose of GIZA++ in statistical machine translation?",
         "answer": "GIZA++ is a statistical machine translation toolkit used to train word alignments."
     },
     {
         "question": "What are some advantages of Phrase-Based Statistical Machine Translation (SMT)?",
-        "answer": "Some advantages of Phrase-Based SMT include many-to-many mappings for non-compositional phrases, the use of local context for disambiguation, and the ability to handle longer learned phrases with more data."
+        "answer": "Some advantages of Phrase-Based SMT include many-to-many mappings that can handle non-compositional phrases, the ability to use local context for disambiguation, and the capability to handle interest rate and interest in different ways based on context."
     },
     {
-        "question": "What is the purpose of the Bleu Metric in automatic evaluation of machine translation?",
-        "answer": "The purpose of the Bleu Metric is to compare machine translation output against several human translations to give a standardized score that correlates highly with human evaluation."
+        "question": "Where can Artificial Intelligence experts join social media communities for networking and sharing knowledge?",
+        "answer": "Artificial Intelligence experts can join social media communities like Facebook, LinkedIn, Quora, KDnuggets, Kaggle, Weka, ICAME, ACL, SemEval, and EU-JRC communities."
     },
     {
-        "question": "Where can Artificial Intelligence experts join social media communities for networking, sharing knowledge, and getting ideas for research projects?",
-        "answer": "Artificial Intelligence experts can join social media communities like Facebook, LinkedIn, Quora, as well as communities set up by/for academics and practitioners such as KDnuggets, Kaggle, Weka, ICAME, ACL, SemEval, and EU-JRC communities."
+        "question": "Which subsidiaries are mentioned in the lecture as part of the company that is the parent organization of Facebook?",
+        "answer": "Instagram and WhatsApp"
     },
     {
-        "question": "What are some of the subsidiaries of the parent organization mentioned in the lecture?",
-        "answer": "Facebook, Instagram, WhatsApp"
+        "question": "What is the task of text classification?",
+        "answer": "The task of text classification involves categorizing text into predefined classes or categories based on its content."
     },
     {
-        "question": "What is a knowledge nugget according to the lecture material?",
-        "answer": "A knowledge nugget is a small item or piece of useful knowledge in categories of interest to the user."
+        "question": "Who were the authors of the anonymous essays trying to convince New York to ratify the U.S. Constitution in 1787-8?",
+        "answer": "Jay, Madison, Hamilton"
     },
     {
-        "question": "What platform offers a customizable Jupyter Notebooks environment, access to free GPUs, and a large repository of community published data & code?",
-        "answer": "Kaggle offers a no-setup, customizable, Jupyter Notebooks environment. Access free GPUs and a huge repository of community published data & code."
+        "question": "Based on the given text, is the review positive or negative?",
+        "answer": "Negative"
     },
     {
-        "question": "What is the purpose of the WEKA software mentioned in the lecture segment?",
-        "answer": "The purpose of WEKA is to provide a platform for knowledge analysis and is a hub for users to access downloads, textbooks, tutorials, and contribution add-ons in a more open and community-based environment."
+        "question": "What is the purpose of sentiment analysis mentioned in the lecture segment?",
+        "answer": "The purpose of sentiment analysis is to determine whether a review is positive or negative in the context of movies, products, public sentiment, and politics."
     },
     {
-        "question": "What areas of expertise are involved in the HUMAINT project?",
-        "answer": "The areas of expertise involved in the HUMAINT project include cognitive science, machine learning, human-computer interaction, and economy."
+        "question": "What is the focus of sentiment analysis?",
+        "answer": "Sentiment analysis focuses on the detection of attitudes, specifically whether the attitude of a text is positive or negative."
     },
     {
-        "question": "What method was used by Mosteller and Wallace to determine the authorship of the disputed letters in the Federalist papers?",
-        "answer": "Bayesian methods"
+        "question": "What is the Naive Bayes Classifier based on?",
+        "answer": "The Naive Bayes Classifier is based on Bayes rule and relies on a simple representation of documents known as Bag of Words."
     },
     {
-        "question": "What is the goal of probabilistic language models discussed in the lecture?",
-        "answer": "The goal is to assign a probability to a sentence."
+        "question": "What is the complexity for estimating parameters in a corpus with the given formula O(|X|n |C|)?",
+        "answer": "The complexity for estimating parameters in a corpus is O(|X|n |C|)."
+    },
+    {
+        "question": "What are the independence assumptions made in Multinomial Naive Bayes?",
+        "answer": "The independence assumptions made in Multinomial Naive Bayes are the Bag of Words assumption (where position doesn't matter) and Conditional Independence (where the feature probabilities P(xi|cj) are independent given the class c)."
+    },
+    {
+        "question": "Why does the lecturer suggest using logs when dealing with probabilities?",
+        "answer": "The lecturer suggests using logs when dealing with probabilities because by taking the log of probabilities, we can sum logs of probabilities instead of multiplying probabilities, which allows us to work in log space and simplifies calculations."
+    },
+    {
+        "question": "How does Naive Bayes classify text?",
+        "answer": "Naive Bayes classifies text by calculating the maximum of a sum of weights, which is a linear function of the inputs."
+    },
+    {
+        "question": "Can zero probabilities be conditioned away, regardless of other evidence?",
+        "answer": "No, zero probabilities cannot be conditioned away, no matter the other evidence."
+    },
+    {
+        "question": "What is the challenge with unknown words that appear in test data but not in the training data or vocabulary?",
+        "answer": "The challenge is how to handle unknown words that do not appear in the training data or vocabulary when applying Laplace (add-1) smoothing for Naive Bayes Multinomial."
+    },
+    {
+        "question": "Why do we ignore unknown words in a test document when building a model?",
+        "answer": "We ignore unknown words in a test document and do not include any probability for them because building an unknown word model does not generally help. Knowing which class has more unknown words is not generally helpful."
+    },
+    {
+        "question": "What are stop words in the context of natural language processing?",
+        "answer": "Stop words are very frequent words like 'the' and 'a' that are often ignored in text processing tasks."
+    },
+    {
+        "question": "Why do most Naive Bayes algorithms in practice use all words and don't use stopword lists?",
+        "answer": "Removing stop words doesn't usually help in improving the performance of Naive Bayes algorithms."
+    },
+    {
+        "question": "What seems to be more important than word frequency in tasks like sentiment analysis?",
+        "answer": "Word occurrence"
+    },
+    {
+        "question": "What is the difference between binary multinomial naive Bayes and Bernoulli naive Bayes?",
+        "answer": "Binary multinomial naive Bayes clips word counts at 1, while Bernoulli naive Bayes does not."
+    },
+    {
+        "question": "What preprocessing steps are involved in the Binary Multinomial Naive Bayes algorithm before computing P(wk | cj) terms?",
+        "answer": "The preprocessing steps involve removing duplicates in each document by retaining only a single instance of each word type."
+    },
+    {
+        "question": "How does negation affect sentiment classification?",
+        "answer": "Negation changes the meaning of 'like' to negative in sentiment classification."
+    },
+    {
+        "question": "What are some key topics covered in the lecture on Language Modeling?",
+        "answer": "The key topics covered in the lecture on Language Modeling include Introduction to N-grams, Estimating N-gram Probs, Evaluation and Perplexity, Generalization and zeros, and Add-one Laplace smoothing."
+    },
+    {
+        "question": "In the context of probabilistic language models, why is the probability of the sentence 'I saw a van' higher than the probability of 'eyes awe of an'?",
+        "answer": "The sentence 'I saw a van' has a higher probability because it is a more likely and coherent sequence of words compared to 'eyes awe of an' based on the language model's training data."
     },
     {
         "question": "What is the goal of probabilistic language modeling?",
-        "answer": "The goal is to compute the probability of a sentence or sequence of words."
-    },
-    {
-        "question": "How can we compute the joint probability of a sequence of words using the Chain Rule of Probability?",
-        "answer": "We can compute the joint probability of a sequence of words using the Chain Rule by multiplying the individual probabilities of each word given the previous words in the sequence."
-    },
-    {
-        "question": "Why might it be challenging to accurately predict the next word in a sentence based on the given text 'No! Too many possible sentences!'?",
-        "answer": "It might be challenging because there are too many possible combinations and variations of sentences that could follow the given text."
+        "answer": "The goal of probabilistic language modeling is to compute the probability of a sentence or sequence of words."
     },
     {
         "question": "What are the two kinds of chatbots discussed in the lecture?",
@@ -136,55 +260,259 @@
         "answer": "A mental model (PARRY) was the first system to pass the Turing Test."
     },
     {
-        "question": "What is a formal language used for specifying text strings?",
-        "answer": "Regular expressions"
+        "question": "What is the main goal of task-based dialogue agents?",
+        "answer": "The main goal of task-based dialogue agents is to help a user solve a task, such as setting a timer, making a travel reservation, playing a song, or buying a product."
     },
     {
-        "question": "What are the two kinds of errors discussed in the lecture regarding Regular Expressions?",
-        "answer": "The two kinds of errors discussed are: 1. Matching strings that should not have been matched (false positives or Type I errors) and 2. Not matching things that should have been matched (false negatives or Type II errors)."
+        "question": "What are the different pieces of information being asked for in the given text?",
+        "answer": "The different pieces of information being asked for are the destination city, departure date, departure time, and preferred airline."
     },
     {
-        "question": "What are the two antagonistic efforts involved in reducing the error rate for an application?",
-        "answer": "The two antagonistic efforts involved in reducing the error rate for an application are increasing accuracy or precision (minimizing false positives) and increasing coverage or recall (minimizing false negatives)."
+        "question": "What term is used to describe each contribution in a conversation?",
+        "answer": "Turns"
     },
     {
-        "question": "What is word embedding in the context of NLP?",
-        "answer": "Word embedding is a term used for the representation of word meaning for text analysis, typically in the form of a real-valued vector that encodes the meaning of the word such that the words that are closer in the vector space are expected to be similar in meaning."
+        "question": "What are the three types of turns that can occur in human conversation?",
+        "answer": "A turn can be a sentence, a single word, or multiple sentences."
     },
     {
-        "question": "According to the lecture, what is the meaning of 'dog' in the context of Computer Vision classification?",
-        "answer": "DOG"
+        "question": "What is the term for when a client interrupts a conversation and the human agent knows to stop talking?",
+        "answer": "Interruptions Notice A16, C17"
     },
     {
-        "question": "What is the meaning component of a word according to the lecture material?",
+        "question": "What are some examples of speech acts mentioned in the lecture segment?",
+        "answer": "Some examples of speech acts mentioned in the lecture segment are directives like 'Turn up the music!' and questions like 'What day in May do you want to travel?'"
+    },
+    {
+        "question": "According to the lecture segment, why do participants in a conversation or joint activity need to establish common ground?",
+        "answer": "Participants in a conversation or joint activity need to establish common ground in order to ground each other's utterances and ensure successful communication."
+    },
+    {
+        "question": "Why is grounding important in human-machine interaction?",
+        "answer": "Grounding is important in human-machine interaction to acknowledge that the hearer has understood, establish common ground, and ensure effective communication."
+    },
+    {
+        "question": "What field does the concept of local structure between adjacent speech acts come from?",
+        "answer": "Conversational analysis"
+    },
+    {
+        "question": "What term is used to describe the structure where one utterance is followed by a related response, such as 'Question Answer' or 'Proposal Acceptance/Rejection'?",
+        "answer": "Adjacency pairs"
+    },
+    {
+        "question": "What does the user ask the system about going to on the 5th?",
+        "answer": "The user asks the system about going to Hong Kong on the 5th."
+    },
+    {
+        "question": "What is meant by conversational initiative in a conversation?",
+        "answer": "Conversational initiative refers to the control one person has over a conversation. In some conversations, such as a reporter interviewing a chef, one person leads by asking questions and the other responds."
+    },
+    {
+        "question": "Why is mixed initiative very hard for NLP systems?",
+        "answer": "Mixed initiative is very hard for NLP systems because they often default to simpler styles that can be frustrating for humans."
+    },
+    {
+        "question": "Who developed the rule-based chatbot ELIZA?",
+        "answer": "Weizenbaum (1966)"
+    },
+    {
+        "question": "In the given text, what does the speaker mention about their boyfriend?",
+        "answer": "The speaker mentions that their boyfriend made them come to the place because they are often depressed."
+    },
+    {
+        "question": "What is the speaker's response when asked why they don't argue with the listener?",
+        "answer": "The speaker responds that the listener is afraid of them."
+    },
+    {
+        "question": "Who is the author of the quote 'DOES THAT HAVE ANYTHING TO DO WITH THE FACT THAT YOUR BOYFRIEND MADE YOU COME HERE'?",
+        "answer": "Joseph Weizenbaum"
+    },
+    {
+        "question": "What are some of the topics covered in the section 'Basic Text Processing'?",
+        "answer": "Some of the topics covered in the section 'Basic Text Processing' include Regular Expressions, Substitutions, ELIZA, Words and Corpora, Word tokenization, Byte Pair Encoding, and Word Normalization."
+    },
+    {
+        "question": "What symbol is used for disjunction in regular expressions?",
+        "answer": "The pipe symbol, |, is used for disjunction in regular expressions."
+    },
+    {
+        "question": "What is the purpose of using anchors ^ and $ in regular expressions?",
+        "answer": "Anchors ^ and $ are used to specify the start and end of a line, respectively, in regular expressions."
+    },
+    {
+        "question": "What are the two kinds of errors discussed in the lecture related to matching strings?",
+        "answer": "The two kinds of errors discussed are: 1) Matching strings that should not have been matched (e.g. there, then, other) - False positives (Type I errors) and 2) Not matching things that should have been matched (e.g. The) - False negatives (Type II errors)"
+    },
+    {
+        "question": "What are the two antagonistic efforts involved in reducing error rate for an application in NLP?",
+        "answer": "The two antagonistic efforts involved are increasing accuracy or precision (minimizing false positives) and increasing coverage or recall (minimizing false negatives)."
+    },
+    {
+        "question": "What is one way regular expressions are still used even with the use of machine learning classifiers?",
+        "answer": "Regular expressions are still used for pre-processing, or as features in the classifiers."
+    },
+    {
+        "question": "What is the purpose of lookahead assertions in regular expressions?",
+        "answer": "Lookahead assertions in regular expressions are true if the specified pattern matches the text, but they are zero-width and do not advance the character pointer."
+    },
+    {
+        "question": "What does the regular expression /(?! Volcano)[A-Za-z]+/ match?",
+        "answer": "Any single word at the beginning of a line that does not start with 'Volcano'."
+    },
+    {
+        "question": "How does the program mentioned in the text use pattern matching?",
+        "answer": "The program uses pattern matching to match phrases like 'I need X' and translates them into questions like 'What would it mean to you if you got X?'"
+    },
+    {
+        "question": "Why did the boyfriend make the person come to the specified location?",
+        "answer": "He says the person is depressed much of the time."
+    },
+    {
+        "question": "How does ELIZA respond to the statement 'I am sad'?",
+        "answer": "I AM SORRY TO HEAR YOU ARE sad"
+    },
+    {
+        "question": "What is the difference between a lemma and a wordform in the context of language processing?",
+        "answer": "A lemma is the same stem, part of speech, and rough word sense of a word, while a wordform refers to the full inflected surface form of a word. For example, 'cat' and 'cats' have the same lemma but different wordforms."
+    },
+    {
+        "question": "What is the difference between a Type and a Token in the context of vocabulary?",
+        "answer": "A Type is an element of the vocabulary, while a Token is an instance of that type in running text."
+    },
+    {
+        "question": "What is Heaps Law also known as, and what does it suggest about the relationship between vocabulary size and the number of word tokens?",
+        "answer": "Heaps Law is also known as Herdan's Law. It suggests that the vocabulary size grows with the square root of the number of word tokens, where often 0.67 < < 0.75."
+    },
+    {
+        "question": "What are some dimensions along which corpora can vary?",
+        "answer": "Corpora can vary along dimensions such as language, variety (e.g. African American Language varieties), writer(s), time, and function."
+    },
+    {
+        "question": "What is an example of code switching mentioned in the lecture segment?",
+        "answer": "An example of code switching mentioned in the lecture segment is switching between Spanish and English, as shown in the tweet: 'Por primera vez veo a @username actually being hateful!'"
+    },
+    {
+        "question": "What is the genre of the text mentioned in the lecture segment?",
+        "answer": "The genre of the text is newswire, fiction, scientific articles, Wikipedia."
+    },
+    {
+        "question": "What are some of the key aspects covered in the text regarding the collection process of the data?",
+        "answer": "The text discusses the situation in which it was written, the sampling process for a subsample, consent, pre-processing, annotation process, language variety, and demographics."
+    },
+    {
+        "question": "What are the two main components of text normalization mentioned in the lecture?",
+        "answer": "The two main components of text normalization mentioned in the lecture are tokenizing (segmenting) words and normalizing word formats."
+    },
+    {
+        "question": "What Unix command can be used for space-based tokenization?",
+        "answer": "The 'tr' command"
+    },
+    {
+        "question": "What is word embedding used for in NLP?",
+        "answer": "Word embedding is used for the representation of word meaning for text analysis, typically in the form of a real-valued vector that encodes the meaning of the word."
+    },
+    {
+        "question": "What is the issue with the text classification methods discussed so far?",
+        "answer": "The issue is that words are just strings or indices in a vocabulary list, which is not very satisfactory."
+    },
+    {
+        "question": "What is the purpose of a theory of word meaning according to the lecture?",
+        "answer": "A theory of word meaning should fulfill certain desiderata, which are criteria that outline what it should achieve for us."
+    },
+    {
+        "question": "What is the meaning component of a word?",
         "answer": "A sense or concept"
     },
     {
-        "question": "What tool is introduced in the video for corpus linguistics?",
+        "question": "What is the lecturer emphasizing about the relationship between words like 'couch/sofa' and 'automobile/car'?",
+        "answer": "The lecturer is emphasizing that there are probably no examples of perfect synonymy, as many aspects of meaning can still differ based on politeness, slang, register, genre, etc."
+    },
+    {
+        "question": "According to Abbe Gabriel Girard, what is the Linguistic Principle of Contrast?",
+        "answer": "Difference in form leads to difference in meaning."
+    },
+    {
+        "question": "What dataset is mentioned in the lecture segment?",
+        "answer": "SimLex-999 dataset (Hill et al.)"
+    },
+    {
+        "question": "What is another term for 'word relatedness'?",
+        "answer": "Word association"
+    },
+    {
+        "question": "What is the term used to describe senses that are opposites with respect to only one feature of meaning?",
+        "answer": "Antonymy"
+    },
+    {
+        "question": "What are some examples of antonyms given in the lecture?",
+        "answer": "Some examples of antonyms given in the lecture are dark/light, short/long, fast/slow, rise/fall, hot/cold, up/down, and in/out."
+    },
+    {
+        "question": "What are the three affective dimensions that words seem to vary along, according to Osgood et al.?",
+        "answer": "The three affective dimensions that words seem to vary along are valence, arousal, and dominance."
+    },
+    {
+        "question": "What are some of the relations that concepts or word senses can have with each other, as mentioned in the lecture segment?",
+        "answer": "Synonymy, Antonymy, Similarity, Relatedness, Connotation"
+    },
+    {
+        "question": "What is the standard model introduced in language processing for handling many goals?",
+        "answer": "Vector semantics"
+    },
+    {
+        "question": "According to Zellig Harris (1954), when do we say that two words are synonyms?",
+        "answer": "If A and B have almost identical environments."
+    },
+    {
+        "question": "What does the recent English borrowing 'ongchoi' mean?",
+        "answer": "Ongchoi refers to a type of vegetable that is delicious when sautéed with garlic."
+    },
+    {
+        "question": "What tool will you be introduced to in this video for corpus linguistics?",
         "answer": "SketchEngine web tool"
     },
     {
-        "question": "What are some of the functions of SketchEngine mentioned in the lecture segment?",
-        "answer": "Some of the functions of SketchEngine mentioned in the lecture segment include Word sketch summary, Concordance examples, Distributional Thesaurus, Parallel corpus creation, and Part-of-Speech tagging."
+        "question": "How long has it been since the SketchEngine was introduced?",
+        "answer": "It has been ten years since the SketchEngine was introduced."
     },
     {
-        "question": "What is the purpose of the SketchEngine web tool mentioned in the lecture segment?",
-        "answer": "The SketchEngine web tool is used for corpus linguistics."
+        "question": "What are some of the functions provided by SketchEngine for analyzing text data?",
+        "answer": "Some of the functions provided by SketchEngine for analyzing text data include Word sketch summary, Concordance examples, Distributional Thesaurus, Parallel corpus, WebBootCat, and Terminology."
     },
     {
-        "question": "What are word embeddings and what is their significance in natural language processing?",
-        "answer": "Word embeddings are numerical vector representations of word meanings. They are significant in natural language processing as they capture semantic relationships between words and are used in various NLP tasks such as language modeling, document classification, and machine translation."
+        "question": "What is the focus of the papers mentioned in the text?",
+        "answer": "The focus of the papers is on learning word embeddings from corpora and the impacts of scaling from small data to large real-world data-sets."
     },
     {
-        "question": "Where can you find word2vec code and the associated research paper?",
-        "answer": "You can find the word2vec code on Google code archive at code.google.com/archive/p/word2vec/ and the research paper in the document titled Efficient Estimation of Word Representations in Vector Space by Mikolov."
+        "question": "Which paper discusses scaling to very large corpora for natural language disambiguation in 2013?",
+        "answer": "T Mikolov et al.'s paper titled 'Scaling to very very large corpora for natural language disambiguation banko01largeCorpora.pdf' in 2013."
     },
     {
-        "question": "What are the key components of an AI research paper, as mentioned in the lecture segment?",
+        "question": "Where can one find the word2vec code for efficient estimation of word representations in vector space?",
+        "answer": "Google code archive at code.google.com/archive/p/word2vec/"
+    },
+    {
+        "question": "What are some reasons for reading AI research papers according to the lecture?",
+        "answer": "According to the lecture, one reason for reading AI research papers is to learn about AI research and to get ideas for a research proposal."
+    },
+    {
+        "question": "What are the key components of an AI research paper, as mentioned in the lecture?",
         "answer": "The key components of an AI research paper include research aims & objectives, background related research, methods, programme of research work, conclusions, and results."
     },
     {
-        "question": "Who is attributed with the classification of 8 parts of speech in the 1st century BCE?",
+        "question": "According to the lecture, who is attributed with the classification of 8 parts of speech in the 1st century BCE?",
         "answer": "Dionysius Thrax of Alexandria"
+    },
+    {
+        "question": "What are the two major classes of words discussed in the lecture and what are the characteristics of each?",
+        "answer": "The two major classes of words are Closed and Open. Closed class words consist of function words with fixed membership, such as determiners, pronouns, and prepositions. Open class words consist of content words like nouns, verbs, adjectives, adverbs, and interjections."
+    },
+    {
+        "question": "What does POS stand for in the context of Part-of-Speech Tagging?",
+        "answer": "POS stands for Part-of-Speech."
+    },
+    {
+        "question": "What are some examples of tagsets for English Part of Speech tagging?",
+        "answer": "Some examples of tagsets for English Part of Speech tagging include Brown, LOB, ICE, Penn, and AMALGAM."
     }
 ]
