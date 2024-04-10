@@ -1,0 +1,30 @@
+Loading embeddings from Datasets/embeddings.csv...
+Average Metrics:
+Rouge: 0.7540
+Bleu: 0.7834
+Meteor: 0.6724
+Bertscore: 0.9606
+F1_score_result: 0.8246
+Semantic_similarity_score: 0.9724
+
+
+
+Compared to the Initial RAG Model:
+Rouge: From 0.5890 to 0.7540, indicating improved summarization or content matching capabilities.
+Bleu: From 0.4491 to 0.7834, showing a significant increase in translation accuracy or text generation quality.
+Meteor: From 0.5138 to 0.6724, suggesting better handling of synonyms, stemming, and paraphrasing.
+BERTScore: From 0.9294 to 0.9606, indicating a higher degree of semantic similarity with the reference texts.
+F1 Score: From 0.5965 to 0.8246, reflecting a substantial improvement in model precision and recall.
+Semantic Similarity Score: From 0.8361 to 0.9724, demonstrating a significantly enhanced ability to generate text with meanings closely aligned to the reference texts.
+
+Compared to the Non-RAG Model:
+All metrics show substantial improvements, reflecting the impact of incorporating external knowledge via RAG and the refinements made through fine-tuning. This model far outperforms the non-RAG model in all aspects, confirming the value of both retrieval-augmented strategies and targeted fine-tuning in enhancing model performance.
+The final model, leveraging both RAG and fine-tuning, shows markedly improved performance across all metrics compared to the earlier versions, suggesting it benefits greatly from both the broad, contextually rich base provided by RAG and the specific optimizations introduced through fine-tuning. This balance between leveraging external knowledge and optimizing for specific tasks likely accounts for its superior performance.
+
+
+These improvements indicate that the combination of RAG and fine-tuning:
+
+Enhances the model's ability to generate relevant, accurate text by leveraging both a vast external corpus and task-specific nuances.
+Increases the model's understanding and replication of complex language patterns, leading to outputs that more closely resemble high-quality human-generated text.
+Significantly boosts the model's performance in accurately capturing the essence of the target texts, as evidenced by the high scores across different metrics.
+In summary, this comprehensive approach of using RAG along with fine-tuning represents a robust method for achieving high performance in complex NLP tasks, striking an effective balance between breadth of knowledge and task-specific accuracy.

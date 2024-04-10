@@ -1,0 +1,27 @@
+Loading embeddings from Datasets/embeddings.csv...
+Average Metrics:
+Rouge: 0.5890
+Bleu: 0.4491
+Meteor: 0.5138
+Bertscore: 0.9294
+F1_score_result: 0.5965
+Semantic_similarity_score: 0.8361
+
+
+Rouge
+Rouge stands for Recall-Oriented Understudy for Gisting Evaluation. It's a set of metrics used for evaluating automatic summarization of texts as well as machine translation. It works by comparing an automatically produced summary or translation against a set of reference summaries (usually human-generated). The ROUGE score reported is likely ROUGE-L, which focuses on the longest common subsequence between the generated text and the reference text. A score of 0.5890 means that, on average, the model's output has a fair amount of overlap with the reference texts, but there's significant room for improvement, especially in capturing the entirety of the reference content.
+
+Bleu
+BLEU (Bilingual Evaluation Understudy) is a metric for evaluating a machine-translated text against one or more reference translations. BLEU scores are calculated based on the precision of n-grams between the generated text and the reference text(s), then adjusted by a brevity penalty to prevent short translations from being overvalued. A score of 0.4491 suggests that the model's translations or generated text match the reference texts to some extent but might lack in fluency or accuracy compared to human translations.
+
+Meteor
+METEOR (Metric for Evaluation of Translation with Explicit ORdering) is another metric for the evaluation of machine translation. Unlike BLEU, METEOR also considers synonyms, stemming, and paraphrases, providing a more nuanced assessment of translation quality. It also aligns the words between the generated and reference texts to compute a score based on their harmonic mean. A METEOR score of 0.5138 indicates a moderate level of alignment with the reference translations, suggesting the model captures meaning well but could still be improved for higher precision and recall.
+
+BERTScore
+BERTScore leverages the contextual embeddings from models like BERT to compare the semantic similarity between words in the generated text and the reference text. It looks at the cosine similarity between the embeddings of words to evaluate the quality of text generation. A high BERTScore of 0.9294 suggests that the generated text is semantically very similar to the reference text, which is a strong indicator of the model's performance in capturing the meaning of the target texts.
+
+F1 Score
+The F1 Score is a measure of a model's accuracy that considers both precision (the number of correct positive results divided by the number of all positive results) and recall (the number of correct positive results divided by the number of positives that should have been identified). The F1 Score is the harmonic mean of precision and recall. An F1 Score of 0.5965 is a balanced metric that suggests the model has a moderate level of accuracy in identifying relevant information, but there is room for improvement in both precision and recall.
+
+Semantic Similarity Score
+The Semantic Similarity Score measures how semantically similar the generated text is to the reference text(s). This can be calculated using various methods, including but not limited to cosine similarity between sentence embeddings. A score of 0.8361 indicates that, on average, the model produces text with a high degree of semantic similarity to the reference texts, which is a good sign of the model's ability to understand and generate relevant content.
