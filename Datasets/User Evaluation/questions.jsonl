@@ -1,0 +1,20 @@
+// Easy questions
+// general questions about course content
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "What is the similarity between named entity recognition and information retrieval?"}, {"role": "assistant", "content": "Both named entity recognition and information retrieval involve extracting relevant information from a text based on specific criteria, such as identifying named entities or matching keywords."}]}
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "What is named entity recognition?"}, {"role": "assistant", "content": "Named entity recognition is the identification of proper names and other references to entities in text and their classification into a set of categories of interest."}]}
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "Who founded Sketch Engine?"}, {"role": "assistant", "content": "Adam Kilgarriff"}]}
+
+
+// Medium Questions
+// more course specific content that may be found online
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "What is the necessary step to ensure a successful connection according to the lecture?"}, {"role": "assistant", "content": "The necessary step is to make sure that you connect via the VPN."}]}
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "What is data wrangling in the context of data mining?"}, {"role": "assistant", "content": "Data wrangling involves taking data from various different sources and getting it into the right format so that machine learning algorithms can work on it."}]}
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "Who is the Professor of Artificial Intelligence for Language in the School of Computing at Leeds University?"}, {"role": "assistant", "content": "Eric Atwell"}]}
+
+// Challenging Questions
+// lecture specific questions that cant be found online
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "How is the module structured?"}, {"role": "assistant", "content": ""}]}
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "What are the two types of chatbot architectures mentioned in the lectures?"}, {"role": "assistant", "content": "The two types of chatbot architectures mentioned are fact-finding questions and task-oriented questions."}]}
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "Tell me about the final group project."}, {"role": "assistant", "content": ""}]}
+{"messages": [{"role": "system", "content": "You are a factual chatbot that will help univserity students learn about the COMP2121 Data Mining module"}, {"role": "user", "content": "In what lecture does Eric Atwell talk about multi-word expressions?"}, {"role": "assistant", "content": "6.2"}]}
+

@@ -1,0 +1,11 @@
+participant_id,question,model
+test,What is the similarity between named entity recognition and information retrieval?,ft:gpt-3.5-turbo-0125:personal::90bpxw0O
+test,What is named entity recognition?,ft:gpt-3.5-turbo-0125:personal::90bpxw0O
+test,Who founded Sketch Engine?,gpt-3.5-turbo
+test,What is the necessary step to ensure a successful connection according to the lecture?,gpt-3.5-turbo
+test,What is data wrangling in the context of data mining?,gpt-3.5-turbo
+test,Who is the Professor of Artificial Intelligence for Language in the School of Computing at Leeds University?,ft:gpt-3.5-turbo-0125:personal::90bpxw0O
+test,How is the module structured?,ft:gpt-3.5-turbo-0125:personal::90bpxw0O
+test,What are the two types of chatbot architectures mentioned in the lectures?,gpt-3.5-turbo
+test,Tell me about the final group project.,gpt-3.5-turbo
+test,In what lecture does Eric Atwell talk about multi-word expressions?,gpt-3.5-turbo
