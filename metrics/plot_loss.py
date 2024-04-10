@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 from sympy import bottom_up
 
 # Load the dataset
-file_path = '/Users/karimabbas/Desktop/step_metrics_0.25.csv'
+file_path = '/Users/karimabbas/Downloads/step_metrics.csv'
 data = pd.read_csv(file_path)
 
 # Calculate rolling means to smooth the data
-rolling_window_size = 10  # Defines the smoothing window
+rolling_window_size = 30  # Defines the smoothing window
 data['train_loss_rolling_mean'] = data['train_loss'].rolling(window=rolling_window_size).mean()
 data['train_accuracy_rolling_mean'] = data['train_accuracy'].rolling(window=rolling_window_size).mean()
 
