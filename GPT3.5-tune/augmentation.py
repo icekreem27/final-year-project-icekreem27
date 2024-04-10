@@ -1,6 +1,5 @@
 import spacy
 import json
-import nltk
 import random
 from nltk.corpus import wordnet as wn
 from nltk.tokenize import word_tokenize
@@ -14,7 +13,7 @@ from openai import OpenAI
 client = OpenAI()
 
 # Ensure necessary NLTK data is downloaded
-nlp = spacy.load("en_core_web_sm")
+# nlp = spacy.load("en_core_web_sm")
 tool = language_tool_python.LanguageTool('en-US')
 
 def get_spacy_pos(spacy_token):
@@ -93,6 +92,8 @@ def process_data(data, method):
         return paraphrase(data)
     elif method == "gptReplace":
         return gptReplace(data)
+    elif method == "sarcasm":
+        return sarcasm(data)
     else:
         raise ValueError("Unknown method")
     
@@ -111,6 +112,21 @@ def paraphrase(sentence, model="gpt-3.5-turbo"):
         print(f"An error occurred: {e}")
         return None
     
+def sarcasm(sentence, model="gpt-3.5-turbo"):
+    try:
+        response = client.chat.completions.create(
+            model=model, # model ID
+            messages=[
+                {"role": "system", "content": "You will paraphrase the following sentence into a sarcastic statement while keeping the original meaning. Be condescending and mean."},
+                {"role": "user", "content": sentence}
+            ],
+            n=1
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
 def gptReplace(sentence, model="gpt-3.5-turbo"):
     try:
         response = client.chat.completions.create(
@@ -189,9 +205,10 @@ def augment_data_no_original(input_path, output_path):
         answer = data['messages'][2]['content']
 
         # Apply augmentation methods alternately
-        method = "gptReplace" if len(augmented_lines) % 2 == 0 else "paraphrase"
-        question_aug = process_data(question, method)
-        answer_aug = process_data(answer, method)
+        # method = "gptReplace" if len(augmented_lines) % 2 == 0 else "paraphrase"
+        # question_aug = process_data(question, method)
+        question_aug = question
+        answer_aug = process_data(answer, method="sarcasm")
 
         augmented_lines.append({
             "messages": [
@@ -256,10 +273,9 @@ full_path = 'Datasets/Augmented/full_dataset.jsonl'
 # Dataset split ratio
 split = 0.2
 
-# augment_data(input_path, full_path)
-# augment_data(full_path, full_path)
-split_data(full_path, train_path, val_path, split)
-augment_data_no_original(val_path, val_path)
+# augment_data_no_original(input_path, full_path)
+split_data(input_path, train_path, val_path, split)
+# augment_data_no_original(val_path, val_path)
 
 # will train the model on the full dataset
 # then the validation file would be the second time augmented validation_dataset

@@ -17,7 +17,7 @@ from Tools.embedding import create_embeddings, save, load_embeddings, ask
 # Initialize the OpenAI client with the API key
 # (stored as env variable)
 client = OpenAI(api_key = os.getenv('OPENAI_API_KEY'))
-
+model = "ft:gpt-3.5-turbo-0613:personal::8ukklgNe"
 # Set paths
 file_path = "Datasets/embeddings.csv"
 folder_paths = ['Data Mining files/pdf_txt_files', 'Data Mining files/pptx_txt_files']
@@ -41,5 +41,5 @@ if __name__ == "__main__":
     # Conversation loop
     while True:
         user_input = input("User> ")
-        response = ask(user_input, df)
+        response = ask(user_input, df, model)
         print("Model> ", response)
