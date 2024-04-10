@@ -29,23 +29,47 @@ def read_text_file(file_path: str) -> str:
 def generate_embeddings(text_chunks: List[str]) -> List[List[float]]:
     """Generates embeddings for a list of text chunks using the OpenAI API."""
     embeddings = []
-    for i in range(0, len(text_chunks), BATCH_SIZE):
-        batch = text_chunks[i:i+BATCH_SIZE]
+    for batch_start in range(0, len(text_chunks), BATCH_SIZE):
+        batch_end = batch_start + BATCH_SIZE
+        batch = text_chunks[batch_start:batch_end]
+        # print(f"Batch {batch_start} to {batch_end-1}")
         response = client.embeddings.create(model=EMBEDDING_MODEL, input=batch)
         batch_embeddings = [e.embedding for e in response.data]
         embeddings.extend(batch_embeddings)
     return embeddings
 
+
 def create_embeddings(folder_paths: List[str]) -> pd.DataFrame:
-    """Creates a DataFrame of text chunks and their embeddings for all text files in the specified folders."""
+    """Creates a DataFrame of text chunks, their embeddings, and the corresponding lecture names."""
+    embeddings = []
     text_chunks = []
+    lectures = []
+    
     for folder_path in folder_paths:
         for filename in os.listdir(folder_path):
             if filename.endswith(".txt"):
+                # Extract lecture name from filename
+                lecture_name = os.path.splitext(filename)[0]  # Remove the file extension to get the lecture name
                 file_path = os.path.join(folder_path, filename)
-                text_chunks.extend(list(split_into_chunks(read_text_file(file_path))))
+                with open(file_path, 'r') as file:
+                    chunk_text = file.read()
+                # Split the text into chunks and extend the text_chunks list
+                chunks = list(split_into_chunks(chunk_text))
+                text_chunks.extend(chunks)
+                # For each chunk, add the corresponding lecture name to the lectures list
+                lectures.extend([lecture_name] * len(chunks))  # Extend the list of lectures by repeating the lecture name
+
+    # Ensure embeddings are generated for all chunks
     embeddings = generate_embeddings(text_chunks)
-    return pd.DataFrame({"text": text_chunks, "embedding": embeddings})
+
+    # Check that all lists are of the same length
+    assert len(lectures) == len(text_chunks) == len(embeddings), "Lists must be of the same length"
+
+    # Create a DataFrame from the lists
+    df = pd.DataFrame({"lecture title": lectures, "text": text_chunks, "embedding": embeddings})
+    return df
+
+
 
 def save(df: pd.DataFrame, file_path: str):
     """Saves the DataFrame with embeddings to a CSV file."""
@@ -58,42 +82,50 @@ def load_embeddings(csv_file_path: str) -> pd.DataFrame:
     df['embedding'] = df['embedding'].apply(ast.literal_eval)
     return df
 
-def texts_ranked_by_relatedness(query: str, df: pd.DataFrame, top_n: int = 5) -> Tuple[List[str], List[float]]:
+def texts_ranked_by_relatedness(query: str, df: pd.DataFrame, top_n: int = 3) -> Tuple[List[str], List[str], List[float]]:
     query_embedding_response = client.embeddings.create(model=EMBEDDING_MODEL, input=query)
     query_embedding = np.array(query_embedding_response.data[0].embedding)
 
-    # Calculate relatedness scores using a list
     texts_and_relatedness = []
     for _, row in df.iterrows():
         row_embedding = np.array(row['embedding'])
-        texts_and_relatedness.append((row['text'], 1 - distance.cosine(query_embedding, row_embedding)))
+        # Include lecture title in the tuple
+        texts_and_relatedness.append((row['lecture title'], row['text'], 1 - distance.cosine(query_embedding, row_embedding)))
 
-    # Sort texts by relatedness score in descending order
-    texts_and_relatedness.sort(key=lambda x: x[1], reverse=True)
+    texts_and_relatedness.sort(key=lambda x: x[2], reverse=True)  # x[2] is the relatedness score
 
-    # Unpack texts and relatedness scores into separate lists, limited to top_n items
-    texts, relatedness_scores = zip(*texts_and_relatedness[:top_n])
+    # Unpack lecture titles, texts, and relatedness scores into separate lists, limited to top_n items
+    lecture_titles, texts, relatedness_scores = zip(*texts_and_relatedness[:top_n])
 
-    # Return texts and relatedness
-    return list(texts), list(relatedness_scores)
+    return list(lecture_titles), list(texts), list(relatedness_scores)
 
-def query_message(query: str, df: pd.DataFrame, model: str, token_budget: int) -> str:
-    """Constructs a message for GPT, incorporating relevant texts from the DataFrame."""
-    strings, _ = texts_ranked_by_relatedness(query, df)
-    message = 'Use the below lecture contents to answer the subsequent question. If the answer cannot be found in the contents, write "I could not find an answer."'
-    for string in strings:
+
+def query_message(query: str, df: pd.DataFrame, token_budget: int) -> str:
+    lecture_titles, strings, _ = texts_ranked_by_relatedness(query, df)
+    message = "Use the below lecture content to answer the question. Ensure that you mention the lecture title in your answer. Never give a response without mentioning which lecture it has come from. It is critical that you cite your source lecture title. If the answer cannot be found in the contents, write 'I could not find an answer :(' do not use your own knowledge."
+    for lecture_title, string in zip(lecture_titles, strings):
         if len(message) + len(string) + len(query) + 3 <= token_budget:
-            message += f'\n\nLecture content section:\n"""\n{string}\n"""'
+            message += f'\n\nLecture title: {lecture_title}\nLecture content:\n"""\n{string}\n"""'
         else:
             break
     return message + f"\n\nQuestion: {query}"
 
-def ask(query: str, df: pd.DataFrame, model: str = "gpt-3.5-turbo", token_budget: int = 4096 - 500, print_message: bool = False) -> str:
+
+def ask(query: str, df: pd.DataFrame, model, token_budget: int = 4096 - 500, print_message: bool = False) -> str:
     """Generates a response to a user query using a specified GPT model and a DataFrame of embeddings."""
-    message = query_message(query, df, model=model, token_budget=token_budget)
+    message = query_message(query, df, token_budget=token_budget)
     if print_message:
         print(message)
-    response = client.chat.completions.create(model=model, messages=[{"role": "system", "content": "You are a knowledgeable assistant that will help students learn about the COMP2121 Data Mining module."}, {"role": "user", "content": message}], temperature=0)
+    response = client.chat.completions.create(model=model, messages=[{"role": "system", "content": "You are a knowledgeable assistant that will help students learn about the COMP2121 Data Mining module."}, {"role": "user", "content": message}], temperature=0.5)
+    # Use regular gpt to answer the question generally
+    # if response.choices[0].message.content == "I could not find an answer :(":
+    #     response = client.chat.completions.create(model=model, messages=[{"role": "system", "content": "You are a knowledgeable assistant that will help students learn about the COMP2121 Data Mining module."}, {"role": "user", "content": query}], temperature=0)
+    return response.choices[0].message.content
+
+
+def ask_no_embeddings(query: str, model="gpt-3.5-turbo") -> str:
+    """Generates a response to a user query."""
+    response = client.chat.completions.create(model=model, messages=[{"role": "user", "content": query}], temperature=0.5)
     return response.choices[0].message.content
 
 if __name__ == "__main__":
@@ -115,5 +147,5 @@ if __name__ == "__main__":
           
     while True:
         user_input = input("User> ")
-        response = ask(user_input, df)
-        print("Model> ", response)
+        response = ask(user_input, df, model="gpt-3.5-turbo", print_message=True)
+        print("Model> ", response)        
