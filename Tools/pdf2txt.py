@@ -19,7 +19,7 @@ def convert_pdf_folder_to_txt(source_folder_path, destination_folder_path):
                     text += page.get_text()
                 
                 # Construct text file name and path in the destination folder
-                txt_filename = os.path.splitext(filename)[0] + ".txt"
+                txt_filename = os.path.splitext(filename)[0] + os.path.splitext(filename)[1] + ".txt"
                 txt_path = os.path.join(destination_folder_path, txt_filename)
                 
                 # Save the extracted text to a .txt file
@@ -29,5 +29,5 @@ def convert_pdf_folder_to_txt(source_folder_path, destination_folder_path):
 
 # Specify folder paths here
 source_folder_path = 'Data Mining files/scraped files'
-destination_folder_path = 'Data Mining files/txt_files/'
+destination_folder_path = 'Data Mining files/pdf_txt_files'
 convert_pdf_folder_to_txt(source_folder_path, destination_folder_path)

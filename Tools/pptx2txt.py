@@ -21,7 +21,7 @@ def convert_pptx_folder_to_txt(source_folder_path, destination_folder_path):
                         text += shape.text + "\n"
             
             # Construct text file name and path in the destination folder
-            txt_filename = os.path.splitext(filename)[0] + ".txt"
+            txt_filename = os.path.splitext(filename)[0] + os.path.splitext(filename)[1] + ".txt"
             txt_path = os.path.join(destination_folder_path, txt_filename)
             
             # Save the extracted text to a .txt file
