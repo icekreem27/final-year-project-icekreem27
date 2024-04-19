@@ -99,13 +99,13 @@ class EvaluationApp:
             selected_model = self.models[choice]
             self.results.append({
                 "participant_id": self.participant_id,
-                "question": self.questions[self.current_question_index],
+                "question_number": self.current_question_index + 1,
                 "model": selected_model
             })
-        self.next_question()
+            self.next_question()
 
     def finish_evaluation(self):
-        fieldnames = ['participant_id', 'question', 'model']
+        fieldnames = ['participant_id', 'question_number', 'model']
         with open("Datasets/User Evaluation/evaluation_results.csv", "a", newline='', encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             if f.tell() == 0:
