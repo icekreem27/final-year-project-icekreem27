@@ -5,6 +5,7 @@ import sys
 import csv
 from pathlib import Path
 from tkinter import simpledialog
+import random
 
 # Get the path of the current file
 project_root = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ class EvaluationApp:
         
         # Results list now includes participant ID and model chosen
         self.results = []
+        self.answers = []
         
         # Setting up the window
         self.master.title("User Evaluation")
@@ -74,14 +76,23 @@ class EvaluationApp:
     def display_question(self, question):
         answers = []
         self.question_label.config(text=question, pady=35, font=('Arial', 20, 'bold'), justify="center")
+        
+        # Collect answers from models
         for model in self.models:
             if model != 'base':
-                answers.append(ask(question, self.df, model=model))
+                answers.append((ask(question, self.df, model=model), model))
             else:
-                answers.append(ask_no_embeddings(question))
-            
+                answers.append((ask_no_embeddings(question), model))
+        
+        # Shuffle the list of answers with their corresponding model
+        random.shuffle(answers)
+
+        # Store shuffled answers for later reference
+        self.shuffled_answers = answers
+
         self.choice_var = tk.IntVar(value=-1)
-        for idx, answer in enumerate(answers):
+        # Generate GUI components for each answer
+        for idx, (answer, model) in enumerate(answers):
             frame = tk.Frame(self.answers_frame, bg='#f0f0f0')
             frame.pack(fill="x", expand=True, pady=5)
 
@@ -91,18 +102,20 @@ class EvaluationApp:
             answer_box.pack(side="left", fill="both", expand=True, padx=(0, 10))
             answer_box.config(height=8)
             tk.Radiobutton(frame, text="Select", variable=self.choice_var, value=idx, font=('Arial', 12, 'bold'), bg='#f0f0f0', fg='#333', selectcolor="#ddd").pack(side="left", pady=(0, 10))
-            
+
 
     def submit_choice(self):
         choice = self.choice_var.get()
-        if choice >= 0:
-            selected_model = self.models[choice]
+        if choice >= 0 and choice < len(self.shuffled_answers):
+            selected_model = self.shuffled_answers[choice][1]
             self.results.append({
                 "participant_id": self.participant_id,
                 "question_number": self.current_question_index + 1,
                 "model": selected_model
             })
             self.next_question()
+
+
 
     def finish_evaluation(self):
         fieldnames = ['participant_id', 'question_number', 'model']
