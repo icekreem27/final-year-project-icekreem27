@@ -16,9 +16,8 @@ def create_fine_tune(training_file_name, validation_file_name):
         training_file=training_file_name, 
         validation_file=validation_file_name,
         model="gpt-3.5-turbo",
-        suffix="sarcasm",
         hyperparameters={
-            "learning_rate_multiplier":0.25
+            "n_epochs": 8,
         }
     )
 
