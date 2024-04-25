@@ -32,7 +32,7 @@ def generate_embeddings(text_chunks: List[str]) -> List[List[float]]:
     for batch_start in range(0, len(text_chunks), BATCH_SIZE):
         batch_end = batch_start + BATCH_SIZE
         batch = text_chunks[batch_start:batch_end]
-        # print(f"Batch {batch_start} to {batch_end-1}")
+        print(f"Batch {batch_start} to {batch_end-1}")
         response = client.embeddings.create(model=EMBEDDING_MODEL, input=batch)
         batch_embeddings = [e.embedding for e in response.data]
         embeddings.extend(batch_embeddings)
@@ -82,7 +82,7 @@ def load_embeddings(csv_file_path: str) -> pd.DataFrame:
     df['embedding'] = df['embedding'].apply(ast.literal_eval)
     return df
 
-def texts_ranked_by_relatedness(query: str, df: pd.DataFrame, top_n: int = 3) -> Tuple[List[str], List[str], List[float]]:
+def texts_ranked_by_relatedness(query: str, df: pd.DataFrame, top_n: int = 5) -> Tuple[List[str], List[str], List[float]]:
     query_embedding_response = client.embeddings.create(model=EMBEDDING_MODEL, input=query)
     query_embedding = np.array(query_embedding_response.data[0].embedding)
 
@@ -134,7 +134,7 @@ if __name__ == "__main__":
     # Check if embeddings exist, otherwise create them
     if not os.path.exists(file_path):
         print(f"{file_path} not found. Creating embeddings...")
-        # Define the folder path where your text files are located
+        # Define the folder path where the text files are located
         folder_paths = ['Data Mining files/pdf_txt_files', 'Data Mining files/pptx_txt_files']
         # Create embeddings from text files in the specified folder
         df = create_embeddings(folder_paths)
@@ -147,5 +147,5 @@ if __name__ == "__main__":
           
     while True:
         user_input = input("User> ")
-        response = ask(user_input, df, model="gpt-3.5-turbo", print_message=True)
+        response = ask(user_input, df, model="gpt-3.5-turbo", print_message=False)
         print("Model> ", response)        
