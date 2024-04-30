@@ -4,9 +4,9 @@ from matplotlib.ticker import MaxNLocator
 
 # function to show a bar chart
 def show_bar_chart(df):
-    plt.style.use('seaborn-v0_8-deep')
+    plt.style.use('seaborn-v0_8')
 
-    pivot_table = df.pivot_table(index='question', columns='model', aggfunc='size', fill_value=0)
+    pivot_table = df.pivot_table(index='question_number', columns='model', aggfunc='size', fill_value=0)
 
     fig, ax = plt.subplots(figsize=(14, 8))
     pivot_table.plot(kind='bar', ax=ax, width=0.8)
@@ -23,17 +23,30 @@ def show_bar_chart(df):
     ax.set_xlabel('Question Number and Difficulty', fontsize=14)
     ax.set_ylabel('Number of Picks', fontsize=14)
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-    ax.legend(title="Models", title_fontsize='13', fontsize='11', loc='upper right')
+    ax.legend(title="Models", title_fontsize='13', fontsize='11', loc='upper right', edgecolor='black', frameon = True)
+    
+    # Set border properties
+    for _, spine in ax.spines.items():
+        spine.set_visible(True)
+        spine.set_linewidth(1)
+        spine.set_edgecolor('black')
+
     ax.set_facecolor('none')
     fig.patch.set_facecolor('none')
     ax.grid(False)
-
+    
+    y_values = [1, 2, 3, 4, 5, 6, 7 , 8, 9]
+    for y in y_values:
+        ax.axhline(y=y, color='gray', linewidth=0.4, linestyle='--')
+    
+    plt.savefig('Model_Picks_per_Question.png')
+     
     plt.tight_layout()
     plt.show()
 
 # function to show a pie chart
 def show_pie_chart(df):
-    plt.style.use('seaborn-v0_8-deep')
+    plt.style.use('seaborn-v0_8')
 
     model_counts = df['model'].value_counts()
 
@@ -41,6 +54,8 @@ def show_pie_chart(df):
     model_counts.plot(kind='pie', ax=ax, autopct='%1.1f%%', startangle=90, counterclock=False, shadow=False)
     ax.set_ylabel('')
     ax.set_title('Overall Model Picks Percentage', fontsize=16)
+    
+    plt.savefig('Overall_Model_Picks.png')
 
     plt.tight_layout()
     plt.show()
